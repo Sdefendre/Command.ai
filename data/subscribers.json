@@ -1,0 +1,9 @@
+{
+  "subscribers": [
+    {
+      "email": "test-subscriber@example.com",
+      "subscribedAt": "2025-08-22T20:54:58.536Z",
+      "isActive": true
+    }
+  ]
+}

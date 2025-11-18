@@ -1,0 +1,68 @@
+"use client"
+
+import { motion } from "framer-motion"
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
+import { SiteHeader } from "@/components/SiteHeader"
+import { BLOG_POSTS } from "@/constants/blog"
+import { createFadeInUp, viewportOnce } from "@/lib/motion"
+import { NewsletterSubscription } from "@/components/NewsletterSubscription"
+
+export default function BlogPage() {
+  const sortedPosts = [...BLOG_POSTS].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+
+  return (
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20">
+      <SiteHeader />
+
+      <main className="container mx-auto px-4 max-w-3xl py-20">
+        <div className="mb-16">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">Writing</h1>
+          <p className="text-xl text-muted-foreground leading-relaxed">
+            Thoughts on software engineering, system design, and building products.
+          </p>
+        </div>
+
+        <div className="space-y-12">
+          {sortedPosts.map((post, index) => (
+            <motion.article
+              key={post.id}
+              variants={createFadeInUp(false)}
+              initial="initial"
+              whileInView="animate"
+              viewport={viewportOnce}
+              className="group"
+            >
+              <Link href={`/blog/${post.id}`} className="block">
+                <div className="flex flex-col md:flex-row md:items-baseline justify-between mb-3">
+                  <h2 className="text-2xl font-semibold group-hover:underline underline-offset-4 decoration-muted-foreground/50">
+                    {post.title}
+                  </h2>
+                  <time className="text-sm text-muted-foreground whitespace-nowrap mt-1 md:mt-0 md:ml-4">
+                    {new Date(post.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                  </time>
+                </div>
+                <p className="text-muted-foreground leading-relaxed mb-3">
+                  {post.excerpt}
+                </p>
+                <div className="flex items-center gap-2 text-sm font-medium text-primary/80 group-hover:text-primary transition-colors">
+                  Read more <ArrowRight size={14} />
+                </div>
+              </Link>
+            </motion.article>
+          ))}
+        </div>
+
+        <div className="mt-24 pt-12 border-t border-border">
+          <div className="bg-accent/30 rounded-xl p-8">
+            <h3 className="text-xl font-semibold mb-2">Stay updated</h3>
+            <p className="text-muted-foreground mb-6">
+              Get notified when I publish new articles. No spam, unsubscribe anytime.
+            </p>
+            <NewsletterSubscription />
+          </div>
+        </div>
+      </main>
+    </div>
+  )
+}
