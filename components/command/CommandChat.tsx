@@ -1,54 +1,46 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import Link from 'next/link'
 import { useChat } from '@ai-sdk/react'
 import { DefaultChatTransport } from 'ai'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion } from 'framer-motion'
+import Link from 'next/link'
 import {
-  Send,
   Mic,
   Plus,
-  PanelLeftClose,
-  PanelLeftOpen,
-  Settings,
   User,
   MessageSquare,
   Sparkles,
   Zap,
-  MicOff,
+  Search,
+  Image as ImageIcon,
+  History,
+  Grid,
   Menu,
-  Loader2,
-  Terminal,
-  Home,
+  Globe,
+  ArrowUp,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
-import { Badge } from '@/components/ui/badge'
+import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { CommandMessage, CommandMessageLoading } from './CommandMessage'
 import { VoiceAgent } from '@/components/VoiceAgent'
 import { MODEL_OPTIONS, type ModelOption } from '@/constants/ai'
+import { cn } from '@/lib/utils'
 
 interface CommandChatProps {
   userId?: string
 }
 
 export function CommandChat({ userId }: CommandChatProps) {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   const [selectedModel, setSelectedModel] = useState<ModelOption>('gpt-4o-mini')
   const [isVoiceMode, setIsVoiceMode] = useState(false)
-  const [rateLimit, setRateLimit] = useState<{ remaining: number; limit: number } | null>(null)
+  // Removed unused rateLimit state
 
   // Generate conversation ID
-  const [conversationId, setConversationId] = useState<string>(() => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [conversationId] = useState<string>(() => {
     if (typeof window !== 'undefined') {
       const stored = sessionStorage.getItem('ai-conversation-id')
       if (stored) return stored
@@ -75,13 +67,11 @@ export function CommandChat({ userId }: CommandChatProps) {
         conversationId: conversationId || undefined,
       },
       onResponse: async (response) => {
+        // Rate limit headers are available here if needed
         const remaining = response.headers.get('X-Rate-Limit-Remaining')
         const limit = response.headers.get('X-Rate-Limit-Limit')
         if (remaining && limit) {
-          setRateLimit({
-            remaining: parseInt(remaining, 10),
-            limit: parseInt(limit, 10),
-          })
+          // Could update rate limit state here if added back
         }
       },
     }),
@@ -91,17 +81,12 @@ export function CommandChat({ userId }: CommandChatProps) {
   useEffect(() => {
     async function loadRateLimit() {
       if (!userId) {
-        setRateLimit({ remaining: 5, limit: 5 })
         return
       }
       try {
         const response = await fetch(`/api/ai-agent/rate-limit?userId=${userId}`)
         if (response.ok) {
-          const data = await response.json()
-          setRateLimit({
-            remaining: data.remaining,
-            limit: data.limit,
-          })
+          // Could update rate limit state here if added back
         }
       } catch (err) {
         console.error('Failed to load rate limit:', err)
@@ -137,298 +122,347 @@ export function CommandChat({ userId }: CommandChatProps) {
 
   const toggleVoiceMode = () => setIsVoiceMode(!isVoiceMode)
 
-  const SidebarContent = () => (
-    <div className="flex flex-col h-full bg-background/40 backdrop-blur-md border-r border-border/50">
-      <div className="p-4 border-b border-border/50">
-        <Button
-          variant="outline"
-          className="w-full justify-start gap-2 bg-background/20 hover:bg-primary/20 border-primary/20 hover:border-primary/50 transition-all duration-300"
-          onClick={() => {
-            setMessages([])
-            const newId = `conv-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
-            setConversationId(newId)
-          }}
-        >
-          <Plus className="h-4 w-4" />
-          <span>New Chat</span>
-        </Button>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const NavItem = ({
+    icon: Icon,
+    label,
+    active = false,
+    onClick,
+  }: {
+    icon: any
+    label: string
+    active?: boolean
+    onClick?: () => void
+  }) => (
+    <button
+      onClick={onClick}
+      className={cn(
+        'flex flex-col items-center justify-center w-full py-4 gap-1 transition-colors relative group',
+        active ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+      )}
+    >
+      <div className="relative">
+        <Icon className={cn('h-6 w-6', active && 'fill-current')} />
+        {active && (
+          <motion.div
+            layoutId="activeTab"
+            className="absolute -right-4 top-1/2 -translate-y-1/2 w-1 h-8 bg-primary rounded-l-full hidden md:block"
+          />
+        )}
+      </div>
+      <span className="text-[10px] font-medium hidden md:block">{label}</span>
+
+      {/* Tooltip for mobile/collapsed */}
+      <div className="absolute left-full ml-4 px-2 py-1 bg-popover text-popover-foreground text-xs rounded opacity-0 group-hover:opacity-100 pointer-events-none transition-opacity whitespace-nowrap z-50 md:hidden">
+        {label}
+      </div>
+    </button>
+  )
+
+  const Sidebar = () => (
+    <div className="h-full flex flex-col items-center py-6 bg-background/50 backdrop-blur-xl border-r border-border/20 w-16 md:w-24 z-30 flex-shrink-0">
+      <div className="mb-8">
+        <Link href="/">
+          <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center shadow-[0_0_20px_rgba(255,255,255,0.2)] hover:scale-105 transition-transform cursor-pointer">
+            <Sparkles className="h-6 w-6 text-primary-foreground fill-current" />
+          </div>
+        </Link>
       </div>
 
-      <div className="flex-1 overflow-y-auto p-4 custom-scrollbar">
-        <div className="text-xs font-medium text-muted-foreground mb-3 uppercase tracking-wider flex items-center gap-2">
-          <Terminal className="h-3 w-3" />
-          Recent Sessions
-        </div>
-        <div className="space-y-1">
-          {/* Visual placeholders for history */}
-          <Button
-            variant="ghost"
-            className="w-full justify-start text-sm font-normal text-muted-foreground truncate h-auto py-2 hover:bg-primary/10 hover:text-primary transition-colors"
-          >
-            VA Benefits Explained
-          </Button>
-          <Button
-            variant="ghost"
-            className="w-full justify-start text-sm font-normal text-muted-foreground truncate h-auto py-2 hover:bg-primary/10 hover:text-primary transition-colors"
-          >
-            Disability Rating Check
-          </Button>
-        </div>
+      <div className="flex-1 w-full space-y-2">
+        <NavItem icon={Search} label="Search" />
+        <NavItem icon={MessageSquare} label="Chat" active onClick={() => {}} />
+        <NavItem icon={ImageIcon} label="Imagine" />
+        <NavItem icon={Grid} label="Projects" />
+        <NavItem icon={History} label="History" />
       </div>
 
-      <div className="p-4 border-t border-border/50 mt-auto bg-background/20">
-        <div className="flex items-center gap-3 p-2 rounded-md hover:bg-primary/10 transition-colors cursor-pointer group">
-          <div className="h-8 w-8 rounded-full bg-primary/20 flex items-center justify-center ring-2 ring-primary/20 group-hover:ring-primary/50 transition-all">
-            <User className="h-4 w-4 text-primary" />
-          </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium truncate group-hover:text-primary transition-colors">
-              {userId ? 'Veteran' : 'Guest User'}
-            </p>
-            <p className="text-xs text-muted-foreground truncate">
-              {userId ? 'Pro Plan' : 'Free Tier'}
-            </p>
-          </div>
-          <Settings className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
-        </div>
+      <div className="mt-auto w-full flex flex-col items-center gap-4">
+        <NavItem icon={Globe} label="Spaces" />
+        <div className="h-px w-10 bg-border/50" />
+        <button className="h-10 w-10 rounded-full bg-secondary overflow-hidden border-2 border-transparent hover:border-primary transition-colors">
+          <User className="h-full w-full p-2 text-secondary-foreground" />
+        </button>
       </div>
     </div>
   )
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const SuggestedCard = ({
+    icon: Icon,
+    title,
+    description,
+    delay,
+  }: {
+    icon: any
+    title: string
+    description: string
+    delay: number
+  }) => (
+    <motion.button
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.4 }}
+      onClick={() => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        handleInputChange({ target: { value: title } } as any)
+        // Optional: auto-submit or let user edit
+      }}
+      className="flex flex-col items-start p-3 md:p-4 rounded-xl bg-background/40 hover:bg-background/60 border border-white/5 hover:border-primary/20 transition-all text-left group w-full h-full backdrop-blur-sm min-h-[100px] md:min-h-[120px]"
+    >
+      <div className="flex items-center gap-2 mb-2 text-muted-foreground group-hover:text-primary transition-colors">
+        <Icon className="h-4 w-4" />
+        <span className="text-xs font-medium uppercase tracking-wider">Topic</span>
+      </div>
+      <h3 className="text-sm md:text-base font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
+        {title}
+      </h3>
+      <p className="text-xs md:text-sm text-muted-foreground line-clamp-2 leading-relaxed">
+        {description}
+      </p>
+    </motion.button>
+  )
+
   return (
-    <div className="flex h-[100vh] overflow-hidden">
-      {/* Desktop Sidebar */}
-      <AnimatePresence initial={false}>
-        {isSidebarOpen && (
-          <motion.aside
-            initial={{ width: 0, opacity: 0 }}
-            animate={{ width: 280, opacity: 1 }}
-            exit={{ width: 0, opacity: 0 }}
-            className="hidden md:block flex-shrink-0 z-20"
-          >
-            <SidebarContent />
-          </motion.aside>
-        )}
-      </AnimatePresence>
+    <div className="flex h-[100vh] overflow-hidden bg-black text-foreground font-sans">
+      {/* Sidebar - Hidden on mobile, handled by sheet/bottom nav if needed */}
+      <div className="hidden md:flex">
+        <Sidebar />
+      </div>
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0 relative h-full">
-        {/* Header */}
-        <header className="flex items-center justify-between p-4 border-b border-border/50 bg-background/60 backdrop-blur-md z-10 sticky top-0">
+        {/* Mobile Header */}
+        <header className="md:hidden flex items-center justify-between p-4 border-b border-white/5 bg-background/50 backdrop-blur-md z-20 absolute top-0 left-0 right-0">
           <div className="flex items-center gap-3">
-            <Link href="/">
-              <Button
-                variant="ghost"
-                size="icon"
-                className="text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors"
-                title="Back to Home"
-              >
-                <Home className="h-5 w-5" />
-              </Button>
-            </Link>
-
-            <Button
-              variant="ghost"
-              size="icon"
-              className="hidden md:flex text-muted-foreground hover:text-primary hover:bg-primary/10"
-              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            >
-              {isSidebarOpen ? (
-                <PanelLeftClose className="h-5 w-5" />
-              ) : (
-                <PanelLeftOpen className="h-5 w-5" />
-              )}
-            </Button>
-
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="md:hidden text-muted-foreground">
+                <Button variant="ghost" size="icon" className="text-muted-foreground">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
               <SheetContent
                 side="left"
-                className="p-0 w-[280px] border-r-border/50 bg-background/80 backdrop-blur-xl"
+                className="p-0 w-[80px] bg-black border-r border-white/10 pt-safe"
               >
-                <SidebarContent />
+                <Sidebar />
               </SheetContent>
             </Sheet>
-
-            <div className="flex items-center gap-2">
-              <Select
-                value={selectedModel}
-                onValueChange={(value) => setSelectedModel(value as ModelOption)}
-              >
-                <SelectTrigger className="h-9 min-w-[140px] border-primary/20 bg-background/30 hover:bg-primary/10 focus:ring-primary/30 transition-all gap-2">
-                  <Sparkles className="h-3 w-3 text-primary" />
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent className="bg-background/90 backdrop-blur-xl border-primary/20">
-                  {MODEL_OPTIONS.map((option) => (
-                    <SelectItem
-                      key={option.value}
-                      value={option.value}
-                      className="focus:bg-primary/20"
-                    >
-                      <span className="font-medium">{option.label}</span>
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+            <span className="font-bold text-lg tracking-tight">Command</span>
           </div>
-
-          <div className="flex items-center gap-2">
-            {rateLimit && (
-              <Badge
-                variant="outline"
-                className={`hidden sm:flex items-center gap-1.5 font-medium border-primary/20 bg-primary/5 ${
-                  rateLimit.remaining <= 2
-                    ? 'text-destructive border-destructive/30 bg-destructive/5'
-                    : 'text-primary'
-                }`}
-              >
-                <Zap className="h-3 w-3" />
-                <span>
-                  {rateLimit.remaining}/{rateLimit.limit}
-                </span>
-              </Badge>
-            )}
-            <Button
-              variant={isVoiceMode ? 'default' : 'outline'}
-              size="icon"
-              onClick={toggleVoiceMode}
-              className={`transition-all duration-300 ${
-                isVoiceMode
-                  ? 'bg-red-500 hover:bg-red-600 text-white shadow-[0_0_15px_rgba(239,68,68,0.5)] border-transparent'
-                  : 'border-primary/20 text-muted-foreground hover:text-primary hover:bg-primary/10'
-              }`}
-            >
-              {isVoiceMode ? <MicOff className="h-5 w-5" /> : <Mic className="h-5 w-5" />}
-            </Button>
-          </div>
+          <Button variant="ghost" size="icon" onClick={() => setMessages([])}>
+            <Plus className="h-5 w-5" />
+          </Button>
         </header>
 
-        {/* Chat Area */}
-        <div className="flex-1 overflow-y-auto relative scroll-smooth custom-scrollbar">
+        {/* Content Area */}
+        <div className="flex-1 overflow-y-auto relative scroll-smooth custom-scrollbar flex flex-col">
           {isVoiceMode ? (
-            <div className="h-full flex flex-col items-center justify-center p-6 bg-background/20 backdrop-blur-sm">
-              <div className="w-full max-w-md">
-                <VoiceAgent userId={userId} />
-              </div>
+            <div className="h-full flex flex-col items-center justify-center p-6">
+              <VoiceAgent userId={userId} />
             </div>
           ) : (
             <>
               {messages.length === 0 ? (
-                <div className="h-full flex flex-col items-center justify-center p-8 text-center animate-in fade-in zoom-in duration-500">
+                <div className="flex-1 flex flex-col items-center justify-center p-4 md:p-8 max-w-5xl mx-auto w-full">
                   <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5 }}
-                    className="h-24 w-24 rounded-full bg-gradient-to-tr from-primary/30 to-purple-500/30 flex items-center justify-center mb-8 ring-4 ring-background/50 backdrop-blur-md shadow-[0_0_30px_rgba(124,58,237,0.3)]"
+                    className="flex flex-col items-center text-center mb-12 w-full"
                   >
-                    <Sparkles className="h-10 w-10 text-primary" />
-                  </motion.div>
-                  <h2 className="text-3xl font-bold mb-3 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
-                    Command Interface Online
-                  </h2>
-                  <p className="text-lg text-muted-foreground max-w-md mb-10 leading-relaxed">
-                    Ready to assist with VA benefits, claims analysis, and transition guidance.
-                  </p>
+                    <div className="mb-8 relative">
+                      <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full" />
+                      <Sparkles className="h-20 w-20 text-white relative z-10 fill-white/10" />
+                    </div>
+                    <h1 className="text-3xl md:text-5xl font-bold mb-8 tracking-tight text-white">
+                      What do you want to know?
+                    </h1>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-2xl">
-                    {[
-                      'Explain my VA disability benefits',
-                      'How do I file a C&P claim?',
-                      'What does my DD-214 code mean?',
-                      'Find local veteran resources',
-                    ].map((prompt, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 * i }}
-                      >
-                        <Button
-                          variant="outline"
-                          className="w-full h-auto py-4 px-5 justify-start text-left whitespace-normal bg-background/40 hover:bg-primary/20 border-primary/10 hover:border-primary/40 backdrop-blur-sm transition-all duration-300 group"
-                          onClick={() => {
-                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                            const event = { preventDefault: () => {} } as any
-                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                            handleInputChange({ target: { value: prompt } } as any)
-                            setTimeout(() => handleSubmit(event), 100)
-                          }}
-                        >
-                          <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center mr-3 group-hover:bg-primary/20 transition-colors">
-                            <MessageSquare className="h-4 w-4 text-primary" />
+                    {/* Search Input Centered */}
+                    <div className="w-full max-w-2xl relative group mb-12">
+                      <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-purple-500/20 to-primary/20 rounded-full blur opacity-50 group-hover:opacity-100 transition duration-500" />
+                      <div className="relative flex items-center bg-[#1a1a1a] rounded-full border border-white/10 focus-within:border-primary/50 transition-all shadow-2xl">
+                        <Search className="h-5 w-5 text-muted-foreground ml-5 shrink-0" />
+                        <form onSubmit={handleSubmit} className="flex-1 flex items-center">
+                          <input
+                            value={input}
+                            onChange={handleInputChange}
+                            placeholder="Ask anything..."
+                            className="w-full bg-transparent border-none focus:ring-0 py-4 px-4 text-lg text-white placeholder:text-muted-foreground/50 outline-none"
+                          />
+                          <div className="pr-2 flex items-center gap-1">
+                            <Button
+                              type="button"
+                              variant="ghost"
+                              size="icon"
+                              className="text-muted-foreground hover:text-white rounded-full"
+                              onClick={toggleVoiceMode}
+                            >
+                              <Mic className="h-5 w-5" />
+                            </Button>
+                            <Button
+                              type="submit"
+                              size="icon"
+                              disabled={!input.trim() || isLoading}
+                              className={cn(
+                                'h-10 w-10 rounded-full transition-all duration-300',
+                                input.trim()
+                                  ? 'bg-white text-black hover:bg-gray-200'
+                                  : 'bg-white/5 text-muted-foreground hover:bg-white/10'
+                              )}
+                            >
+                              <ArrowUp className="h-5 w-5" />
+                            </Button>
                           </div>
-                          <span className="group-hover:text-primary transition-colors">
-                            {prompt}
-                          </span>
-                        </Button>
-                      </motion.div>
-                    ))}
+                        </form>
+                      </div>
+
+                      <div className="absolute top-full left-0 right-0 mt-6 flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground/60 font-medium">
+                        <button className="flex items-center gap-2 hover:text-primary transition-colors">
+                          <Globe className="h-3 w-3" /> Search Web
+                        </button>
+                        <button className="flex items-center gap-2 hover:text-primary transition-colors">
+                          <ImageIcon className="h-3 w-3" /> Generate Images
+                        </button>
+                        <button className="flex items-center gap-2 hover:text-primary transition-colors">
+                          <Zap className="h-3 w-3" /> Deep Research
+                        </button>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  {/* Suggestion Cards */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-5xl px-4">
+                    <SuggestedCard
+                      icon={MessageSquare}
+                      title="VA Benefits"
+                      description="Explain my disability rating and compensation."
+                      delay={0.2}
+                    />
+                    <SuggestedCard
+                      icon={Grid}
+                      title="Claims Analysis"
+                      description="Analyze my C&P exam results for potential issues."
+                      delay={0.3}
+                    />
+                    <SuggestedCard
+                      icon={History}
+                      title="Transition Guide"
+                      description="Help me plan my transition from active duty to civilian life."
+                      delay={0.4}
+                    />
+                    <SuggestedCard
+                      icon={Sparkles}
+                      title="Success Stories"
+                      description="Show me examples of successful benefit claims."
+                      delay={0.5}
+                    />
                   </div>
                 </div>
               ) : (
-                <div className="flex flex-col py-6 pb-32">
-                  {messages.map((message, i) => (
-                    <CommandMessage
-                      key={message.id}
-                      message={message}
-                      isLast={i === messages.length - 1}
-                    />
-                  ))}
-                  {isLoading && <CommandMessageLoading />}
-                  {error && (
-                    <div className="max-w-3xl mx-auto w-full p-4">
-                      <div className="p-4 rounded-xl bg-destructive/10 text-destructive text-sm border border-destructive/20 backdrop-blur-md shadow-lg">
+                <div className="flex flex-col min-h-full pb-32 pt-20 md:pt-10">
+                  <div className="max-w-3xl mx-auto w-full px-4 space-y-2 md:space-y-0">
+                    {messages.map((message, i) => (
+                      <CommandMessage
+                        key={message.id}
+                        message={message}
+                        isLast={i === messages.length - 1}
+                      />
+                    ))}
+                    {isLoading && <CommandMessageLoading />}
+                    {error && (
+                      <div className="p-3 md:p-4 rounded-xl bg-destructive/10 text-destructive text-sm border border-destructive/20 backdrop-blur-md shadow-lg my-2 md:my-4">
                         Error: {error.message}
                       </div>
-                    </div>
-                  )}
-                  <div ref={messagesEndRef} className="h-4" />
+                    )}
+                    <div ref={messagesEndRef} className="h-4" />
+                  </div>
                 </div>
               )}
             </>
           )}
         </div>
 
-        {/* Input Area */}
-        {!isVoiceMode && (
-          <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-background via-background/95 to-transparent pt-20">
-            <div className="max-w-3xl mx-auto relative group">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/30 to-purple-600/30 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-500"></div>
-              <div className="relative bg-background/80 backdrop-blur-xl border border-primary/20 rounded-2xl shadow-2xl focus-within:ring-1 focus-within:ring-primary/50 transition-all">
-                <form onSubmit={handleSubmit} className="relative flex items-end p-2 gap-2">
+        {/* Floating Input Area (Only visible when there are messages) */}
+        {!isVoiceMode && messages.length > 0 && (
+          <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-gradient-to-t from-black via-black/95 to-transparent pt-6 md:pt-10 z-20 supports-[padding-bottom:env(safe-area-inset-bottom)]:pb-[max(12px,env(safe-area-inset-bottom))]">
+            <div className="max-w-3xl mx-auto">
+              <div className="relative bg-[#1a1a1a] rounded-2xl md:rounded-3xl border border-white/10 focus-within:border-primary/50 transition-all shadow-2xl overflow-hidden">
+                <form onSubmit={handleSubmit} className="flex flex-col">
                   <Textarea
                     ref={textareaRef}
                     value={input || ''}
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
-                    placeholder="Enter command or query..."
-                    className="min-h-[50px] max-h-[200px] w-full resize-none border-0 shadow-none focus-visible:ring-0 bg-transparent py-3 pl-4 pr-10 text-base"
+                    placeholder="Ask anything..."
+                    className="min-h-[48px] max-h-[200px] w-full resize-none border-0 shadow-none focus-visible:ring-0 bg-transparent py-3 md:py-4 px-3 md:px-4 text-base text-white placeholder:text-muted-foreground/50 outline-none"
                     rows={1}
                   />
-                  <Button
-                    type="submit"
-                    size="icon"
-                    disabled={!input || typeof input !== 'string' || !input.trim() || isLoading}
-                    className="h-10 w-10 rounded-xl mb-1 shrink-0 bg-primary hover:bg-primary/90 transition-all shadow-lg hover:shadow-primary/25"
-                  >
-                    {isLoading ? (
-                      <Loader2 className="h-5 w-5 animate-spin" />
-                    ) : (
-                      <Send className="h-5 w-5" />
-                    )}
-                    <span className="sr-only">Execute</span>
-                  </Button>
+                  <div className="flex items-center justify-between px-2 pb-2">
+                    <div className="flex items-center gap-1">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8 text-muted-foreground hover:text-white rounded-full min-h-[40px] min-w-[40px]"
+                      >
+                        <ImageIcon className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        className="h-8 w-8 text-muted-foreground hover:text-white rounded-full min-h-[40px] min-w-[40px]"
+                      >
+                        <Globe className="h-4 w-4" />
+                      </Button>
+                      <Select
+                        value={selectedModel}
+                        onValueChange={(value) => setSelectedModel(value as ModelOption)}
+                      >
+                        <SelectTrigger className="h-8 border-none bg-transparent hover:bg-white/5 focus:ring-0 gap-1 text-muted-foreground text-xs w-auto px-2 min-h-[32px]">
+                          <span className="truncate max-w-[80px] md:max-w-[100px]">
+                            {selectedModel}
+                          </span>
+                        </SelectTrigger>
+                        <SelectContent className="bg-[#1a1a1a] border-white/10 text-white">
+                          {MODEL_OPTIONS.map((option) => (
+                            <SelectItem key={option.value} value={option.value}>
+                              {option.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        onClick={toggleVoiceMode}
+                        className="h-8 w-8 text-muted-foreground hover:text-white rounded-full min-h-[40px] min-w-[40px]"
+                      >
+                        <Mic className="h-4 w-4" />
+                      </Button>
+                      <Button
+                        type="submit"
+                        size="icon"
+                        disabled={!input || typeof input !== 'string' || !input.trim() || isLoading}
+                        className={cn(
+                          'h-8 w-8 rounded-full transition-all min-h-[40px] min-w-[40px]',
+                          input?.trim()
+                            ? 'bg-white text-black hover:bg-gray-200'
+                            : 'bg-white/10 text-muted-foreground hover:bg-white/20'
+                        )}
+                      >
+                        <ArrowUp className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  </div>
                 </form>
               </div>
-            </div>
-            <div className="text-center mt-3 text-[10px] text-muted-foreground font-mono">
-              COMMAND OS v1.0.4 • SECURE CONNECTION ESTABLISHED
+              <div className="text-center mt-2 text-[10px] text-muted-foreground/40 font-mono px-4">
+                COMMAND OS v1.0.4 • SECURE
+              </div>
             </div>
           </div>
         )}

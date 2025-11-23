@@ -198,13 +198,17 @@ export async function POST(request: NextRequest) {
     })
 
     // Return the streaming response with conversation ID in headers
-    // Use toDataStreamResponse for useChat in AI SDK v3+
+    // Cast to any to handle potential type definition mismatches in the AI SDK
     let response: Response
-    // @ts-expect-error - toDataStreamResponse is available in recent versions but types might be mismatching
-    if (result.toDataStreamResponse) {
-      response = result.toDataStreamResponse()
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const streamResult = result as any
+    if (typeof streamResult.toDataStreamResponse === 'function') {
+      response = streamResult.toDataStreamResponse()
+    } else if (typeof streamResult.toAIStreamResponse === 'function') {
+      response = streamResult.toAIStreamResponse()
+    } else if (typeof result.toTextStreamResponse === 'function') {
+      response = result.toTextStreamResponse()
     } else {
-      // Fallback or error
       throw new Error('No compatible streaming response method found.')
     }
 

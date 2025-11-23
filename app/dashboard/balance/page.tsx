@@ -76,7 +76,7 @@ export default function BalancePage() {
   // This is an approximation since we don't store historical account snapshots
   const balanceHistory = useMemo(() => {
     let runningBalance = stats.totalBalance
-    const history = []
+    const history: { month: string; balance: number }[] = []
     const today = new Date()
 
     // We have current balance. To get previous months, we subtract income and add expenses?
