@@ -55,8 +55,12 @@ const pricingTiers = [
 
 export function LandingPricing() {
   return (
-    <section id="pricing" className="py-24 relative">
-      <div className="container mx-auto px-4 max-w-7xl">
+    <section id="pricing" className="py-24 relative overflow-hidden">
+      {/* Background gradients for glass effect visibility */}
+      <div className="absolute top-1/4 left-0 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl -z-10" />
+
+      <div className="container mx-auto px-4 max-w-7xl relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">Operational Costs</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -88,10 +92,10 @@ export function LandingPricing() {
               )}
 
               <Card
-                className={`relative h-full flex flex-col ${
+                className={`relative h-full flex flex-col glass ${
                   tier.highlight
-                    ? 'border-primary/50 shadow-2xl bg-card/50 backdrop-blur-sm'
-                    : 'border-border/50 shadow-lg bg-card/30 hover:bg-card/50'
+                    ? 'border-primary/30 shadow-2xl bg-white/15 dark:bg-black/15 hover:bg-white/20 dark:hover:bg-black/20'
+                    : 'border-white/20 dark:border-white/10 shadow-lg hover:bg-white/15 dark:hover:bg-black/15'
                 } transition-all duration-300 hover:-translate-y-1`}
               >
                 <CardHeader className="text-center pt-10 pb-8 border-b border-border/50">

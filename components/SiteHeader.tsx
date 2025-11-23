@@ -16,7 +16,7 @@ export function SiteHeader() {
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.4, ease: 'easeOut' }}
-        className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur-sm relative"
+        className="sticky top-0 z-50 w-full border-b border-white/20 dark:border-white/10 bg-white/80 dark:bg-black/80 backdrop-blur-xl relative"
       >
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent"></div>
         <div className="container mx-auto px-3 sm:px-4 h-14 sm:h-16 flex items-center justify-between max-w-5xl">
@@ -74,7 +74,7 @@ export function SiteHeader() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden border-b border-border bg-background overflow-hidden fixed top-14 sm:top-16 left-0 right-0 z-40"
+            className="md:hidden border-b border-white/20 dark:border-white/10 bg-white/90 dark:bg-black/90 backdrop-blur-xl overflow-hidden fixed top-14 sm:top-16 left-0 right-0 z-40"
           >
             <nav className="flex flex-col p-4 space-y-3 text-sm font-medium">
               <Link

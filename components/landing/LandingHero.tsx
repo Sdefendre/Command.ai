@@ -10,6 +10,8 @@ import Image from 'next/image'
 export function LandingHero() {
   return (
     <section className="relative py-20 sm:py-32 lg:py-40 overflow-hidden">
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-900/20 via-background to-background opacity-40" />
+
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <div className="text-center max-w-4xl mx-auto">
           <motion.div
@@ -99,7 +101,7 @@ export function LandingHero() {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mt-20 relative mx-auto max-w-5xl"
         >
-          <div className="rounded-xl border border-border/50 bg-card/50 backdrop-blur-sm shadow-2xl overflow-hidden p-2 sm:p-4 hover:shadow-primary/20 transition-all duration-500">
+          <div className="glass rounded-2xl shadow-2xl overflow-hidden p-2 sm:p-4 hover:shadow-primary/20 hover:bg-white/15 dark:hover:bg-black/15 transition-all duration-500">
             <div className="aspect-video rounded-lg bg-gradient-to-br from-gray-950 to-gray-900 flex items-center justify-center relative overflow-hidden group hover:scale-[1.01] transition-transform duration-700 ease-out">
               {/* Abstract representation of dashboard */}
               <Image

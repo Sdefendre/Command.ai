@@ -55,7 +55,7 @@ export function OverviewCards() {
     <>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {/* Total Balance */}
-        <Card className="hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
+        <Card className="glass hover:shadow-xl hover:-translate-y-1 hover:bg-white/15 dark:hover:bg-black/15 transition-all duration-300">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Total Assets
@@ -97,7 +97,7 @@ export function OverviewCards() {
         </Card>
 
         {/* Monthly Spending */}
-        <Card className="hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
+        <Card className="glass hover:shadow-xl hover:-translate-y-1 hover:bg-white/15 dark:hover:bg-black/15 transition-all duration-300">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Monthly Expenditure
@@ -122,7 +122,7 @@ export function OverviewCards() {
         </Card>
 
         {/* Budget Remaining */}
-        <Card className="hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
+        <Card className="glass hover:shadow-xl hover:-translate-y-1 hover:bg-white/15 dark:hover:bg-black/15 transition-all duration-300">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Available Budget
@@ -149,7 +149,7 @@ export function OverviewCards() {
         </Card>
 
         {/* Savings Goal */}
-        <Card className="hover:shadow-lg hover:-translate-y-1 transition-all duration-200">
+        <Card className="glass hover:shadow-xl hover:-translate-y-1 hover:bg-white/15 dark:hover:bg-black/15 transition-all duration-300">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-muted-foreground">
               Savings Progress

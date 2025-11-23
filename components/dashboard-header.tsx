@@ -142,9 +142,9 @@ export function DashboardHeader() {
           </div>
         </form>
       </div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1 sm:gap-2">
         <ThemeToggle />
-        <Button variant="ghost" size="icon" className="h-9 w-9 relative">
+        <Button variant="ghost" size="icon" className="h-9 w-9 relative hidden sm:flex">
           <Bell className="h-4 w-4" />
           <span className="absolute top-2 right-2 h-1.5 w-1.5 rounded-full bg-red-500 ring-2 ring-background" />
           <span className="sr-only">Notifications</span>

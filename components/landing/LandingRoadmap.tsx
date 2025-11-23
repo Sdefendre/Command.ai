@@ -43,8 +43,12 @@ export function LandingRoadmap() {
   }
 
   return (
-    <section className="py-24 bg-background">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <section className="py-24 relative overflow-hidden">
+      {/* Background gradients for glass effect visibility */}
+      <div className="absolute top-1/3 right-1/4 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-1/3 left-1/4 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl -z-10" />
+
+      <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">Product Roadmap</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -77,7 +81,7 @@ export function LandingRoadmap() {
                 {items.map((item) => (
                   <Card
                     key={item.id}
-                    className="relative overflow-hidden border-l-4 hover:shadow-md transition-shadow h-full flex flex-col"
+                    className="relative overflow-hidden border-l-4 glass hover:shadow-xl hover:bg-white/15 dark:hover:bg-black/15 transition-all duration-300 h-full flex flex-col"
                   >
                     {/* Status Indicator Stripe */}
                     <div

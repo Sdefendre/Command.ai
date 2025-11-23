@@ -76,7 +76,7 @@ export function LandingCTA() {
               <Button
                 size="lg"
                 variant="outline"
-                className="text-lg px-8 py-6 h-auto rounded-full bg-background/50 backdrop-blur-sm hover:bg-background/80 hover:scale-105 active:scale-95 transition-all duration-300 border-2 group"
+                className="text-lg px-8 py-6 h-auto rounded-full glass hover:bg-white/20 dark:hover:bg-black/20 hover:scale-105 active:scale-95 transition-all duration-300 border-2 group"
               >
                 <BookOpen className="mr-2 w-5 h-5 group-hover:rotate-6 transition-transform" />
                 Access Documentation
