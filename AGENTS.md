@@ -87,3 +87,39 @@ This document provides context and guidelines for AI agents working on the Life 
 - Deploys to Vercel.
 - Environment variables must be configured in Vercel dashboard.
 - Google Calendar API key should be added as environment variable.
+
+## 8. Linear Project Management
+
+This project is connected to Linear for issue tracking and project management.
+
+### Linear Project Details
+
+- **Project Name**: Life Command OS
+- **Project ID**: `cea70c7e-066a-4e85-931c-2e5983067453`
+- **Team**: Ceceriforma
+- **Project URL**: [https://linear.app/ceceriforma/project/life-command-os-113a92ca8686](https://linear.app/ceceriforma/project/life-command-os-113a92ca8686)
+
+### Using Linear MCP
+
+When creating Linear issues related to this project, always specify the project:
+
+```typescript
+// Example: Create an issue for the Life Command OS project
+project: 'Life Command OS'
+// or
+project: 'cea70c7e-066a-4e85-931c-2e5983067453'
+```
+
+### Common Linear Operations
+
+- **Create Issues**: Use Linear MCP to create issues directly from code discussions
+- **Link Issues**: Reference Linear issues in commit messages or PR descriptions
+- **Track Features**: Use Linear to track feature requests and bug reports
+- **Project Planning**: Organize work items in the Life Command OS project
+
+### Best Practices
+
+- Create Linear issues for significant bugs or feature requests
+- Link issues to relevant code changes when possible
+- Use descriptive titles and include context in issue descriptions
+- Assign issues to appropriate team members when working collaboratively

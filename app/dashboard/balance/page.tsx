@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useMemo } from 'react'
+import { useMemo } from 'react'
 import {
   Wallet,
   CreditCard,
@@ -21,7 +21,7 @@ import {
   XAxis,
   YAxis,
 } from 'recharts'
-import { format, subMonths, startOfMonth, endOfMonth } from 'date-fns'
+import { format, subMonths } from 'date-fns'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -29,7 +29,6 @@ import { Badge } from '@/components/ui/badge'
 import { DashboardCardSkeleton, ChartSkeleton } from '@/components/dashboard-card-skeleton'
 import { cn } from '@/lib/utils'
 import { useDashboard } from '@/components/dashboard/dashboard-context'
-import { Account } from '@/constants/dashboard'
 import { EditableNumber } from '@/components/ui/editable-number'
 
 export default function BalancePage() {
@@ -87,8 +86,7 @@ export default function BalancePage() {
     history.push({ month: format(today, 'MMM'), balance: runningBalance })
 
     for (let i = 1; i <= 5; i++) {
-      const d = subMonths(today, i)
-      const monthKey = format(d, 'MMM') // This logic is slightly flawed if transactions don't align perfectly with months in the loop above, but good enough for demo
+      // This logic is slightly flawed if transactions don't align perfectly with months in the loop above, but good enough for demo
 
       // Find transactions in the *following* month (the one we just processed/stepped back from)
       // Actually better to just take the cashFlowData and walk backwards
@@ -131,7 +129,7 @@ export default function BalancePage() {
       case 'checking':
         return 'text-emerald-500'
       case 'savings':
-        return 'text-blue-500'
+        return 'text-teal-500'
       case 'credit':
         return 'text-purple-500'
       case 'investment':
@@ -146,7 +144,7 @@ export default function BalancePage() {
       case 'checking':
         return 'bg-emerald-500/10'
       case 'savings':
-        return 'bg-blue-500/10'
+        return 'bg-teal-500/10'
       case 'credit':
         return 'bg-purple-500/10'
       case 'investment':
@@ -205,7 +203,7 @@ export default function BalancePage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Liquid Assets</CardTitle>
-            <Wallet className="h-4 w-4 text-blue-500" />
+            <Wallet className="h-4 w-4 text-emerald-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">

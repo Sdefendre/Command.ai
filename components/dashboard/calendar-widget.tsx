@@ -15,7 +15,7 @@ import { Calendar as CalendarComponent } from '@/components/ui/calendar'
 
 export function CalendarWidget() {
   const [isCalendarDialogOpen, setIsCalendarDialogOpen] = useState(false)
-  const [selectedCalendarDate, setSelectedCalendarDate] = useState<Date | undefined>(new Date())
+  const [selectedCalendarDate, setSelectedCalendarDate] = useState<Date | undefined>(undefined)
   const [dateData, setDateData] = useState<{ month: string; daysRemaining: number | null }>({
     month: '',
     daysRemaining: null,
@@ -23,6 +23,7 @@ export function CalendarWidget() {
 
   useEffect(() => {
     const today = new Date()
+    setSelectedCalendarDate(today)
     setDateData({
       month: format(today, 'MMMM yyyy'),
       daysRemaining: differenceInCalendarDays(endOfMonth(today), today),

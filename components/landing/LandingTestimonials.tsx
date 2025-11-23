@@ -6,28 +6,28 @@ import { Star, Quote } from 'lucide-react'
 
 const testimonials = [
   {
-    name: 'Sarah Chen',
-    role: 'Software Engineer',
+    name: 'Mike Thompson',
+    role: 'Army Veteran, 82nd Airborne',
     content:
-      'Life Command OS transformed how I manage my finances. The AI advisor gives me clear, actionable steps instead of overwhelming data. I saved $2,400 in the first month.',
+      'After EAS, I was broke and confused about my benefits. The AI Benefits Navigator helped me understand my DD-214 and file my first claim. Went from 0% to 70% rating in 6 months. This platform changed my life.',
     rating: 5,
-    avatar: 'SC',
+    avatar: 'MT',
   },
   {
-    name: 'Marcus Rodriguez',
-    role: 'Entrepreneur',
+    name: 'Jennifer Martinez',
+    role: 'Navy Veteran, Corpsman',
     content:
-      'Finally, a system that speaks my language. The tactical directives are exactly what I needed—no fluff, just precision. My financial stability improved dramatically.',
+      'I was overwhelmed by the VA system and C&P exams. The course gave me the exact strategy I needed. Finally got my 100% rating after years of fighting. Worth every penny.',
     rating: 5,
-    avatar: 'MR',
+    avatar: 'JM',
   },
   {
-    name: 'Jessica Park',
-    role: 'Marketing Director',
+    name: 'David Chen',
+    role: 'Marine Veteran, Infantry',
     content:
-      'The resource leak detection caught three subscriptions I forgot about. The system pays for itself. Best investment I made this year.',
+      "The transition roadmap saved me. I went from survival mode to actually building wealth. The community support and AI agent answered questions I didn't even know to ask. Built by vets who get it.",
     rating: 5,
-    avatar: 'JP',
+    avatar: 'DC',
   },
 ]
 
@@ -35,7 +35,7 @@ export function LandingTestimonials() {
   return (
     <section className="py-24 relative overflow-hidden bg-muted/30">
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-violet-500/10 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/10 rounded-full blur-3xl -z-10" />
 
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <motion.div
@@ -46,10 +46,10 @@ export function LandingTestimonials() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-            Trusted by Operators Worldwide
+            Trusted by Veterans Nationwide
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Join thousands who've taken command of their financial future
+            Join thousands of veterans who've escaped survival mode and unlocked financial freedom
           </p>
         </motion.div>
 

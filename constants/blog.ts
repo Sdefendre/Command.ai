@@ -8,8 +8,10 @@ import { postTeslaMP4 } from '@/blog_posts/tesla-masterplan-part-4'
 import { postAfterScarcity } from '@/blog_posts/after-scarcity'
 import { youtubeVideos } from '@/blog_posts/youtube-videos'
 import { rebrandingPost } from '@/blog_posts/rebranding'
+import { missionStatementPost } from '@/blog_posts/mission-statement'
 
 export const BLOG_POSTS = [
+  missionStatementPost,
   rebrandingPost,
   postAfterScarcity,
   ...youtubeVideos,

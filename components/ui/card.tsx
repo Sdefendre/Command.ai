@@ -1,15 +1,28 @@
+'use client'
+
 import * as React from 'react'
 
 import { cn } from '@/lib/utils'
+import { useCardHover } from '@/lib/use-card-hover'
 
 function Card({ className, ...props }: React.ComponentProps<'div'>) {
+  const { cardRef, mousePosition } = useCardHover()
+
   return (
     <div
+      ref={cardRef}
       data-slot="card"
       className={cn(
-        'bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm',
+        'bg-card text-card-foreground flex flex-col gap-6 rounded-xl border-2 border-border py-6 shadow-sm relative overflow-hidden group',
+        'card-hover-effect',
         className
       )}
+      style={
+        {
+          '--mouse-x': `${mousePosition.x}%`,
+          '--mouse-y': `${mousePosition.y}%`,
+        } as React.CSSProperties
+      }
       {...props}
     />
   )

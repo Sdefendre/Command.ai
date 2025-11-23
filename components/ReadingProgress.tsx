@@ -7,6 +7,10 @@ export function ReadingProgress() {
   const [progress, setProgress] = useState(0)
 
   useEffect(() => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') return
+
+    let ticking = false
+
     const updateProgress = () => {
       const windowHeight = window.innerHeight
       const documentHeight = document.documentElement.scrollHeight
@@ -14,12 +18,20 @@ export function ReadingProgress() {
       const scrollableHeight = documentHeight - windowHeight
       const progressPercent = scrollableHeight > 0 ? (scrollTop / scrollableHeight) * 100 : 0
       setProgress(Math.min(100, Math.max(0, progressPercent)))
+      ticking = false
     }
 
-    window.addEventListener('scroll', updateProgress)
+    const handleScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateProgress)
+        ticking = true
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
     updateProgress() // Initial calculation
 
-    return () => window.removeEventListener('scroll', updateProgress)
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   return (

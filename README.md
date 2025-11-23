@@ -39,6 +39,15 @@ Visit: [Life Command OS](https://steve-os.vercel.app)
    Create a `.env.local` file in the project root:
 
    ```env
+   # AI Agent - Required for AI chat functionality
+   OPENAI_API_KEY=your_openai_api_key_here
+   XAI_API_KEY=your_xai_api_key_here  # Optional, for Grok models
+
+   # Supabase - Required for rate limiting, knowledge base, and Reddit dataset
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key  # For server-side operations
+
    # Google Calendar Integration (Optional)
    GOOGLE_CALENDAR_API_KEY=your_api_key_here
    GOOGLE_CALENDAR_ID=primary
@@ -49,6 +58,27 @@ Visit: [Life Command OS](https://steve-os.vercel.app)
    SMTP_USER=your_email
    SMTP_PASS=your_password
    ```
+
+   **Getting API Keys:**
+   - **OpenAI API Key** (Required):
+     - Visit [OpenAI Platform](https://platform.openai.com/api-keys)
+     - Sign in or create an account
+     - Create a new API key
+     - Copy the key and add it to your `.env.local` file
+   - **XAI API Key** (Optional, for Grok models):
+     - Visit [X.AI Console](https://console.x.ai/)
+     - Sign in or create an account
+     - Navigate to API Keys section
+     - Create a new API key
+     - Copy the key and add it to your `.env.local` file
+   - **Supabase Setup** (Required for full functionality):
+     - Visit [Supabase](https://supabase.com/)
+     - Create a new project or use an existing one
+     - Go to Project Settings → API
+     - Copy the Project URL and anon/public key
+     - For service role key: Go to Project Settings → API → Service Role key (keep this secret!)
+     - Add all three values to your `.env.local` file
+     - See [Supabase Setup Guide](./docs/SUPABASE_SETUP.md) for database schema setup
 
    See [GOOGLE_CALENDAR_SETUP.md](./GOOGLE_CALENDAR_SETUP.md) for detailed calendar setup instructions.
 
@@ -115,6 +145,57 @@ The GitHub MCP server allows AI assistants to interact with GitHub repositories,
 2. Restart Cursor to load the MCP configuration
 
 The GitHub MCP server is configured in `.cursor/mcp.json` and will automatically start when Cursor connects to MCP servers. It uses `npx` to run the server, so no Docker installation is required.
+
+### Linear MCP Server
+
+The Linear MCP server allows AI assistants to interact with Linear issues, create new issues, and manage your Linear workspace directly from Cursor.
+
+**Prerequisites:**
+
+1. **Node.js**: Ensure Node.js is installed (already required for this project)
+   - Verify installation: `node --version`
+
+2. **Linear Account**: You need a Linear account to authorize the MCP server
+
+**Setup:**
+
+1. The Linear MCP server is already configured in `.cursor/mcp.json` and will automatically start when Cursor connects to MCP servers.
+
+2. **Authorize with Linear:**
+   - When you first use the Linear MCP server, Cursor will open a web browser
+   - Follow the on-screen instructions to authorize the connection with your Linear account
+   - This is a one-time setup process
+
+3. **Activate the Server:**
+   - Press `CTRL/CMD + P` and search for `MCP: List Servers`
+   - Select `Linear` from the list
+   - Choose `Start Server` to initiate the connection
+
+4. Restart Cursor if needed to load the MCP configuration
+
+**Project Connection:**
+
+This repository is connected to the **Life Command OS** project in Linear:
+
+- **Linear Project URL**: [https://linear.app/ceceriforma/project/life-command-os-113a92ca8686](https://linear.app/ceceriforma/project/life-command-os-113a92ca8686)
+- **Team**: Ceceriforma
+- **Project ID**: `cea70c7e-066a-4e85-931c-2e5983067453`
+
+**Usage:**
+
+Once configured, you can use the Linear MCP server to:
+
+- List Linear issues related to this project
+- Create new Linear issues linked to the Life Command OS project
+- Update existing issues
+- Search for issues by various criteria
+
+Example prompts:
+
+- "List all issues in the Life Command OS project"
+- "Create a new Linear issue for this bug in the Life Command OS project"
+- "Show me all open issues in the Life Command OS project"
+- "Create an issue for [feature description] and add it to the Life Command OS project"
 
 ## 🔧 GitHub CLI Usage
 

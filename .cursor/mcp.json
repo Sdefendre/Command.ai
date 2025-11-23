@@ -1,17 +1,12 @@
 {
   "mcpServers": {
-    "vercel": {
-      "url": "https://mcp.vercel.com"
-    },
-    "github": {
+    "linear": {
       "command": "npx",
       "args": [
         "-y",
-        "@modelcontextprotocol/server-github"
-      ],
-      "env": {
-        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}"
-      }
+        "mcp-remote",
+        "https://mcp.linear.app/sse"
+      ]
     }
   }
 }

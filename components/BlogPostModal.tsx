@@ -3,7 +3,19 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowLeft, X } from 'lucide-react'
 import { FloatingDots } from '@/components/FloatingDots'
 
-export default function BlogPostModal({ post, onClose }: { post: any; onClose: () => void }) {
+interface BlogPost {
+  id: string
+  title: string
+  excerpt: string
+  content: string
+  author: string
+  date: string
+  readTime: string
+  tags?: string[]
+  youtubeId?: string
+}
+
+export default function BlogPostModal({ post, onClose }: { post: BlogPost; onClose: () => void }) {
   return (
     <AnimatePresence>
       {post && (

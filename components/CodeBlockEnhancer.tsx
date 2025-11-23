@@ -1,9 +1,17 @@
-"use client"
+'use client'
 
-import { useEffect } from "react"
+import { useEffect } from 'react'
+import { useTheme } from 'next-themes'
+
+interface HighlightJS {
+  highlightAuto: (code: string) => { value: string; language?: string }
+  highlightElement: (element: HTMLElement) => void
+}
 
 declare global {
-  interface Window { hljs?: any }
+  interface Window {
+    hljs?: HighlightJS
+  }
 }
 
 /**
@@ -11,27 +19,32 @@ declare global {
  * and client-side syntax highlighting via highlight.js (CDN).
  */
 export function CodeBlockEnhancer() {
-  useEffect(() => {
-    const pres = Array.from(document.querySelectorAll<HTMLElement>("article .prose pre"))
-    pres.forEach((pre) => {
-      if (pre.dataset.enhanced === "true") return
-      pre.dataset.enhanced = "true"
-      pre.style.position = pre.style.position || "relative"
+  const { resolvedTheme } = useTheme()
 
-      const code = pre.querySelector("code") as HTMLElement | null
+  // Initial enhancement: add highlighting and copy buttons
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') return
+
+    const pres = Array.from(document.querySelectorAll<HTMLElement>('article .prose pre'))
+    pres.forEach((pre) => {
+      if (pre.dataset.enhanced === 'true') return
+      pre.dataset.enhanced = 'true'
+      pre.style.position = pre.style.position || 'relative'
+
+      const code = pre.querySelector('code') as HTMLElement | null
       if (!code) return
 
       // Load highlight.js and apply highlighting
-      injectHljsTheme()
+      injectHljsTheme(resolvedTheme)
       const runHighlight = () => {
         try {
           if (!window.hljs) return
-          if ((code as any)._hljsDone) return
-          
+          if ((code as HTMLElement & { _hljsDone?: boolean })._hljsDone) return
+
           // Try to detect language from class or content
           const className = code.className || ''
           const hasLanguageClass = /language-\w+/.test(className)
-          
+
           if (!hasLanguageClass) {
             // Auto-detect language if no language class
             const result = window.hljs.highlightAuto(code.textContent || '')
@@ -44,29 +57,34 @@ export function CodeBlockEnhancer() {
             // Use specified language
             window.hljs.highlightElement(code)
           }
-          
-          ;(code as any)._hljsDone = true
-        } catch { /* no-op */ }
+
+          ;(code as HTMLElement & { _hljsDone?: boolean })._hljsDone = true
+        } catch {
+          /* no-op */
+        }
       }
       if (window.hljs) runHighlight()
-      else loadHljsFromCdn().then(runHighlight).catch(() => {})
+      else
+        loadHljsFromCdn()
+          .then(runHighlight)
+          .catch(() => {})
 
       // Add copy button
-      const btn = document.createElement("button")
-      btn.type = "button"
-      btn.className = "code-copy-btn"
-      btn.setAttribute("aria-label", "Copy code to clipboard")
+      const btn = document.createElement('button')
+      btn.type = 'button'
+      btn.className = 'code-copy-btn'
+      btn.setAttribute('aria-label', 'Copy code to clipboard')
       btn.innerHTML = COPY_SVG
-      btn.addEventListener("click", async () => {
+      btn.addEventListener('click', async () => {
         try {
-          const text = code.textContent ?? ""
+          const text = code.textContent ?? ''
           await navigator.clipboard.writeText(text)
           const prev = btn.innerHTML
           btn.innerHTML = CHECK_SVG
-          btn.classList.add("copied")
+          btn.classList.add('copied')
           setTimeout(() => {
             btn.innerHTML = prev || COPY_SVG
-            btn.classList.remove("copied")
+            btn.classList.remove('copied')
           }, 1500)
         } catch {
           // Fallback: select and copy
@@ -76,14 +94,42 @@ export function CodeBlockEnhancer() {
           selection?.removeAllRanges()
           selection?.addRange(range)
           try {
-            document.execCommand("copy")
+            document.execCommand('copy')
             selection?.removeAllRanges()
-          } catch { /* no-op */ }
+          } catch {
+            /* no-op */
+          }
         }
       })
       pre.appendChild(btn)
     })
-  }, [])
+  }, [resolvedTheme])
+
+  // Re-apply highlighting when theme changes
+  useEffect(() => {
+    if (!resolvedTheme || typeof window === 'undefined' || typeof document === 'undefined') return
+
+    // Update theme
+    injectHljsTheme(resolvedTheme)
+
+    // Re-highlight all code blocks
+    const pres = Array.from(document.querySelectorAll<HTMLElement>('article .prose pre code.hljs'))
+    pres.forEach((code) => {
+      try {
+        if (window.hljs) {
+          const language = code.className.match(/language-(\w+)/)?.[1]
+          if (language) {
+            window.hljs.highlightElement(code as HTMLElement)
+          } else {
+            const result = window.hljs.highlightAuto(code.textContent || '')
+            code.innerHTML = result.value
+          }
+        }
+      } catch {
+        /* no-op */
+      }
+    })
+  }, [resolvedTheme])
 
   return null
 }
@@ -99,16 +145,37 @@ const CHECK_SVG = `
   <path d="M20 6 9 17l-5-5"/>
 </svg>`
 
-function injectHljsTheme() {
-  if (document.querySelector('link[data-hljs-theme]')) return
+function injectHljsTheme(theme?: string | null) {
+  if (typeof document === 'undefined') return
+
+  const isDark = theme === 'dark'
+  const themeName = isDark ? 'github-dark' : 'github'
+  const themeUrl = `https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/${themeName}.min.css`
+
+  // Remove existing theme link if it exists
+  const existing = document.querySelector('link[data-hljs-theme]')
+  if (existing) {
+    const existingTheme = existing.getAttribute('data-hljs-theme')
+    if (existingTheme === themeName) {
+      // Theme already matches, no need to change
+      return
+    }
+    existing.remove()
+  }
+
+  // Create and add new theme link
   const link = document.createElement('link')
   link.rel = 'stylesheet'
-  link.href = 'https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/github-dark.min.css'
-  link.setAttribute('data-hljs-theme', 'github-dark')
+  link.href = themeUrl
+  link.setAttribute('data-hljs-theme', themeName)
   document.head.appendChild(link)
 }
 
 function loadHljsFromCdn(): Promise<void> {
+  if (typeof window === 'undefined' || typeof document === 'undefined') {
+    return Promise.reject(new Error('Window or document not available'))
+  }
+
   if (window.hljs) return Promise.resolve()
   const existing = document.getElementById('hljs-script') as HTMLScriptElement | null
   if (existing) {
@@ -123,11 +190,23 @@ function loadHljsFromCdn(): Promise<void> {
     s.src = 'https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.9.0/build/highlight.min.js'
     s.async = true
     s.onload = () => {
-      try { 
-        window.hljs?.configure({ 
+      try {
+        window.hljs?.configure({
           ignoreUnescapedHTML: true,
-          languages: ['javascript', 'typescript', 'jsx', 'tsx', 'css', 'html', 'json', 'bash', 'python', 'java', 'sql']
-        }) 
+          languages: [
+            'javascript',
+            'typescript',
+            'jsx',
+            'tsx',
+            'css',
+            'html',
+            'json',
+            'bash',
+            'python',
+            'java',
+            'sql',
+          ],
+        })
       } catch {}
       resolve()
     }
@@ -135,4 +214,3 @@ function loadHljsFromCdn(): Promise<void> {
     document.body.appendChild(s)
   })
 }
-

@@ -8,48 +8,36 @@ import { Button } from '@/components/ui/button'
 
 const pricingTiers = [
   {
-    title: 'Civilian',
+    title: 'Free Tier',
     price: '$0',
-    description: 'Basic system access for casual users',
+    description: 'Start your journey with free AI-powered education',
     features: [
-      'Last 30 Days Transaction History',
-      'Basic Analytics',
-      'Manual Data Entry',
-      'Community Support',
-      'Standard Dashboard',
+      'AI Benefits Navigator (limited queries)',
+      'Basic educational content',
+      'Transition resources library',
+      'Community forum access (read-only)',
+      'DD-214 guidance',
+      'Basic C&P exam information',
     ],
-    buttonText: 'Get Started',
+    buttonText: 'Get Started Free',
     highlight: false,
   },
   {
-    title: 'Command Access',
-    price: '$20',
-    description: 'Unlock full system capabilities',
+    title: 'Premium Course',
+    price: 'One-Time',
+    description: 'The complete blueprint to financial freedom',
     features: [
-      'Unlimited Transaction History',
-      'Advanced Analytics & Reports',
-      'Google Calendar Integration',
-      'CSV Data Import/Export',
-      'Priority Email Support',
-      'Custom Budget Categories',
+      'Full AI agent access (unlimited)',
+      'Complete educational library',
+      'The 0-100% Service-Connected Disability Rating Course',
+      'Community full access',
+      'Priority support',
+      'Step-by-step claim strategy',
+      'C&P exam preparation guide',
+      'Lifetime course access',
     ],
-    buttonText: 'Activate Access',
+    buttonText: 'Enroll Now',
     highlight: true,
-  },
-  {
-    title: 'Elite Vanguard',
-    price: '$50',
-    description: 'For power users demanding total control',
-    features: [
-      'Everything in Command Access',
-      'AI-Powered Financial Insights',
-      'Weekly Strategy Calls',
-      'Early Access to New Features',
-      'Dedicated Account Manager',
-      'White-glove Onboarding',
-    ],
-    buttonText: 'Join Elite',
-    highlight: false,
   },
 ]
 
@@ -57,8 +45,8 @@ export function LandingPricing() {
   return (
     <section id="pricing" className="py-16 sm:py-24 relative overflow-hidden">
       {/* Background gradients for glass effect visibility */}
-      <div className="absolute top-1/4 left-0 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl -z-10" />
-      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl -z-10" />
+      <div className="absolute top-1/4 left-0 w-96 h-96 bg-primary/20 rounded-full blur-3xl -z-10" />
+      <div className="absolute bottom-1/4 right-0 w-96 h-96 bg-primary/20 rounded-full blur-3xl -z-10" />
 
       <div className="container mx-auto px-3 sm:px-4 max-w-7xl relative z-10">
         <motion.div
@@ -69,15 +57,15 @@ export function LandingPricing() {
           className="text-center mb-10 sm:mb-16"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4">
-            Operational Costs
+            Choose Your Path
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Choose the level of control that fits your mission. From basic reconnaissance to full
-            command authority.
+            Start free with our AI Benefits Navigator, or unlock the complete strategy to maximize
+            your service-connected benefits.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
           {pricingTiers.map((tier, index) => (
             <motion.div
               key={index}
@@ -118,7 +106,9 @@ export function LandingPricing() {
                       <span className="text-3xl sm:text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent">
                         {tier.price}
                       </span>
-                      <span className="text-muted-foreground text-lg sm:text-xl">/month</span>
+                      {tier.price !== '$0' && (
+                        <span className="text-muted-foreground text-lg sm:text-xl"> payment</span>
+                      )}
                     </div>
                     <CardDescription className="mt-3 sm:mt-4 text-sm sm:text-base min-h-[50px]">
                       {tier.description}
@@ -153,13 +143,20 @@ export function LandingPricing() {
                         : 'bg-secondary text-secondary-foreground hover:bg-secondary/80'
                     }`}
                     size="lg"
+                    onClick={() => {
+                      if (tier.highlight) {
+                        window.location.href = '/course'
+                      } else {
+                        window.location.href = '/ai-agent'
+                      }
+                    }}
                   >
                     {tier.buttonText}
                   </Button>
 
                   {tier.highlight && (
                     <p className="text-xs text-center text-muted-foreground mt-3 sm:mt-4">
-                      30-day operational guarantee.
+                      30-day money-back guarantee. Lifetime access.
                     </p>
                   )}
                 </CardContent>

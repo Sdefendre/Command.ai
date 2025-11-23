@@ -1,0 +1,478 @@
+'use client'
+
+import { useState, useRef, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Textarea } from '@/components/ui/textarea'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Badge } from '@/components/ui/badge'
+import { Send, Bot, User, Loader2, Sparkles, Zap } from 'lucide-react'
+import { useChat } from '@ai-sdk/react'
+import { DefaultChatTransport } from 'ai'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+
+interface AIAgentChatProps {
+  userId?: string
+}
+
+type ModelOption =
+  | 'grok-4.1-fast'
+  | 'grok-4-fast-reasoning'
+  | 'grok-4-fast-non-reasoning'
+  | 'gpt-5.1'
+  | 'gpt-4o-mini'
+  | 'gpt-4o'
+
+const MODEL_OPTIONS: { value: ModelOption; label: string; description: string }[] = [
+  {
+    value: 'gpt-5.1',
+    label: 'GPT-5.1',
+    description: "OpenAI's latest and most advanced model",
+  },
+  {
+    value: 'grok-4.1-fast',
+    label: 'Grok 4.1 Fast',
+    description: 'Latest Grok model - fast & capable',
+  },
+  {
+    value: 'grok-4-fast-reasoning',
+    label: 'Grok 4 Fast (Reasoning)',
+    description: 'Deep reasoning & complex problem-solving',
+  },
+  {
+    value: 'grok-4-fast-non-reasoning',
+    label: 'Grok 4 Fast (Speed)',
+    description: 'Optimized for speed & straightforward queries',
+  },
+  {
+    value: 'gpt-4o',
+    label: 'GPT-4o',
+    description: "OpenAI's most capable model",
+  },
+  {
+    value: 'gpt-4o-mini',
+    label: 'GPT-4o Mini',
+    description: 'Fast & cost-efficient',
+  },
+]
+
+export function AIAgentChat({ userId }: AIAgentChatProps) {
+  const [selectedModel, setSelectedModel] = useState<ModelOption>('gpt-4o-mini')
+  const [input, setInput] = useState('')
+  // Generate conversation ID on mount and persist it
+  const [conversationId, setConversationId] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      const stored = sessionStorage.getItem('ai-conversation-id')
+      if (stored) return stored
+      const newId = `conv-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+      sessionStorage.setItem('ai-conversation-id', newId)
+      return newId
+    }
+    return `conv-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+  })
+  const [rateLimit, setRateLimit] = useState<{ remaining: number; limit: number } | null>(null)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
+
+  // Update sessionStorage when conversation ID changes
+  useEffect(() => {
+    if (typeof window !== 'undefined' && conversationId) {
+      sessionStorage.setItem('ai-conversation-id', conversationId)
+    }
+  }, [conversationId])
+
+  // Use the useChat hook from AI SDK for proper streaming support
+  const { messages, sendMessage, status, error, setMessages } = useChat({
+    transport: new DefaultChatTransport({
+      api: '/api/ai-agent',
+      body: {
+        userId,
+        model: selectedModel,
+        conversationId: conversationId || undefined,
+      },
+      onResponse: async (response) => {
+        // Get rate limit from response headers
+        const remaining = response.headers.get('X-Rate-Limit-Remaining')
+        const limit = response.headers.get('X-Rate-Limit-Limit')
+
+        if (remaining && limit) {
+          setRateLimit({
+            remaining: parseInt(remaining, 10),
+            limit: parseInt(limit, 10),
+          })
+        }
+      },
+    }),
+    initialMessages: [
+      {
+        id: '1',
+        role: 'assistant',
+        parts: [
+          {
+            type: 'text',
+            text: "Welcome! I'm your AI Benefits Navigator. I can help you understand VA benefits, disability claims, C&P exams, and your DD-214. What would you like to know?",
+          },
+        ],
+      },
+    ],
+  })
+
+  // Load conversation history on mount if userId exists
+  useEffect(() => {
+    async function loadHistory() {
+      if (!userId || !conversationId) return
+
+      try {
+        const response = await fetch(
+          `/api/ai-agent/history?userId=${userId}&conversationId=${conversationId}`
+        )
+        if (response.ok) {
+          const data = await response.json()
+          if (data.conversations && data.conversations.length > 0) {
+            // Convert database format to chat format
+            const historyMessages = data.conversations.map((conv: any, idx: number) => ({
+              id: `history-${conv.id}`,
+              role: conv.role,
+              parts: [{ type: 'text', text: conv.message }],
+            }))
+            // Add welcome message if no history
+            if (historyMessages.length > 0) {
+              setMessages([
+                {
+                  id: '1',
+                  role: 'assistant',
+                  parts: [
+                    {
+                      type: 'text',
+                      text: "Welcome! I'm your AI Benefits Navigator. I can help you understand VA benefits, disability claims, C&P exams, and your DD-214. What would you like to know?",
+                    },
+                  ],
+                },
+                ...historyMessages,
+              ])
+            }
+          }
+        }
+      } catch (err) {
+        console.error('Failed to load conversation history:', err)
+      }
+    }
+
+    loadHistory()
+  }, [userId, conversationId, setMessages])
+
+  // Load rate limit status on mount and after messages
+  useEffect(() => {
+    async function loadRateLimit() {
+      if (!userId) {
+        setRateLimit({ remaining: 5, limit: 5 }) // Anonymous limit
+        return
+      }
+
+      try {
+        const response = await fetch(`/api/ai-agent/rate-limit?userId=${userId}`)
+        if (response.ok) {
+          const data = await response.json()
+          setRateLimit({
+            remaining: data.remaining,
+            limit: data.limit,
+          })
+        }
+      } catch (err) {
+        console.error('Failed to load rate limit:', err)
+      }
+    }
+
+    loadRateLimit()
+  }, [userId, messages])
+
+  const isLoading = status === 'submitted' || status === 'streaming'
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [messages])
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setInput(e.target.value)
+  }
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!input.trim() || isLoading) return
+
+    const userMessage = input.trim()
+    setInput('')
+
+    sendMessage({
+      role: 'user',
+      parts: [{ type: 'text', text: userMessage }],
+    })
+  }
+
+  return (
+    <div className="flex flex-col h-full">
+      {/* Model Selection & Rate Limit */}
+      <div className="border-b border-border p-3 bg-muted/30">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-2">
+            <Sparkles className="h-4 w-4 text-primary" />
+            <span className="text-xs font-medium text-muted-foreground">Model:</span>
+            <Select
+              value={selectedModel}
+              onValueChange={(value) => setSelectedModel(value as ModelOption)}
+            >
+              <SelectTrigger className="h-8 w-[200px] text-xs">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                {MODEL_OPTIONS.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    <div className="flex flex-col">
+                      <span className="font-medium">{option.label}</span>
+                      <span className="text-xs text-muted-foreground">{option.description}</span>
+                    </div>
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          {rateLimit && (
+            <Badge
+              variant={rateLimit.remaining <= 2 ? 'destructive' : 'secondary'}
+              className="flex items-center gap-1.5 text-xs"
+            >
+              <Zap className="h-3 w-3" />
+              {rateLimit.remaining} / {rateLimit.limit} remaining
+            </Badge>
+          )}
+        </div>
+      </div>
+
+      {/* Messages Container */}
+      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        <AnimatePresence>
+          {messages.map((message) => (
+            <motion.div
+              key={message.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className={`flex gap-3 ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+            >
+              {message.role === 'assistant' && (
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                  <Bot className="h-5 w-5 text-primary" />
+                </div>
+              )}
+              <Card
+                className={`max-w-[80%] ${
+                  message.role === 'user'
+                    ? 'bg-primary/10 border-primary/20'
+                    : 'bg-muted/50 border-border'
+                }`}
+              >
+                <CardContent className="p-3">
+                  <div className="text-sm markdown-content">
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      components={{
+                        h1: ({ node, ...props }) => (
+                          <h1 className="text-lg font-bold mt-4 mb-2 first:mt-0" {...props} />
+                        ),
+                        h2: ({ node, ...props }) => (
+                          <h2 className="text-base font-bold mt-3 mb-2 first:mt-0" {...props} />
+                        ),
+                        h3: ({ node, ...props }) => (
+                          <h3 className="text-sm font-semibold mt-3 mb-1.5 first:mt-0" {...props} />
+                        ),
+                        h4: ({ node, ...props }) => (
+                          <h4 className="text-sm font-semibold mt-2 mb-1 first:mt-0" {...props} />
+                        ),
+                        p: ({ node, ...props }) => (
+                          <p className="my-2 leading-relaxed first:mt-0 last:mb-0" {...props} />
+                        ),
+                        ul: ({ node, ...props }) => (
+                          <ul className="list-disc list-inside my-2 space-y-1 ml-2" {...props} />
+                        ),
+                        ol: ({ node, ...props }) => (
+                          <ol className="list-decimal list-inside my-2 space-y-1 ml-2" {...props} />
+                        ),
+                        li: ({ node, ...props }) => <li className="leading-relaxed" {...props} />,
+                        strong: ({ node, ...props }) => (
+                          <strong className="font-semibold" {...props} />
+                        ),
+                        em: ({ node, ...props }) => <em className="italic" {...props} />,
+                        code: ({ node, inline, className, children, ...props }: any) => {
+                          const match = /language-(\w+)/.exec(className || '')
+                          return !inline ? (
+                            <pre className="bg-muted p-2 rounded my-2 overflow-x-auto">
+                              <code className={className} {...props}>
+                                {children}
+                              </code>
+                            </pre>
+                          ) : (
+                            <code
+                              className="bg-muted px-1.5 py-0.5 rounded text-xs font-mono"
+                              {...props}
+                            >
+                              {children}
+                            </code>
+                          )
+                        },
+                        pre: ({ node, ...props }) => (
+                          <pre className="bg-muted p-2 rounded overflow-x-auto my-2" {...props} />
+                        ),
+                        a: ({ node, ...props }) => (
+                          <a
+                            className="text-primary underline hover:text-primary/80 transition-colors"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            {...props}
+                          />
+                        ),
+                        blockquote: ({ node, ...props }) => (
+                          <blockquote
+                            className="border-l-4 border-primary/30 pl-4 my-2 italic text-muted-foreground"
+                            {...props}
+                          />
+                        ),
+                        hr: ({ node, ...props }) => (
+                          <hr className="my-4 border-border" {...props} />
+                        ),
+                        table: ({ node, ...props }) => (
+                          <div className="overflow-x-auto my-2">
+                            <table
+                              className="min-w-full border-collapse border border-border"
+                              {...props}
+                            />
+                          </div>
+                        ),
+                        thead: ({ node, ...props }) => <thead className="bg-muted" {...props} />,
+                        th: ({ node, ...props }) => (
+                          <th
+                            className="border border-border px-3 py-2 text-left font-semibold"
+                            {...props}
+                          />
+                        ),
+                        td: ({ node, ...props }) => (
+                          <td className="border border-border px-3 py-2" {...props} />
+                        ),
+                      }}
+                    >
+                      {message.parts
+                        ?.filter((part) => part.type === 'text')
+                        .map((part) => ('text' in part ? part.text : ''))
+                        .join('')}
+                    </ReactMarkdown>
+                  </div>
+                </CardContent>
+              </Card>
+              {message.role === 'user' && (
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+                  <User className="h-5 w-5 text-primary" />
+                </div>
+              )}
+            </motion.div>
+          ))}
+        </AnimatePresence>
+        {isLoading && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex gap-3 justify-start"
+          >
+            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
+              <Bot className="h-5 w-5 text-primary" />
+            </div>
+            <Card className="bg-muted/50 border-border">
+              <CardContent className="p-3">
+                <div className="flex items-center gap-2">
+                  <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" />
+                  <span className="text-sm text-muted-foreground">Thinking...</span>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
+        {error && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex gap-3 justify-start"
+          >
+            <Card className="bg-destructive/10 border-destructive/20 max-w-[80%]">
+              <CardContent className="p-3">
+                <p className="text-sm text-destructive">
+                  {error.message || 'An error occurred. Please try again.'}
+                </p>
+              </CardContent>
+            </Card>
+          </motion.div>
+        )}
+        <div ref={messagesEndRef} />
+      </div>
+
+      {/* Input Container */}
+      <div className="border-t border-border p-4">
+        <form onSubmit={onSubmit} className="flex gap-2">
+          <Textarea
+            ref={textareaRef}
+            value={input}
+            onChange={handleInputChange}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault()
+                onSubmit(e as any)
+              }
+            }}
+            placeholder="Ask about VA benefits, disability claims, C&P exams, DD-214..."
+            className="min-h-[60px] resize-none"
+            disabled={isLoading}
+          />
+          <Button
+            type="submit"
+            disabled={!input.trim() || isLoading}
+            size="lg"
+            className="shrink-0"
+          >
+            {isLoading ? (
+              <Loader2 className="h-5 w-5 animate-spin" />
+            ) : (
+              <Send className="h-5 w-5" />
+            )}
+          </Button>
+        </form>
+        <p className="text-xs text-muted-foreground mt-2 text-center">
+          {rateLimit ? (
+            <>
+              {rateLimit.remaining === 0 ? (
+                <span className="text-destructive">
+                  Daily limit reached. Upgrade for unlimited access.
+                </span>
+              ) : (
+                <>
+                  {rateLimit.remaining} of {rateLimit.limit} queries remaining today.
+                  {rateLimit.limit <= 20 && ' Upgrade for unlimited access.'}
+                </>
+              )}
+            </>
+          ) : (
+            'Free tier: Limited queries per day. Upgrade for unlimited access.'
+          )}
+        </p>
+      </div>
+    </div>
+  )
+}

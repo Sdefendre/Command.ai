@@ -2,15 +2,17 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ExternalLink, Github, ArrowRight } from 'lucide-react'
+import { ExternalLink, ArrowRight } from 'lucide-react'
 import { SiteHeader } from '@/components/SiteHeader'
 import { PROJECTS } from '@/constants/projects'
 import { createFadeInUp, viewportOnce } from '@/lib/motion'
 import { SearchBar } from '@/components/SearchBar'
+import { SubtleThreeBackground } from '@/components/SubtleThreeBackground'
 
 export default function WorkPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20">
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20 relative">
+      <SubtleThreeBackground />
       <SiteHeader />
 
       <main className="container mx-auto px-3 sm:px-4 max-w-5xl py-12 sm:py-16 md:py-20">

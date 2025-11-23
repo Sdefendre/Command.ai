@@ -9,6 +9,17 @@ export function LandingFooter() {
           <p className="text-xs sm:text-sm text-muted-foreground">
             © {new Date().getFullYear()} Life Command OS. All rights reserved.
           </p>
+          <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+            Built by{' '}
+            <a
+              href="https://defendresolutions.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-primary transition-colors"
+            >
+              DefendreSolutions.com
+            </a>
+          </p>
         </div>
         <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs sm:text-sm text-muted-foreground">
           <Link href="/roadmap" className="hover:text-primary transition-colors">

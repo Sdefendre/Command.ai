@@ -4,8 +4,6 @@ import { useState, useMemo } from 'react'
 import {
   Bar,
   BarChart,
-  Line,
-  LineChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -24,7 +22,7 @@ import {
   ArrowUpRight,
   ArrowDownRight,
 } from 'lucide-react'
-import { format, subMonths, startOfMonth, endOfMonth, isWithinInterval, subDays } from 'date-fns'
+import { format, subMonths } from 'date-fns'
 
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
@@ -217,7 +215,7 @@ export default function ReportsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Savings</CardTitle>
-            <DollarSign className="h-4 w-4 text-blue-500" />
+            <DollarSign className="h-4 w-4 text-emerald-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">

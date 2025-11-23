@@ -11,7 +11,6 @@ import {
   ShoppingBag,
   Zap,
   Wifi,
-  Smartphone,
   Film,
   Heart,
   Plane,
@@ -379,7 +378,12 @@ export default function BudgetsPage() {
                                   <div className="font-medium flex items-center gap-2">
                                     {budget.name}
                                     <Badge
-                                      variant={getBadgeVariant(percentage) as any}
+                                      variant={
+                                        getBadgeVariant(percentage) as
+                                          | 'destructive'
+                                          | 'secondary'
+                                          | 'outline'
+                                      }
                                       className="text-[10px] px-1 py-0 h-5"
                                     >
                                       {getStatusText(percentage)}

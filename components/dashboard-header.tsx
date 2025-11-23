@@ -20,6 +20,7 @@ import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Input } from '@/components/ui/input'
 import { ThemeToggle } from '@/components/theme-toggle'
+import { FeedbackDialog } from '@/components/FeedbackDialog'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   DropdownMenu,
@@ -67,10 +68,15 @@ export function DashboardHeader() {
   const pathname = usePathname()
 
   return (
-    <header className="flex h-14 items-center gap-2 sm:gap-4 border-b border-white/20 dark:border-white/10 bg-white/80 dark:bg-black/80 backdrop-blur-xl px-3 sm:px-6 lg:h-[60px] sticky top-0 z-50">
+    <header className="flex h-14 items-center gap-2 sm:gap-4 border-b border-border/80 dark:border-border/60 bg-background/95 dark:bg-background/95 backdrop-blur-xl px-3 sm:px-6 lg:h-[60px] sticky top-0 z-50">
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant="ghost" size="icon" className="shrink-0 md:hidden -ml-2">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="shrink-0 md:hidden -ml-2 min-h-[44px] min-w-[44px] sm:min-h-[36px] sm:min-w-[36px]"
+            aria-label="Toggle navigation menu"
+          >
             <Menu className="h-5 w-5" />
             <span className="sr-only">Toggle navigation menu</span>
           </Button>
@@ -143,6 +149,7 @@ export function DashboardHeader() {
         </form>
       </div>
       <div className="flex items-center gap-1 sm:gap-2">
+        <FeedbackDialog path={pathname} />
         <ThemeToggle />
         <Button variant="ghost" size="icon" className="h-9 w-9 relative hidden sm:flex">
           <Bell className="h-4 w-4" />

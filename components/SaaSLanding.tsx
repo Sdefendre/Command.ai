@@ -1,5 +1,6 @@
 import { SiteHeader } from '@/components/SiteHeader'
 import { LandingHero } from '@/components/landing/LandingHero'
+import { MovingGradientBackground } from '@/components/MovingGradientBackground'
 import { ThreeBackground } from '@/components/ThreeBackground'
 import dynamic from 'next/dynamic'
 
@@ -37,19 +38,22 @@ const LandingFooter = dynamic(() =>
 
 export default function SaaSLanding() {
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20 overflow-x-hidden relative">
+    <div className="min-h-screen text-foreground font-sans selection:bg-primary/20 overflow-x-hidden relative w-full max-w-full">
       <ThreeBackground />
-      <SiteHeader />
+      <MovingGradientBackground />
+      <div className="relative z-10 w-full max-w-full">
+        <SiteHeader />
 
-      <main>
-        <LandingHero />
-        <LandingFeatures />
-        <LandingTestimonials />
-        <LandingRoadmap />
-        <LandingPricing />
-        <LandingCTA />
-        <LandingFooter />
-      </main>
+        <main className="relative z-10 w-full max-w-full overflow-x-hidden">
+          <LandingHero />
+          <LandingFeatures />
+          <LandingTestimonials />
+          <LandingRoadmap />
+          <LandingPricing />
+          <LandingCTA />
+          <LandingFooter />
+        </main>
+      </div>
     </div>
   )
 }

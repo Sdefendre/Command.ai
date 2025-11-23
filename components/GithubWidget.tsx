@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ExternalLink, Users, FileCode, Star, GitFork } from 'lucide-react'
+import { Users, FileCode, Star } from 'lucide-react'
 import { GithubRepo } from '@/lib/github'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'

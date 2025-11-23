@@ -9,12 +9,6 @@ import {
   Calendar,
   MoreHorizontal,
   CheckCircle2,
-  Plane,
-  Home,
-  GraduationCap,
-  Car,
-  Smartphone,
-  Wallet,
   Trash2,
 } from 'lucide-react'
 import {
@@ -150,20 +144,12 @@ export default function SavingsPage() {
       case 'major':
         return 'bg-emerald-500'
       case 'lifestyle':
-        return 'bg-blue-500'
+        return 'bg-teal-500'
       case 'education':
-        return 'bg-indigo-500'
+        return 'bg-cyan-500'
       default:
         return 'bg-gray-500'
     }
-  }
-
-  function getCategoryIcon(category: string) {
-    // This logic is a bit loose since we don't store category in goal object in my type definition
-    // I only have 'color' and 'name' in SavingsGoal type in constants/dashboard.ts
-    // I should probably add 'category' to SavingsGoal type.
-    // For now I'll infer based on color or just generic
-    return Target
   }
 
   function getDaysRemaining(deadline?: string) {
@@ -177,12 +163,6 @@ export default function SavingsPage() {
     if (current / target >= 0.75) return 'Almost There'
     if (current > 0) return 'In Progress'
     return 'Started'
-  }
-
-  function getStatusColor(current: number, target: number) {
-    if (current >= target) return 'bg-emerald-500 text-emerald-500'
-    if (current / target >= 0.75) return 'bg-blue-500 text-blue-500'
-    return 'bg-primary text-primary'
   }
 
   if (isLoading) {
@@ -269,10 +249,10 @@ export default function SavingsPage() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Goals Achieved</CardTitle>
-            <CheckCircle2 className="h-4 w-4 text-blue-500" />
+            <CheckCircle2 className="h-4 w-4 text-emerald-500" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-blue-500">
+            <div className="text-2xl font-bold text-emerald-500">
               <EditableNumber
                 value={stats.achieved}
                 onSave={() => {}}
@@ -349,10 +329,10 @@ export default function SavingsPage() {
             <CardDescription>Recommendations to reach your goals faster.</CardDescription>
           </CardHeader>
           <CardContent className="grid gap-4">
-            <div className="flex items-start gap-3 p-3 bg-blue-500/10 rounded-lg border border-blue-500/20">
-              <TrendingUp className="h-5 w-5 text-blue-500 mt-0.5" />
+            <div className="flex items-start gap-3 p-3 bg-emerald-500/10 rounded-lg border border-emerald-500/20">
+              <TrendingUp className="h-5 w-5 text-emerald-500 mt-0.5" />
               <div>
-                <h4 className="font-semibold text-sm text-blue-700 dark:text-blue-400">
+                <h4 className="font-semibold text-sm text-emerald-700 dark:text-emerald-400">
                   Increase Contributions
                 </h4>
                 <p className="text-xs text-muted-foreground mt-1">
@@ -367,7 +347,7 @@ export default function SavingsPage() {
                   On Track
                 </h4>
                 <p className="text-xs text-muted-foreground mt-1">
-                  You're on track to hit your Emergency Fund goal. Keep it up!
+                  You&apos;re on track to hit your Emergency Fund goal. Keep it up!
                 </p>
               </div>
             </div>
@@ -446,7 +426,6 @@ export default function SavingsPage() {
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {goals.map((goal) => {
           const percentage = goal.targetAmount > 0 ? goal.currentAmount / goal.targetAmount : 0
-          const statusColor = getStatusColor(goal.currentAmount, goal.targetAmount)
 
           return (
             <Card key={goal.id} className="relative overflow-hidden">

@@ -1,92 +1,174 @@
 'use client'
 
+import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowRight, Play, FileText } from 'lucide-react'
+import { ArrowRight, Play, Clock, Search, X } from 'lucide-react'
 import { SiteHeader } from '@/components/SiteHeader'
 import { BLOG_POSTS } from '@/constants/blog'
 import { createFadeInUp, viewportOnce } from '@/lib/motion'
 import { NewsletterSubscription } from '@/components/NewsletterSubscription'
-import { SearchBar } from '@/components/SearchBar'
+import { Card, CardContent } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
+import { SubtleThreeBackground } from '@/components/SubtleThreeBackground'
 
 export default function BlogPage() {
+  const [searchQuery, setSearchQuery] = useState('')
+
   const sortedPosts = [...BLOG_POSTS].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   )
 
+  // Filter posts by search query
+  const filteredPosts = useMemo(() => {
+    if (!searchQuery.trim()) return sortedPosts
+
+    const query = searchQuery.toLowerCase().trim()
+    return sortedPosts.filter((post) => {
+      return (
+        post.title.toLowerCase().includes(query) ||
+        post.excerpt.toLowerCase().includes(query) ||
+        post.tags?.some((tag) => tag.toLowerCase().includes(query))
+      )
+    })
+  }, [sortedPosts, searchQuery])
+
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20">
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20 relative">
+      <SubtleThreeBackground />
       <SiteHeader />
 
-      <main className="container mx-auto px-3 sm:px-4 max-w-3xl py-12 sm:py-16 md:py-20">
-        <div className="mb-10 sm:mb-12 md:mb-16">
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight mb-3 sm:mb-4">
-            Writing & Videos
-          </h1>
-          <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed">
+      <main className="container mx-auto px-4 sm:px-6 max-w-4xl py-12 sm:py-16 md:py-20">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-12"
+        >
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Writing & Videos</h1>
+          <p className="text-lg text-muted-foreground leading-relaxed">
             Strategic insights on software engineering, system architecture, and operational
             excellence.
           </p>
-        </div>
+        </motion.div>
 
-        <SearchBar
-          items={sortedPosts}
-          searchKeys={['title', 'excerpt', 'tags']}
-          placeholder="Search blog posts..."
-          emptyMessage="No blog posts found matching your search."
-          renderItem={(post, index) => (
+        {/* Search */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mb-8"
+        >
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Input
+              type="text"
+              placeholder="Search posts..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 pr-10"
+              aria-label="Search blog posts"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="Clear search"
+              >
+                <X size={16} />
+              </button>
+            )}
+          </div>
+        </motion.div>
+
+        {/* Posts List */}
+        <div className="space-y-6 mb-16">
+          {filteredPosts.map((post, index) => (
             <motion.article
               key={post.id}
               variants={createFadeInUp(false)}
               initial="initial"
               whileInView="animate"
-              whileHover={{ x: 6 }}
               viewport={viewportOnce}
-              className="group transition-all duration-300 hover:bg-accent/30 rounded-lg p-3 sm:p-4 -mx-3 sm:-mx-4"
+              transition={{ delay: index * 0.05 }}
             >
-              <Link href={`/blog/${post.id}`} className="block">
-                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 sm:gap-3 mb-2 sm:mb-3">
-                  <h2 className="text-xl sm:text-2xl font-semibold group-hover:underline underline-offset-4 decoration-muted-foreground/50 flex items-center gap-2 flex-1 min-w-0">
-                    {/* @ts-ignore */}
-                    {post.youtubeId ? (
-                      <span className="inline-flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-red-100 text-red-600 mr-1 shrink-0">
-                        <Play size={12} fill="currentColor" className="sm:w-3.5 sm:h-3.5" />
-                      </span>
-                    ) : null}
-                    <span className="min-w-0">{post.title}</span>
-                  </h2>
-                  <time className="text-xs sm:text-sm text-muted-foreground whitespace-nowrap shrink-0 sm:ml-4">
-                    {new Date(post.date).toLocaleDateString('en-US', {
-                      month: 'long',
-                      day: 'numeric',
-                      year: 'numeric',
-                    })}
-                  </time>
-                </div>
-                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-2 sm:mb-3">
-                  {post.excerpt}
-                </p>
-                <div className="flex items-center gap-2 text-xs sm:text-sm font-medium text-primary/80 group-hover:text-primary transition-colors">
-                  {/* @ts-ignore */}
-                  {post.youtubeId ? 'Watch video' : 'Read more'}{' '}
-                  <motion.span whileHover={{ x: 5 }} className="inline-block">
-                    <ArrowRight size={14} />
-                  </motion.span>
-                </div>
+              <Link href={`/blog/${post.id}`}>
+                <Card className="group border hover:border-primary/50 transition-all duration-300 hover:shadow-md cursor-pointer">
+                  <CardContent className="p-6">
+                    <div className="flex items-start justify-between gap-4 mb-3">
+                      <h2 className="text-xl sm:text-2xl font-bold group-hover:text-primary-gradient transition-colors flex-1">
+                        {post.title}
+                      </h2>
+                      {/* @ts-expect-error - youtubeId is optional in blog post type */}
+                      {post.youtubeId && (
+                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-red-500/10 text-red-600 shrink-0">
+                          <Play size={14} fill="currentColor" />
+                        </div>
+                      )}
+                    </div>
+                    <p className="text-muted-foreground mb-4 leading-relaxed line-clamp-2">
+                      {post.excerpt}
+                    </p>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                        <time>
+                          {new Date(post.date).toLocaleDateString('en-US', {
+                            month: 'long',
+                            day: 'numeric',
+                            year: 'numeric',
+                          })}
+                        </time>
+                        <div className="flex items-center gap-1.5">
+                          <Clock size={14} />
+                          <span>{post.readTime}</span>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1 text-primary-gradient text-sm font-medium group-hover:gap-2 transition-all">
+                        Read
+                        <ArrowRight
+                          size={14}
+                          className="group-hover:translate-x-1 transition-transform"
+                        />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </Link>
             </motion.article>
-          )}
-        />
+          ))}
+        </div>
 
-        <div className="mt-16 sm:mt-20 md:mt-24 pt-8 sm:pt-10 md:pt-12 border-t border-border">
+        {/* Empty State */}
+        {filteredPosts.length === 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-16"
+          >
+            <p className="text-lg text-muted-foreground mb-4">No posts found</p>
+            <button onClick={() => setSearchQuery('')} className="text-primary hover:underline">
+              Clear search
+            </button>
+          </motion.div>
+        )}
+
+        {/* Newsletter */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewportOnce}
+          transition={{ duration: 0.5 }}
+          className="pt-12 border-t border-border"
+        >
           <div className="bg-accent/30 rounded-xl p-6 sm:p-8">
-            <h3 className="text-lg sm:text-xl font-semibold mb-2">Stay Operational</h3>
-            <p className="text-sm sm:text-base text-muted-foreground mb-4 sm:mb-6">
+            <h3 className="text-xl font-semibold mb-2">Stay Operational</h3>
+            <p className="text-muted-foreground mb-6">
               Receive intelligence updates on new publications. No noise, unsubscribe anytime.
             </p>
             <NewsletterSubscription />
           </div>
-        </div>
+        </motion.div>
       </main>
     </div>
   )

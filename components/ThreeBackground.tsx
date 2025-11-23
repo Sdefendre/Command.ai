@@ -15,13 +15,13 @@ function Particle({ position, color }: { position: [number, number, number]; col
 
     // Float animation - more organic movement
     const time = state.clock.elapsedTime
-    meshRef.current.position.y += Math.sin(time * 0.5 + position[0]) * 0.002
-    meshRef.current.position.x += Math.cos(time * 0.3 + position[1]) * 0.001
-    meshRef.current.rotation.x += 0.002
-    meshRef.current.rotation.y += 0.003
+    meshRef.current.position.y += Math.sin(time * 0.8 + position[0]) * 0.004
+    meshRef.current.position.x += Math.cos(time * 0.6 + position[1]) * 0.003
+    meshRef.current.rotation.x += 0.004
+    meshRef.current.rotation.y += 0.006
 
     // Pulse animation with varied timing
-    const scale = 1 + Math.sin(time * 2.5 + position[0]) * 0.15
+    const scale = 1 + Math.sin(time * 3.5 + position[0]) * 0.15
     meshRef.current.scale.setScalar(scale)
   })
 
@@ -60,13 +60,13 @@ function GeometricShape({
     const time = state.clock.elapsedTime
 
     // Slow rotation with varied speeds
-    meshRef.current.rotation.x += 0.003
-    meshRef.current.rotation.y += 0.004
-    meshRef.current.rotation.z += 0.002
+    meshRef.current.rotation.x += 0.006
+    meshRef.current.rotation.y += 0.008
+    meshRef.current.rotation.z += 0.004
 
     // Float up and down with circular motion
-    meshRef.current.position.y += Math.sin(time * 0.4 + position[0]) * 0.003
-    meshRef.current.position.x += Math.cos(time * 0.3 + position[1]) * 0.002
+    meshRef.current.position.y += Math.sin(time * 0.7 + position[0]) * 0.005
+    meshRef.current.position.x += Math.cos(time * 0.5 + position[1]) * 0.004
   })
 
   const getGeometry = () => {
@@ -120,8 +120,8 @@ function CameraController() {
     if (shouldReduceMotion) return
 
     // Smooth camera movement following mouse
-    camera.position.x += (mouse.x * 0.5 - camera.position.x) * 0.05
-    camera.position.y += (mouse.y * 0.5 - camera.position.y) * 0.05
+    camera.position.x += (mouse.x * 0.5 - camera.position.x) * 0.08
+    camera.position.y += (mouse.y * 0.5 - camera.position.y) * 0.08
     camera.lookAt(0, 0, 0)
   })
 
@@ -140,21 +140,21 @@ function AnimatedLight() {
 
     // Move lights in circular patterns
     if (lightRef.current) {
-      lightRef.current.position.x = Math.sin(state.clock.elapsedTime * 0.3) * 3
-      lightRef.current.position.z = Math.cos(state.clock.elapsedTime * 0.3) * 3
-      lightRef.current.intensity = 1 + Math.sin(state.clock.elapsedTime * 2) * 0.3
+      lightRef.current.position.x = Math.sin(state.clock.elapsedTime * 0.5) * 3
+      lightRef.current.position.z = Math.cos(state.clock.elapsedTime * 0.5) * 3
+      lightRef.current.intensity = 1 + Math.sin(state.clock.elapsedTime * 3) * 0.3
     }
 
     if (lightRef2.current) {
-      lightRef2.current.position.x = Math.cos(state.clock.elapsedTime * 0.2) * 4
-      lightRef2.current.position.z = Math.sin(state.clock.elapsedTime * 0.2) * 4
-      lightRef2.current.intensity = 0.5 + Math.sin(state.clock.elapsedTime * 1.5) * 0.2
+      lightRef2.current.position.x = Math.cos(state.clock.elapsedTime * 0.4) * 4
+      lightRef2.current.position.z = Math.sin(state.clock.elapsedTime * 0.4) * 4
+      lightRef2.current.intensity = 0.5 + Math.sin(state.clock.elapsedTime * 2.5) * 0.2
     }
 
     if (lightRef3.current) {
-      lightRef3.current.position.x = -Math.sin(state.clock.elapsedTime * 0.25) * 3
-      lightRef3.current.position.z = -Math.cos(state.clock.elapsedTime * 0.25) * 3
-      lightRef3.current.intensity = 0.5 + Math.cos(state.clock.elapsedTime * 1.8) * 0.2
+      lightRef3.current.position.x = -Math.sin(state.clock.elapsedTime * 0.45) * 3
+      lightRef3.current.position.z = -Math.cos(state.clock.elapsedTime * 0.45) * 3
+      lightRef3.current.intensity = 0.5 + Math.cos(state.clock.elapsedTime * 2.8) * 0.2
     }
   })
 
@@ -237,7 +237,7 @@ export function ThreeBackground() {
   if (shouldReduceMotion) {
     // Fallback to static gradient for users with reduced motion preference
     return (
-      <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-900/20 via-background to-background opacity-40" />
+      <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background to-background opacity-40" />
     )
   }
 

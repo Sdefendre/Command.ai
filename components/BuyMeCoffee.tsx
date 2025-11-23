@@ -8,6 +8,8 @@ interface BuyMeCoffeeProps {
 
 export default function BuyMeCoffee({ className }: BuyMeCoffeeProps) {
   const handleButtonClick = () => {
+    if (typeof window === 'undefined' || typeof document === 'undefined') return
+
     // Try to open the BMC widget if it exists
     const widgetButton = document.querySelector('[data-id="BMC-Widget-Launcher"]') as HTMLElement
     if (widgetButton) {
@@ -20,8 +22,8 @@ export default function BuyMeCoffee({ className }: BuyMeCoffeeProps) {
 
   return (
     <div className={className}>
-      <h4 className="text-xl font-semibold mb-4 text-white">Support My Work ☕</h4>
-      <p className="text-gray-300 mb-6">
+      <h4 className="text-xl font-semibold mb-4 text-foreground">Support My Work ☕</h4>
+      <p className="text-muted-foreground mb-6">
         Enjoying my work? Your support helps me create more amazing projects and keep them
         maintained!
       </p>
@@ -61,7 +63,7 @@ export default function BuyMeCoffee({ className }: BuyMeCoffeeProps) {
         </button>
       </div>
 
-      <p className="text-xs text-gray-400 mt-4 text-center">
+      <p className="text-xs text-muted-foreground mt-4 text-center">
         Every coffee helps fuel late-night coding sessions! 🚀
       </p>
     </div>

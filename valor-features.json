@@ -1,0 +1,90 @@
+[
+  {
+    "title": "Your VA Claims",
+    "description": "Live preview from VA Benefits Claims API"
+  },
+  {
+    "title": "📧 Advanced Notification System",
+    "description": "Multi-channel notifications (email, SMS, push) with smart scheduling, quiet hours, and personalized alert preferences"
+  },
+  {
+    "title": "🎤 Voice-First Claims Assistant",
+    "description": "Complete voice interface for claims filing with natural language processing, voice-to-text transcription, and hands-free navigation"
+  },
+  {
+    "title": "📚 AI-Powered Knowledge Base",
+    "description": "Dynamic knowledge base that learns from veteran interactions and provides personalized, context-aware guidance"
+  },
+  {
+    "title": "👥 Veteran Mentorship Network",
+    "description": "Structured mentorship program connecting veterans with similar experiences, service branches, and claim types"
+  },
+  {
+    "title": "🔔 Predictive Deadline Management",
+    "description": "AI-powered deadline prediction and management with automatic extension filing and proactive compliance alerts"
+  },
+  {
+    "title": "📊 Claims Analytics Dashboard",
+    "description": "Advanced analytics showing claim success patterns, VA processing trends, and personalized success probability modeling"
+  },
+  {
+    "title": "🏥 Integrated Health Records",
+    "description": "Secure integration with VA health systems for automatic medical evidence gathering and claim support"
+  },
+  {
+    "title": "💰 Comprehensive Benefits Optimizer",
+    "description": "AI-driven benefits optimization that considers all available programs, eligibility stacking, and maximum benefit utilization"
+  },
+  {
+    "title": "🔍 Smart Evidence Discovery",
+    "description": "AI-powered evidence gathering that proactively identifies relevant documents, witnesses, and supporting materials"
+  },
+  {
+    "title": "🌐 Multi-Language Veteran Support",
+    "description": "Complete localization for Spanish, Vietnamese, Korean, and other languages spoken by veteran communities"
+  },
+  {
+    "title": "📈 Predictive Career Transition",
+    "description": "AI-powered career counseling and transition support with veteran-specific job matching and skills assessment"
+  },
+  {
+    "title": "🎓 Education Benefits Maximizer",
+    "description": "Comprehensive GI Bill optimization with school selection, degree planning, and stipend management"
+  },
+  {
+    "title": "🏠 Home Loan Assistance Hub",
+    "description": "Complete VA home loan support including pre-approval, lender matching, and purchase assistance"
+  },
+  {
+    "title": "⚖️ Appeal Strategy Optimizer",
+    "description": "Advanced appeal strategy engine that analyzes case law, success rates, and recommends optimal appeal pathways"
+  },
+  {
+    "title": "🛰️ Real-time Claims Radar",
+    "description": "Push notifications and digest emails for VA status changes powered by the upcoming live data sync service."
+  },
+  {
+    "title": "📄 VA Form Submission Hardening",
+    "description": "Productionize the new VA submission pipelines with better metrics, retries, and sandbox-to-prod parity before opening access broadly."
+  },
+  {
+    "title": "🔐 BYOK Reliability & Usage Guardrails",
+    "description": "Tighten encryption, validation, and usage tracking for bring-your-own-key flows so heavy chat users stay under quota without surprises."
+  },
+  {
+    "title": "📊 Claims & Records Sync Service",
+    "description": "Foundational service that keeps disability ratings, DD-214 extracts, and award letters current so the assistant always has trusted context."
+  },
+  {
+    "title": "🧾 PDF Workflow Observability",
+    "description": "Deep instrumentation across Smart Autofill, draft autosave, and submission modals to catch regressions before they hit production."
+  },
+  {
+    "title": "⚡ In progress",
+    "description": "⚡ In progress"
+  },
+  {
+    "title": "✅ Recently shipped",
+    "description": "✅ Recently shipped"
+  }
+]

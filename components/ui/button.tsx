@@ -9,22 +9,24 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        default:
+          'bg-primary-gradient text-primary-foreground hover:opacity-90 shadow-lg shadow-primary/20 hover:shadow-primary/30 transition-all',
         destructive:
           'bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
         outline:
-          'border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50',
-        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
-        ghost: 'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
-        link: 'text-primary underline-offset-4 hover:underline',
+          'border-2 border-border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground hover:border-accent dark:bg-input/40 dark:border-input dark:hover:bg-input/60 dark:hover:border-input',
+        secondary:
+          'bg-secondary text-secondary-foreground hover:bg-secondary/90 border border-border/50',
+        ghost: 'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/60',
+        link: 'text-primary-gradient underline-offset-4 hover:underline',
       },
       size: {
-        default: 'h-9 px-4 py-2 has-[>svg]:px-3',
-        sm: 'h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5',
-        lg: 'h-10 rounded-md px-6 has-[>svg]:px-4',
-        icon: 'size-9',
-        'icon-sm': 'size-8',
-        'icon-lg': 'size-10',
+        default: 'h-9 min-h-[44px] px-4 py-2 has-[>svg]:px-3 sm:h-9 sm:min-h-[36px]',
+        sm: 'h-8 min-h-[44px] rounded-md gap-1.5 px-3 has-[>svg]:px-2.5 sm:h-8 sm:min-h-[32px]',
+        lg: 'h-10 min-h-[44px] rounded-md px-6 has-[>svg]:px-4 sm:h-10 sm:min-h-[40px]',
+        icon: 'size-9 min-h-[44px] min-w-[44px] sm:size-9 sm:min-h-[36px] sm:min-w-[36px]',
+        'icon-sm': 'size-8 min-h-[44px] min-w-[44px] sm:size-8 sm:min-h-[32px] sm:min-w-[32px]',
+        'icon-lg': 'size-10 min-h-[44px] min-w-[44px] sm:size-10 sm:min-h-[40px] sm:min-w-[40px]',
       },
     },
     defaultVariants: {

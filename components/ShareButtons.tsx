@@ -3,7 +3,6 @@
 import { Twitter, Linkedin, Mail, Copy, Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useState } from 'react'
-import { motion } from 'framer-motion'
 
 interface ShareButtonsProps {
   title: string
@@ -34,8 +33,8 @@ export function ShareButtons({ title, url, description }: ShareButtonsProps) {
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-2 pt-6 border-t border-border">
-      <span className="text-sm text-muted-foreground mr-2">Share:</span>
+    <div className="flex flex-wrap items-center gap-2">
+      <span className="text-sm text-muted-foreground mr-2 hidden sm:inline">Share:</span>
       <Button
         variant="outline"
         size="sm"

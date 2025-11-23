@@ -1,11 +1,13 @@
 import type React from 'react'
 import { ThemeProvider } from '@/components/theme-provider'
+import { ThemeColorMeta } from '@/components/theme-color-meta'
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { ScrollToTop } from '@/components/ScrollToTop'
 import { SkipLink } from '@/components/SkipLink'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
+import { ChatFloatingButton } from '@/components/ChatFloatingButton'
 import './globals.css'
 
 const inter = Inter({
@@ -27,13 +29,13 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Life Command OS - Stop Surviving. Start Commanding.',
+    default: 'Life Command OS - Stop Surviving. Start Commanding Your Benefits.',
     template: '%s | Life Command OS',
   },
   description:
-    'Life Command OS is your intelligent command center. An AI agent built for people who’ve spent too long fighting to stay afloat. Stabilize your money, eliminate chaos, and build your future.',
+    'AI-powered education for veterans ready to escape survival mode and unlock financial freedom. Navigate your DD-214, understand C&P exams, and master your service-connected benefits. Built by veterans, for veterans.',
   keywords:
-    'Life Command OS, survival mode, financial stability, AI coach, budget command center, productivity, masculine energy',
+    'veteran benefits, VA disability, service-connected, DD-214, C&P exam, veteran transition, financial freedom, veteran education, AI benefits navigator, veteran resources',
   authors: [
     { name: 'Steve Defendre', url: 'https://www.linkedin.com/in/joseph-m-defendre-a11a47225/' },
   ],
@@ -45,6 +47,13 @@ export const metadata: Metadata = {
     telephone: false,
   },
   metadataBase: new URL('https://steve-os.vercel.app'),
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+    viewportFit: 'cover',
+  },
   alternates: {
     canonical: '/',
     types: {
@@ -52,9 +61,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Life Command OS - Stop Surviving. Start Commanding.',
+    title: 'Life Command OS - Stop Surviving. Start Commanding Your Benefits.',
     description:
-      'Life Command OS is your intelligent command center. An AI agent built for people who’ve spent too long fighting to stay afloat.',
+      'AI-powered education for veterans ready to escape survival mode and unlock financial freedom. Built by veterans, for veterans.',
     url: 'https://steve-os.vercel.app',
     siteName: 'Life Command OS',
     images: [
@@ -70,9 +79,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Life Command OS - Stop Surviving. Start Commanding.',
+    title: 'Life Command OS - Stop Surviving. Start Commanding Your Benefits.',
     description:
-      'Life Command OS is your intelligent command center. An AI agent built for people who’ve spent too long fighting to stay afloat.',
+      'AI-powered education for veterans ready to escape survival mode and unlock financial freedom. Built by veterans, for veterans.',
     images: ['/logo.png'],
   },
   robots: {
@@ -90,16 +99,15 @@ export const metadata: Metadata = {
     google: 'your-google-verification-code', // Add your Google Search Console verification code
   },
   generator: 'v0.app',
+  icons: {
+    icon: '/logo.png',
+    apple: '/logo.png',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link rel="icon" href="/logo.png" type="image/png" sizes="32x32" />
-        <link rel="apple-touch-icon" href="/logo.png" sizes="180x180" />
-        <meta name="theme-color" content="#ffffff" />
-      </head>
       <body
         className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} font-sans antialiased bg-background text-foreground`}
         suppressHydrationWarning
@@ -111,8 +119,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           enableSystem
           disableTransitionOnChange
         >
+          <ThemeColorMeta />
           <ErrorBoundary>
             {children}
+            <ChatFloatingButton />
             <ScrollToTop />
             <Analytics />
           </ErrorBoundary>
@@ -132,7 +142,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 'https://www.youtube.com/@Stevedefendre',
               ],
               description:
-                'Full-Stack Engineer and Veteran specializing in building high-performance web applications and resilient software systems.',
+                'Full-Stack Engineer and Veteran specializing in building educational technology for veterans transitioning from service to financial freedom.',
             }),
           }}
         />

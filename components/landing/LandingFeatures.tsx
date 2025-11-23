@@ -2,48 +2,48 @@
 
 import { motion } from 'framer-motion'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { PieChart, Shield, Check, Zap, TrendingUp, Lock, BarChart3 } from 'lucide-react'
+import { MessageSquare, GraduationCap, Target, Map, Users, Lock } from 'lucide-react'
 
 const features = [
   {
-    title: 'Resource Leak Detection',
+    title: 'AI Benefits Navigator',
     description:
-      'Automated surveillance of income, bills, and subscriptions. Identify and plug financial leaks before they compromise your stability.',
-    icon: PieChart,
+      'Chat with our AI agent about VA benefits, disability claims, and transition resources. Get instant answers to questions about your DD-214, C&P exams, and service-connected ratings.',
+    icon: MessageSquare,
     gradient: 'from-indigo-500 to-blue-500',
   },
   {
-    title: 'Stability Fortress Protocol',
+    title: 'Educational Pathways',
     description:
-      'Construct a defensive financial perimeter. We assist in building a 90-day runway to ensure operational continuity.',
-    icon: Shield,
+      'Structured learning modules on financial literacy for veterans. Master your benefits, understand your rating, and build the financial foundation you deserve.',
+    icon: GraduationCap,
     gradient: 'from-violet-500 to-purple-500',
   },
   {
-    title: 'Tactical Directives',
+    title: 'Claim Strategy Builder',
     description:
-      'Receive clear, actionable weekly missions. No vague advice—just precise orders to optimize your finances and habits.',
-    icon: Check,
+      'Tools to understand the service-connected disability process. Learn how to navigate the VA system and maximize your benefits (premium course reveals the complete strategy).',
+    icon: Target,
     gradient: 'from-blue-500 to-cyan-500',
   },
   {
-    title: 'Strategic AI Advisor',
+    title: 'Transition Roadmap',
     description:
-      'An intelligent system that communicates like a commander, not a calculator. It demands action and enforces accountability.',
-    icon: Zap,
+      'Step-by-step guidance from EAS to financial stability. Navigate the confusing transition period with clear, actionable steps tailored to your situation.',
+    icon: Map,
     gradient: 'from-indigo-500 to-violet-500',
   },
   {
-    title: 'Real-Time Analytics',
+    title: 'Community Access',
     description:
-      'Live financial dashboards with instant insights. Track spending patterns, income trends, and budget performance in real-time.',
-    icon: BarChart3,
+      'Connect with other veterans on the same journey. Share experiences, ask questions, and learn from those who&apos;ve successfully navigated the system.',
+    icon: Users,
     gradient: 'from-purple-500 to-pink-500',
   },
   {
     title: 'Secure & Private',
     description:
-      'Bank-level encryption protects your data. Your financial information stays private and secure, always under your control.',
+      'Bank-level encryption protects your data. Veteran-owned and operated. Your information stays private and secure, always under your control.',
     icon: Lock,
     gradient: 'from-cyan-500 to-blue-500',
   },
@@ -51,7 +51,7 @@ const features = [
 
 export function LandingFeatures() {
   return (
-    <section id="features" className="py-24 relative overflow-hidden">
+    <section id="features" className="py-16 sm:py-24 relative overflow-hidden">
       {/* Background gradients for glass effect visibility */}
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl -z-10" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-secondary/40 rounded-full blur-3xl -z-10" />
@@ -64,16 +64,16 @@ export function LandingFeatures() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-            Eliminate Uncertainty. Execute with Precision.
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 not-italic font-sans">
+            From Confusion → Clarity → Freedom
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Data without action is noise. Life Command OS transforms metrics into missions, ensuring
-            you never operate blind again.
+            Stop navigating the VA system alone. Our AI-powered platform transforms confusion about
+            your benefits into clear action steps toward financial freedom.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {features.map((feature, index) => (
             <motion.div
               key={index}
@@ -93,7 +93,7 @@ export function LandingFeatures() {
                   >
                     <feature.icon className="h-7 w-7" />
                   </div>
-                  <CardTitle className="text-xl group-hover:text-primary transition-colors duration-300">
+                  <CardTitle className="text-xl group-hover:text-primary-gradient transition-colors duration-300">
                     {feature.title}
                   </CardTitle>
                 </CardHeader>

@@ -9,6 +9,75 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **AI Benefits Navigator**: AI-powered chat assistant for VA benefits and disability claims
+  - Chat interface (`/ai-agent`) powered by AI SDK with knowledge base integration
+  - Real-time conversation with context-aware responses
+  - Knowledge base search for accurate VA benefits information
+  - Support for questions about DD-214, C&P exams, service-connected benefits
+  - Conversation history saved to Supabase
+  - Quick tips cards for common topics (Service-Connected Benefits, C&P Exam Prep, Transition Support)
+- **Course System**: Comprehensive online course platform
+  - Course page (`/course`) for "0-100% Service-Connected Disability Rating Course"
+  - Course content page (`/course/content`) with course player
+  - 6 comprehensive modules covering DD-214, service-connected conditions, C&P exams, claims, rating maximization, and appeals
+  - Stripe payment integration for course enrollment
+  - Course access management via Supabase
+  - Course progress tracking
+  - Enrollment with one-time payment and lifetime access
+- **Stripe Payment Integration**: Secure payment processing
+  - Stripe checkout API route (`/api/stripe/checkout`)
+  - Stripe webhook handler (`/api/stripe/webhook`) for payment events
+  - Secure course enrollment flow
+  - Payment session management
+  - CheckoutButton component for course enrollment
+- **Supabase Integration**: Database backend and authentication
+  - Supabase client configuration with service role key support
+  - Course access management functions
+  - Conversation storage for AI agent
+  - Knowledge base database schema
+  - Reddit Q&A dataset schema for training data
+  - Migration system for database schema
+- **Knowledge Base System**: Searchable knowledge base for AI agent
+  - Full-text search functionality
+  - Keyword matching and relevance scoring
+  - Category and tag-based filtering
+  - Knowledge base articles stored in Supabase
+  - Integration with AI agent for context retrieval
+- **Feedback System**: User feedback collection
+  - FeedbackDialog component for collecting user feedback
+  - FeedbackFloatingButton for easy access on all pages
+  - Feedback API route (`/api/feedback`) for submission
+  - Feedback stored and analyzed for improvements
+- **Background Components**: Enhanced visual backgrounds
+  - `HeroThreeBackground` - 3D Three.js background for hero sections
+  - `DashboardThreeBackground` - Custom background for dashboard pages
+  - `MovingGradientBackground` - Animated gradient background
+  - `SubtleThreeBackground` - Subtle Three.js particles background
+  - Performance-optimized 3D rendering
+- **Theme Enhancements**: Improved theme management
+  - `ThemeColorMeta` component for dynamic browser theme color
+  - Automatic theme color updates based on current theme (light/dark)
+  - Better integration with browser UI (address bar, etc.)
+- **Blog Posts**: New content additions
+  - Mission Statement blog post
+  - Rebranding announcement post
+  - After Scarcity blog post
+  - Tesla Master Plan Part 4 post
+  - YouTube videos collection post
+- **Reddit Dataset**: Community Q&A dataset
+  - Reddit scraper script (`scripts/scrape-reddit.ts`)
+  - Dataset collection from r/VeteransBenefits and related subreddits
+  - Question-answer pairs for AI training
+  - Valor features scraper (`scripts/scrape-valor-features.ts`)
+  - Dataset setup documentation (`REDDIT_DATASET_SETUP.md`)
+- **Changelog Page**: Public changelog page (`/changelog`) displaying all project updates
+  - Automatic parsing of `CHANGELOG.md` following Keep a Changelog format
+  - Organized by version with date badges
+  - Sections for Added, Changed, Deprecated, Removed, Fixed, and Security
+  - Support for nested bullet points and markdown formatting (bold, code, links)
+  - Added to site navigation (header and mobile menu)
+  - Included in sitemap for SEO
+
 - **Dashboard System**: Comprehensive financial dashboard with sidebar navigation
   - Financial metrics cards (Balance, Spending, Budget, Savings)
   - Interactive charts using Recharts (spending trends, category breakdowns)
@@ -36,6 +105,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Avatar, Badge, Button, Calendar, Card, Chart
   - Dialog, Dropdown Menu, Input, Label, Popover
   - Progress, Select, Separator, Sheet, Skeleton, Table, Tabs
+  - Textarea component for forms and feedback
 - **CSV Processing**: PapaParse integration for bank statement imports
 - **Chart Library**: Recharts integration for data visualization
 - **Date Utilities**: date-fns for date formatting and calculations
@@ -73,11 +143,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `date-fns` - Date utility library
   - `papaparse` - CSV parsing library
   - `googleapis` - Google Calendar API integration
+  - `@supabase/supabase-js` - Supabase client for database and auth
+  - `stripe` - Payment processing library
+  - `ai` - AI SDK for chat functionality with OpenAI and XAI support
+  - `@ai-sdk/openai` - OpenAI provider for AI SDK
+  - `@ai-sdk/xai` - XAI (Grok) provider for AI SDK
+  - `three` - 3D graphics library for backgrounds
+  - `@react-three/fiber` - React renderer for Three.js
+  - `@react-three/drei` - Useful helpers for React Three Fiber
   - Additional Radix UI components for dashboard UI
-- **Project Structure**: Added dashboard directory structure
+- **Project Structure**: Added new directory structures
   - `app/dashboard/` - Dashboard routes and layout
+  - `app/ai-agent/` - AI Benefits Navigator page
+  - `app/course/` - Course pages and content
+  - `app/api/ai-agent/` - AI chat API route
+  - `app/api/course/` - Course progress API routes
+  - `app/api/feedback/` - Feedback submission API
+  - `app/api/stripe/` - Stripe payment API routes
   - `components/ui/` - Shadcn UI component library
   - `components/dashboard-*.tsx` - Dashboard-specific components
+  - `lib/ai-agent.ts` - AI agent configuration and utilities
+  - `lib/knowledge-base.ts` - Knowledge base search functions
+  - `lib/supabase.ts` - Supabase client and helper functions
+  - `lib/reddit-dataset.ts` - Reddit dataset utilities
+  - `supabase/migrations/` - Database migration files
 - Transformed from portfolio to consultancy-focused website
 - Homepage restructured with mission, services preview, work preview
 - Navigation updated with new page links (Services, Work, About)
@@ -89,6 +178,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Mobile menu styling enhanced with glassmorphism consistency
 - Newsletter subscription: improved accessibility (aria-live/roles) and reduced-motion friendly entrance animation
 - Floating background: respect prefers-reduced-motion and reduce element count on small screens
+- Site transformed from consultancy to veteran-focused benefits platform (Life Command OS)
+- Homepage rebranded to focus on veteran benefits navigation and education
+- Navigation updated to include AI Agent and Course pages
+- Site theme and branding updated to reflect veteran-focused mission
 
 ### Technical Improvements
 

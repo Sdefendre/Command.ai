@@ -62,7 +62,7 @@ import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 import { DashboardCardSkeleton } from '@/components/dashboard-card-skeleton'
 import { useDashboard } from '@/components/dashboard/dashboard-context'
-import { Transaction, TransactionType } from '@/constants/dashboard'
+import { TransactionType } from '@/constants/dashboard'
 import { EditableNumber } from '@/components/ui/editable-number'
 
 export default function TransactionsPage() {
@@ -71,8 +71,6 @@ export default function TransactionsPage() {
 
   const [searchQuery, setSearchQuery] = useState('')
   const [categoryFilter, setCategoryFilter] = useState('all')
-  const [statusFilter, setStatusFilter] = useState('all')
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc')
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false)
 
   // New Transaction Form State
@@ -101,7 +99,7 @@ export default function TransactionsPage() {
         const dateB = new Date(b.date).getTime()
         return sortOrder === 'desc' ? dateB - dateA : dateA - dateB
       })
-  }, [transactions, searchQuery, categoryFilter, statusFilter, sortOrder])
+  }, [transactions, searchQuery, categoryFilter])
 
   const totals = useMemo(() => {
     const income = transactions.reduce((acc, t) => (t.amount > 0 ? acc + t.amount : acc), 0)
