@@ -67,7 +67,7 @@ export function DashboardHeader() {
   const pathname = usePathname()
 
   return (
-    <header className="flex h-14 items-center gap-4 border-b border-white/20 dark:border-white/10 bg-white/80 dark:bg-black/80 backdrop-blur-xl px-6 lg:h-[60px] sticky top-0 z-50">
+    <header className="flex h-14 items-center gap-2 sm:gap-4 border-b border-white/20 dark:border-white/10 bg-white/80 dark:bg-black/80 backdrop-blur-xl px-3 sm:px-6 lg:h-[60px] sticky top-0 z-50">
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="ghost" size="icon" className="shrink-0 md:hidden -ml-2">

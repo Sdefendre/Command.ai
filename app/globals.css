@@ -65,7 +65,7 @@
 
   /* Muted: Zinc 100 */
   --muted: oklch(0.967 0.003 264.542);
-  --muted-foreground: oklch(0.551 0.027 264.364); /* Zinc 500 */
+  --muted-foreground: oklch(0.45 0.027 264.364); /* Zinc 600 - Darker for better contrast */
 
   /* Accent: Zinc 100 */
   --accent: oklch(0.967 0.003 264.542);
@@ -110,7 +110,7 @@
 
   /* Muted: Zinc 900 */
   --muted: oklch(0.21 0.034 264.665);
-  --muted-foreground: oklch(0.705 0.019 264.323); /* Zinc 400 */
+  --muted-foreground: oklch(0.75 0.019 264.323); /* Zinc 300 - Lighter for better contrast */
 
   /* Accent: Zinc 800 */
   --accent: oklch(0.274 0.016 264.376);
@@ -139,9 +139,19 @@
   }
   html {
     scroll-behavior: smooth;
+    /* Improve base font size for better legibility */
+    font-size: 17px;
   }
   body {
-    @apply bg-background text-foreground antialiased leading-relaxed;
+    @apply bg-background text-foreground antialiased;
+    /* Improved line height for body text - 1.7 is optimal for readability */
+    line-height: 1.7;
+    /* Slight letter spacing for better character recognition */
+    letter-spacing: 0.01em;
+    /* Better font rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
   h1,
   h2,
@@ -149,10 +159,80 @@
   h4,
   h5,
   h6 {
-    @apply tracking-tight text-foreground;
+    @apply text-foreground;
+    /* Less tight tracking for better readability */
+    letter-spacing: -0.02em;
+    /* Improved line heights for headings */
+    line-height: 1.2;
+    font-weight: 700;
+  }
+  h1 {
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+  h2 {
+    line-height: 1.15;
+    letter-spacing: -0.025em;
+  }
+  h3 {
+    line-height: 1.2;
+    letter-spacing: -0.02em;
   }
   p {
-    @apply leading-7;
+    /* Improved paragraph line height */
+    line-height: 1.75;
+    /* Better spacing between paragraphs */
+    margin-bottom: 1.25em;
+    /* Slightly increased letter spacing for body text */
+    letter-spacing: 0.01em;
+  }
+  /* Improve small text legibility */
+  small,
+  .text-sm {
+    font-size: 0.9375rem; /* 15px */
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+  }
+  .text-xs {
+    font-size: 0.8125rem; /* 13px */
+    line-height: 1.5;
+    letter-spacing: 0.015em;
+  }
+  /* Improve contrast for muted text */
+  .text-muted-foreground {
+    color: oklch(0.45 0.027 264.364); /* Darker than before for better contrast */
+  }
+  .dark .text-muted-foreground {
+    color: oklch(0.75 0.019 264.323); /* Lighter for dark mode */
+  }
+  /* Better link contrast */
+  a {
+    @apply text-primary;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1.5px;
+    transition: opacity 0.2s ease;
+  }
+  a:hover {
+    opacity: 0.8;
+  }
+  /* Improve list readability */
+  ul,
+  ol {
+    line-height: 1.75;
+    letter-spacing: 0.01em;
+  }
+  li {
+    margin-bottom: 0.5em;
+  }
+  /* Improve code block readability */
+  code {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+  pre {
+    line-height: 1.6;
+    letter-spacing: 0;
   }
   /* Skip link styles */
   .sr-only {
@@ -181,24 +261,49 @@
 /* Glass morphism utilities - Apple-style liquid glass effect */
 @layer utilities {
   .glass {
-    @apply bg-white/10 dark:bg-black/10 backdrop-blur-xl border border-white/20 dark:border-white/10 shadow-xl;
+    background-color: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(20px) saturate(180%);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
-    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
   }
 
   .dark .glass {
     background-color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   }
 
   .glass-hover {
-    @apply hover:bg-white/20 dark:hover:bg-black/20 hover:border-white/30 dark:hover:border-white/20 transition-all duration-300;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+  }
+
+  .glass-hover:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .dark .glass-hover:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.2);
   }
 
   .glass-card {
-    @apply glass rounded-2xl p-6;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    border-radius: 1rem;
+    padding: 1.5rem;
+  }
+
+  .dark .glass-card {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
   }
 }
 

@@ -15,12 +15,28 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   if (!post) return { title: 'Post not found' }
   const title = post.title
   const description = post.excerpt
-  const ogImage = '/defendre-logo.png'
+  const ogImage = '/logo.png'
   return {
     title,
     description,
-    openGraph: { title, description, images: [{ url: ogImage }] },
-    twitter: { card: 'summary_large_image', title, description, images: [ogImage] },
+    openGraph: {
+      title,
+      description,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [ogImage],
+    },
   }
 }
 

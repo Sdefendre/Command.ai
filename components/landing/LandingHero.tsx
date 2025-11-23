@@ -2,10 +2,16 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import { ArrowRight, Shield } from 'lucide-react'
+import { ArrowRight, Shield, TrendingUp, Users, Zap } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import Image from 'next/image'
+
+const stats = [
+  { label: 'Active Operators', value: '2.5K+', icon: Users },
+  { label: 'Avg. Savings Increase', value: '34%', icon: TrendingUp },
+  { label: 'Response Time', value: '< 1s', icon: Zap },
+]
 
 export function LandingHero() {
   return (
@@ -36,9 +42,9 @@ export function LandingHero() {
             >
               <Badge
                 variant="outline"
-                className="mb-6 px-4 py-1.5 text-sm font-mono font-medium rounded-full border-red-500/50 text-red-500 bg-red-500/10 uppercase tracking-wider"
+                className="mb-6 px-4 py-1.5 text-sm font-mono font-medium rounded-full border-red-500/50 text-red-500 bg-red-500/10 uppercase tracking-wider animate-pulse"
               >
-                Take Control of Your Life
+                Escape Survival Mode
               </Badge>
             </motion.div>
 
@@ -49,9 +55,9 @@ export function LandingHero() {
               }}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif font-bold tracking-tight mb-6 leading-[1.1] antialiased"
             >
-              Your Life, <br />
+              Stop Surviving. <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-violet-600 to-blue-500 animate-gradient-x">
-                Under Command.
+                Start Commanding.
               </span>
             </motion.h1>
 
@@ -62,8 +68,8 @@ export function LandingHero() {
               }}
               className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed font-sans"
             >
-              Transform chaos into clarity. Track finances, manage budgets, and make decisions with
-              confidence. The intelligent system that helps you build the future you deserve.
+              Your intelligent operating system for life. Stabilize finances, eliminate chaos, and
+              execute with precision. An AI agent built for those ready to build their future.
             </motion.p>
 
             <motion.div
@@ -71,14 +77,15 @@ export function LandingHero() {
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
               }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
             >
               <Link href="/dashboard">
                 <Button
                   size="lg"
-                  className="w-full sm:w-auto text-lg px-8 py-6 rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:scale-105 active:scale-95 transition-all duration-300 bg-primary hover:bg-primary/90 text-primary-foreground border-0"
+                  className="w-full sm:w-auto text-lg px-8 py-6 rounded-full shadow-lg shadow-primary/20 hover:shadow-primary/40 hover:scale-105 active:scale-95 transition-all duration-300 bg-primary hover:bg-primary/90 text-primary-foreground border-0 group"
                 >
-                  Initialize Command <ArrowRight className="ml-2 h-5 w-5" />
+                  Initialize Command
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
               <Link href="#pricing">
@@ -91,6 +98,30 @@ export function LandingHero() {
                 </Button>
               </Link>
             </motion.div>
+
+            {/* Stats Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto"
+            >
+              {stats.map((stat, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
+                  className="glass rounded-xl p-6 hover:scale-105 transition-all duration-300"
+                >
+                  <stat.icon className="h-8 w-8 text-primary mx-auto mb-3" />
+                  <div className="text-3xl font-bold mb-1 bg-gradient-to-r from-indigo-600 to-blue-500 bg-clip-text text-transparent">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                </motion.div>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
 
@@ -98,11 +129,11 @@ export function LandingHero() {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
           className="mt-20 relative mx-auto max-w-5xl"
         >
-          <div className="glass rounded-2xl shadow-2xl overflow-hidden p-2 sm:p-4 hover:shadow-primary/20 hover:bg-white/15 dark:hover:bg-black/15 transition-all duration-500">
-            <div className="aspect-video rounded-lg bg-gradient-to-br from-gray-950 to-gray-900 flex items-center justify-center relative overflow-hidden group hover:scale-[1.01] transition-transform duration-700 ease-out">
+          <div className="glass rounded-2xl shadow-2xl overflow-hidden p-2 sm:p-4 hover:shadow-primary/20 hover:bg-white/15 dark:hover:bg-black/15 transition-all duration-500 group">
+            <div className="aspect-video rounded-lg bg-gradient-to-br from-gray-950 to-gray-900 flex items-center justify-center relative overflow-hidden hover:scale-[1.01] transition-transform duration-700 ease-out">
               {/* Abstract representation of dashboard */}
               <Image
                 src="https://images.unsplash.com/photo-1639322537228-f710d846310a?q=80&w=2832&auto=format&fit=crop"
@@ -111,11 +142,24 @@ export function LandingHero() {
                 className="object-cover opacity-20 group-hover:opacity-40 transition-opacity duration-700"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1000px"
                 priority
+                quality={85}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
 
               <div className="relative z-10 text-center p-8">
-                <Shield className="h-20 w-20 text-primary mx-auto mb-4 opacity-80" />
+                <motion.div
+                  animate={{
+                    rotate: [0, 5, -5, 0],
+                    scale: [1, 1.1, 1],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    repeatType: 'reverse',
+                  }}
+                >
+                  <Shield className="h-20 w-20 text-primary mx-auto mb-4 opacity-80" />
+                </motion.div>
                 <p className="text-2xl font-mono font-bold text-white tracking-widest uppercase">
                   Command Center Active
                 </p>
@@ -124,8 +168,30 @@ export function LandingHero() {
           </div>
 
           {/* Decorative elements */}
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-indigo-600/20 rounded-full blur-3xl -z-10" />
-          <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-600/20 rounded-full blur-3xl -z-10" />
+          <motion.div
+            className="absolute -top-10 -right-10 w-40 h-40 bg-indigo-600/20 rounded-full blur-3xl -z-10"
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
+          <motion.div
+            className="absolute -bottom-10 -left-10 w-40 h-40 bg-blue-600/20 rounded-full blur-3xl -z-10"
+            animate={{
+              scale: [1, 1.15, 1],
+              opacity: [0.3, 0.4, 0.3],
+            }}
+            transition={{
+              duration: 5,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
         </motion.div>
       </div>
     </section>

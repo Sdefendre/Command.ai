@@ -22,6 +22,12 @@ const LandingPricing = dynamic(
     loading: () => <div className="min-h-[400px]" />,
   }
 )
+const LandingTestimonials = dynamic(
+  () => import('@/components/landing/LandingTestimonials').then((mod) => mod.LandingTestimonials),
+  {
+    loading: () => <div className="min-h-[400px]" />,
+  }
+)
 const LandingCTA = dynamic(() =>
   import('@/components/landing/LandingCTA').then((mod) => mod.LandingCTA)
 )
@@ -38,6 +44,7 @@ export default function SaaSLanding() {
       <main>
         <LandingHero />
         <LandingFeatures />
+        <LandingTestimonials />
         <LandingRoadmap />
         <LandingPricing />
         <LandingCTA />

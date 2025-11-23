@@ -389,113 +389,115 @@ export default function TransactionsPage() {
           </div>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[100px]">Date</TableHead>
-                <TableHead>Description</TableHead>
-                <TableHead className="hidden md:table-cell">Category</TableHead>
-                <TableHead className="hidden md:table-cell">Status</TableHead>
-                <TableHead className="text-right">Amount</TableHead>
-                <TableHead className="w-[50px]"></TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredTransactions.length === 0 ? (
+          <div className="overflow-x-auto -mx-3 sm:mx-0 px-3 sm:px-0">
+            <Table>
+              <TableHeader>
                 <TableRow>
-                  <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
-                    No transactions found.
-                  </TableCell>
+                  <TableHead className="w-[100px]">Date</TableHead>
+                  <TableHead>Description</TableHead>
+                  <TableHead className="hidden md:table-cell">Category</TableHead>
+                  <TableHead className="hidden md:table-cell">Status</TableHead>
+                  <TableHead className="text-right">Amount</TableHead>
+                  <TableHead className="w-[50px]"></TableHead>
                 </TableRow>
-              ) : (
-                filteredTransactions.map((transaction) => {
-                  const Icon = getCategoryIcon(transaction.category)
-                  return (
-                    <TableRow key={transaction.id}>
-                      <TableCell className="font-medium">
-                        <div className="flex flex-col">
-                          <span>{format(new Date(transaction.date), 'MMM d')}</span>
-                          <span className="text-xs text-muted-foreground md:hidden">
-                            {format(new Date(transaction.date), 'yyyy')}
-                          </span>
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-3">
-                          <div
-                            className={cn(
-                              'p-2 rounded-full hidden md:block',
-                              transaction.amount > 0
-                                ? 'bg-emerald-500/10 text-emerald-500'
-                                : 'bg-primary/10 text-primary'
-                            )}
-                          >
-                            <Icon className="h-4 w-4" />
-                          </div>
+              </TableHeader>
+              <TableBody>
+                {filteredTransactions.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
+                      No transactions found.
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  filteredTransactions.map((transaction) => {
+                    const Icon = getCategoryIcon(transaction.category)
+                    return (
+                      <TableRow key={transaction.id}>
+                        <TableCell className="font-medium">
                           <div className="flex flex-col">
-                            <span className="font-medium">{transaction.name}</span>
-                            <span className="text-xs text-muted-foreground">
-                              {transaction.merchant}
+                            <span>{format(new Date(transaction.date), 'MMM d')}</span>
+                            <span className="text-xs text-muted-foreground md:hidden">
+                              {format(new Date(transaction.date), 'yyyy')}
                             </span>
                           </div>
-                        </div>
-                      </TableCell>
-                      <TableCell className="hidden md:table-cell">
-                        <Badge variant="outline">{transaction.category}</Badge>
-                      </TableCell>
-                      <TableCell className="hidden md:table-cell">
-                        <Badge
-                          variant={transaction.status === 'completed' ? 'default' : 'secondary'}
-                        >
-                          {transaction.status}
-                        </Badge>
-                      </TableCell>
-                      <TableCell
-                        className={cn(
-                          'text-right font-bold',
-                          transaction.amount > 0 ? 'text-emerald-500' : ''
-                        )}
-                      >
-                        {transaction.amount > 0 ? '+' : ''}$
-                        <EditableNumber
-                          value={Math.abs(transaction.amount)}
-                          onSave={(value) => {
-                            const finalAmount = transaction.amount > 0 ? value : -value
-                            updateTransaction(transaction.id, { amount: finalAmount })
-                          }}
-                          formatOptions={{ minimumFractionDigits: 2, maximumFractionDigits: 2 }}
-                          min={0}
-                        />
-                      </TableCell>
-                      <TableCell>
-                        <DropdownMenu>
-                          <DropdownMenuTrigger asChild>
-                            <Button variant="ghost" className="h-8 w-8 p-0">
-                              <span className="sr-only">Open menu</span>
-                              <MoreHorizontal className="h-4 w-4" />
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent align="end">
-                            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                            <DropdownMenuItem>
-                              <Edit2 className="mr-2 h-4 w-4" /> Edit
-                            </DropdownMenuItem>
-                            <DropdownMenuSeparator />
-                            <DropdownMenuItem
-                              className="text-red-600"
-                              onClick={() => deleteTransaction(transaction.id)}
+                        </TableCell>
+                        <TableCell>
+                          <div className="flex items-center gap-3">
+                            <div
+                              className={cn(
+                                'p-2 rounded-full hidden md:block',
+                                transaction.amount > 0
+                                  ? 'bg-emerald-500/10 text-emerald-500'
+                                  : 'bg-primary/10 text-primary'
+                              )}
                             >
-                              <Trash2 className="mr-2 h-4 w-4" /> Delete
-                            </DropdownMenuItem>
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </TableCell>
-                    </TableRow>
-                  )
-                })
-              )}
-            </TableBody>
-          </Table>
+                              <Icon className="h-4 w-4" />
+                            </div>
+                            <div className="flex flex-col">
+                              <span className="font-medium">{transaction.name}</span>
+                              <span className="text-xs text-muted-foreground">
+                                {transaction.merchant}
+                              </span>
+                            </div>
+                          </div>
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          <Badge variant="outline">{transaction.category}</Badge>
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          <Badge
+                            variant={transaction.status === 'completed' ? 'default' : 'secondary'}
+                          >
+                            {transaction.status}
+                          </Badge>
+                        </TableCell>
+                        <TableCell
+                          className={cn(
+                            'text-right font-bold',
+                            transaction.amount > 0 ? 'text-emerald-500' : ''
+                          )}
+                        >
+                          {transaction.amount > 0 ? '+' : ''}$
+                          <EditableNumber
+                            value={Math.abs(transaction.amount)}
+                            onSave={(value) => {
+                              const finalAmount = transaction.amount > 0 ? value : -value
+                              updateTransaction(transaction.id, { amount: finalAmount })
+                            }}
+                            formatOptions={{ minimumFractionDigits: 2, maximumFractionDigits: 2 }}
+                            min={0}
+                          />
+                        </TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button variant="ghost" className="h-8 w-8 p-0">
+                                <span className="sr-only">Open menu</span>
+                                <MoreHorizontal className="h-4 w-4" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                              <DropdownMenuItem>
+                                <Edit2 className="mr-2 h-4 w-4" /> Edit
+                              </DropdownMenuItem>
+                              <DropdownMenuSeparator />
+                              <DropdownMenuItem
+                                className="text-red-600"
+                                onClick={() => deleteTransaction(transaction.id)}
+                              >
+                                <Trash2 className="mr-2 h-4 w-4" /> Delete
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })
+                )}
+              </TableBody>
+            </Table>
+          </div>
         </CardContent>
       </Card>
     </div>

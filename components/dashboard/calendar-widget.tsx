@@ -30,19 +30,20 @@ export function CalendarWidget() {
   }, [])
 
   return (
-    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
-      <h1 className="text-3xl font-bold tracking-tight">
+    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-4 sm:mb-6">
+      <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">
         {dateData.month || <div className="h-8 w-40 bg-muted animate-pulse rounded-md" />}
       </h1>
 
       <Dialog open={isCalendarDialogOpen} onOpenChange={setIsCalendarDialogOpen}>
         <DialogTrigger asChild>
-          <button className="flex items-center gap-2 text-sm text-muted-foreground bg-muted/40 px-4 py-2 rounded-full border hover:bg-muted transition-colors hover:text-foreground">
-            <CalendarIcon className="h-4 w-4" />
+          <button className="flex items-center gap-1.5 sm:gap-2 text-xs sm:text-sm text-muted-foreground bg-muted/40 px-3 sm:px-4 py-2 rounded-full border hover:bg-muted transition-colors hover:text-foreground">
+            <CalendarIcon className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
             <span className="font-medium text-foreground">
               {dateData.daysRemaining !== null ? dateData.daysRemaining : '-'}
             </span>
-            <span>days left in month</span>
+            <span className="hidden sm:inline">days left in month</span>
+            <span className="sm:hidden">days left</span>
           </button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[400px]">
