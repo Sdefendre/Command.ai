@@ -73,7 +73,7 @@ export function NewsletterSubscription() {
 
   return (
     <motion.section
-      variants={createFadeInUp(shouldReduceMotion)}
+      variants={createFadeInUp(Boolean(shouldReduceMotion))}
       initial="initial"
       whileInView="animate"
       viewport={viewportOnce}

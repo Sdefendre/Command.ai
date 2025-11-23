@@ -61,9 +61,10 @@ export function parseChangelog(): ParsedChangelog {
         /^###\s+(Added|Changed|Deprecated|Removed|Fixed|Security|Technical Improvements)$/i
       )
       if (sectionMatch) {
-        const sectionName = sectionMatch[1].toLowerCase() as keyof ChangelogEntry['sections']
+        const rawSectionName = sectionMatch[1].toLowerCase()
         // Map "technical improvements" to "changed" for now
-        const mappedSection = sectionName === 'technical improvements' ? 'changed' : sectionName
+        const sectionName = rawSectionName === 'technical improvements' ? 'changed' : rawSectionName
+        const mappedSection = sectionName as keyof ChangelogEntry['sections']
         if (
           ['added', 'changed', 'deprecated', 'removed', 'fixed', 'security'].includes(mappedSection)
         ) {

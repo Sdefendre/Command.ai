@@ -3,23 +3,23 @@
 import { motion } from 'framer-motion'
 import { User, Sparkles, Copy, ThumbsUp, ThumbsDown, RefreshCw } from 'lucide-react'
 import { MarkdownRenderer } from '@/components/MarkdownRenderer'
-import { Message } from 'ai'
+import type { UIMessage } from 'ai'
 import { Button } from '@/components/ui/button'
 
 interface CommandMessageProps {
-  message: Message
+  message: UIMessage
   isLast?: boolean
 }
 
 export function CommandMessage({ message }: CommandMessageProps) {
   const isUser = message.role === 'user'
 
-  // Extract text content from message parts or content
+  // Extract text content from message parts
   const content =
     message.parts
       ?.filter((part) => part.type === 'text')
       .map((part) => ('text' in part ? part.text : ''))
-      .join('') || message.content
+      .join('') || ''
 
   return (
     <motion.div

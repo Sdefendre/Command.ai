@@ -15,7 +15,8 @@ export function useCardHover() {
     if (!card) return
 
     function handleMouseMove(e: MouseEvent) {
-      const rect = card.getBoundingClientRect()
+      if (!card) return
+      const rect = card!.getBoundingClientRect()
       const x = ((e.clientX - rect.left) / rect.width) * 100
       const y = ((e.clientY - rect.top) / rect.height) * 100
       setMousePosition({ x, y })

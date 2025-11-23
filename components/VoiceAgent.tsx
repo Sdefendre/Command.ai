@@ -114,27 +114,33 @@ Remember: You're built by veterans, for veterans. Speak their language and under
       // Handle listening state changes
       // Note: Event names may vary based on SDK version - adjust as needed
       if (typeof session.on === 'function') {
-        session.on('listening', () => {
-          setIsListening(true)
-        })
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const sessionAny = session as any
+        try {
+          sessionAny.on('listening', () => {
+            setIsListening(true)
+          })
 
-        session.on('not_listening', () => {
-          setIsListening(false)
-        })
+          sessionAny.on('not_listening', () => {
+            setIsListening(false)
+          })
 
-        // Handle errors
-        session.on('error', (err: Error) => {
-          console.error('Session error:', err)
-          setError(err.message || 'An error occurred during the conversation')
-          setStatus('error')
-        })
+          // Handle errors
+          sessionAny.on('error', (err: Error) => {
+            console.error('Session error:', err)
+            setError(err.message || 'An error occurred during the conversation')
+            setStatus('error')
+          })
+        } catch {
+          console.warn('Session event handling may not be available in this SDK version')
+        }
 
         // Handle connection events
-        session.on('connected', () => {
+        sessionAny.on('connected', () => {
           setStatus('connected')
         })
 
-        session.on('disconnected', () => {
+        sessionAny.on('disconnected', () => {
           setStatus('disconnected')
           setIsListening(false)
         })
@@ -196,7 +202,12 @@ Remember: You're built by veterans, for veterans. Speak their language and under
             </div>
 
             {/* Connection Button */}
-            {status === 'disconnected' || status === 'error' ? (
+            {status === 'connected' ? (
+              <Button onClick={disconnect} variant="destructive">
+                <MicOff className="h-4 w-4 mr-2" />
+                End Conversation
+              </Button>
+            ) : (
               <Button onClick={connect} disabled={status === 'connecting'}>
                 {status === 'connecting' ? (
                   <>
@@ -209,11 +220,6 @@ Remember: You're built by veterans, for veterans. Speak their language and under
                     Start Conversation
                   </>
                 )}
-              </Button>
-            ) : (
-              <Button onClick={disconnect} variant="destructive">
-                <MicOff className="h-4 w-4 mr-2" />
-                End Conversation
               </Button>
             )}
           </div>
