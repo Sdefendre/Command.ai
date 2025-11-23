@@ -5,41 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { Check } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-
-const pricingTiers = [
-  {
-    title: 'Free Tier',
-    price: '$0',
-    description: 'Start your journey with free AI-powered education',
-    features: [
-      'Command (limited queries)',
-      'Basic educational content',
-      'Transition resources library',
-      'Community forum access (read-only)',
-      'DD-214 guidance',
-      'Basic C&P exam information',
-    ],
-    buttonText: 'Get Started Free',
-    highlight: false,
-  },
-  {
-    title: 'Premium Course',
-    price: 'One-Time',
-    description: 'The complete blueprint to financial freedom',
-    features: [
-      'Full AI agent access (unlimited)',
-      'Complete educational library',
-      'The 0-100% Service-Connected Disability Rating Course',
-      'Community full access',
-      'Priority support',
-      'Step-by-step claim strategy',
-      'C&P exam preparation guide',
-      'Lifetime course access',
-    ],
-    buttonText: 'Enroll Now',
-    highlight: true,
-  },
-]
+import { LANDING_PRICING } from '@/constants/landing'
 
 export function LandingPricing() {
   return (
@@ -57,16 +23,15 @@ export function LandingPricing() {
           className="text-center mb-10 sm:mb-16"
         >
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4">
-            Choose Your Path
+            {LANDING_PRICING.title}
           </h2>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mx-auto">
-            Start free with Command, or unlock the complete strategy to maximize your
-            service-connected benefits.
+            {LANDING_PRICING.description}
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
-          {pricingTiers.map((tier, index) => (
+          {LANDING_PRICING.tiers.map((tier, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}

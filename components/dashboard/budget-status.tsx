@@ -18,7 +18,6 @@ import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { EditableNumber } from '@/components/ui/editable-number'
 import { useDashboard } from '@/components/dashboard/dashboard-context'
-import { cn } from '@/lib/utils'
 
 function getCategoryIcon(category: string) {
   switch (category.toLowerCase()) {

@@ -49,6 +49,7 @@ export interface Database {
           expires_at: string | null
           accessed_at: string | null
           completion_percentage: number | null
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           metadata: Record<string, any> | null
         }
         Insert: {
@@ -61,6 +62,7 @@ export interface Database {
           expires_at?: string | null
           accessed_at?: string | null
           completion_percentage?: number | null
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           metadata?: Record<string, any> | null
         }
         Update: {
@@ -73,6 +75,7 @@ export interface Database {
           expires_at?: string | null
           accessed_at?: string | null
           completion_percentage?: number | null
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           metadata?: Record<string, any> | null
         }
       }
@@ -84,6 +87,7 @@ export interface Database {
           conversation_id: string
           role: 'user' | 'assistant' | 'system'
           message: string
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           metadata: Record<string, any> | null
         }
         Insert: {
@@ -93,6 +97,7 @@ export interface Database {
           conversation_id: string
           role: 'user' | 'assistant' | 'system'
           message: string
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           metadata?: Record<string, any> | null
         }
         Update: {
@@ -102,6 +107,7 @@ export interface Database {
           conversation_id?: string
           role?: 'user' | 'assistant' | 'system'
           message?: string
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           metadata?: Record<string, any> | null
         }
       }
@@ -117,6 +123,7 @@ export interface Database {
           expires_at: string | null
           stripe_subscription_id: string | null
           stripe_customer_id: string | null
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           metadata: Record<string, any> | null
         }
         Insert: {
@@ -130,6 +137,7 @@ export interface Database {
           expires_at?: string | null
           stripe_subscription_id?: string | null
           stripe_customer_id?: string | null
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           metadata?: Record<string, any> | null
         }
         Update: {
@@ -143,6 +151,7 @@ export interface Database {
           expires_at?: string | null
           stripe_subscription_id?: string | null
           stripe_customer_id?: string | null
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           metadata?: Record<string, any> | null
         }
       }
@@ -155,6 +164,7 @@ export interface Database {
           date: string
           query_count: number
           tier: 'free' | 'premium' | 'lifetime'
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           metadata: Record<string, any> | null
         }
         Insert: {
@@ -165,6 +175,7 @@ export interface Database {
           date: string
           query_count?: number
           tier?: 'free' | 'premium' | 'lifetime'
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           metadata?: Record<string, any> | null
         }
         Update: {
@@ -175,6 +186,7 @@ export interface Database {
           date?: string
           query_count?: number
           tier?: 'free' | 'premium' | 'lifetime'
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           metadata?: Record<string, any> | null
         }
       }

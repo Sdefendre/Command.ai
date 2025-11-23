@@ -39,7 +39,11 @@ export function ChatFloatingButton() {
       initial={{ scale: 0.8, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 0.2 }}
-      className="fixed bottom-4 right-4 z-50 print:hidden"
+      className="fixed z-50 print:hidden"
+      style={{
+        bottom: 'max(1rem, env(safe-area-inset-bottom) + 1rem)',
+        right: 'max(1rem, env(safe-area-inset-right) + 1rem)',
+      }}
     >
       <ChatButton />
     </motion.div>

@@ -21,7 +21,9 @@ interface CourseContentPageProps {
   }
 }
 
-export default async function CourseContentPage({ searchParams }: CourseContentPageProps) {
+export default async function CourseContentPage({
+  searchParams: _searchParams,
+}: CourseContentPageProps) {
   // TODO: Get actual user ID from session/auth
   // For now, this is a placeholder - you'll need to implement authentication
   const userId = undefined // Replace with actual user ID from auth

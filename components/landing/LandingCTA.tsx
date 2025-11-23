@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
 import { ArrowRight, Sparkles, BookOpen } from 'lucide-react'
+import { LANDING_CTA } from '@/constants/landing'
 
 export function LandingCTA() {
   return (
@@ -28,14 +29,14 @@ export function LandingCTA() {
             className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs sm:text-sm font-medium mb-6 sm:mb-8 border border-primary/20"
           >
             <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 animate-pulse" />
-            <span>Systemize Success</span>
+            <span>{LANDING_CTA.badge}</span>
           </motion.div>
 
           {/* Heading */}
           <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 tracking-tight leading-tight">
-            Ready to Take{' '}
+            {LANDING_CTA.titlePrefix}{' '}
             <span className="text-primary relative inline-block">
-              Command?
+              {LANDING_CTA.titleHighlight}
               <motion.span
                 className="absolute -bottom-2 left-0 right-0 h-1 bg-primary/30 rounded-full"
                 initial={{ scaleX: 0 }}
@@ -48,8 +49,7 @@ export function LandingCTA() {
 
           {/* Description */}
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 sm:mb-12 max-w-2xl mx-auto leading-relaxed">
-            Drifting is a liability. Command is an asset. Equip yourself with the tools for
-            discipline, precision, and resilience. Join the community of operators today.
+            {LANDING_CTA.description}
           </p>
 
           {/* CTA Buttons */}
@@ -64,13 +64,13 @@ export function LandingCTA() {
                   className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent pointer-events-none"
                   initial={{ x: '-100%' }}
                   whileHover={{ x: '100%' }}
-                  transition={{ duration: 0.15 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 25 }}
                 />
                 <span
                   className="relative z-10 flex items-center"
                   style={{ WebkitTextFillColor: 'initial' }}
                 >
-                  Deploy System
+                  {LANDING_CTA.primaryCta}
                   <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </span>
               </Button>
@@ -87,7 +87,7 @@ export function LandingCTA() {
                   className="text-primary dark:text-white group-hover:text-primary transition-colors"
                   style={{ WebkitTextFillColor: 'initial' }}
                 >
-                  Access Documentation
+                  {LANDING_CTA.secondaryCta}
                 </span>
               </Button>
             </Link>
@@ -101,7 +101,7 @@ export function LandingCTA() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-sm text-muted-foreground/80"
           >
-            No credit card required • Full control • Always accessible
+            {LANDING_CTA.footer}
           </motion.p>
         </motion.div>
       </div>

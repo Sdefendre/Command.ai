@@ -171,7 +171,7 @@ function SubtleScene() {
   const shouldReduceMotion = useReducedMotion()
 
   // Reduced particles for better performance
-  const particles = Array.from({ length: shouldReduceMotion ? 10 : 35 }, (_, i) => {
+  const particles = Array.from({ length: shouldReduceMotion ? 10 : 35 }, () => {
     const colors = ['#4f46e5', '#6366f1', '#7c3aed']
     return {
       position: [
@@ -184,7 +184,7 @@ function SubtleScene() {
   })
 
   // Reduced shapes for better performance
-  const shapes = Array.from({ length: shouldReduceMotion ? 2 : 3 }, (_, i) => {
+  const shapes = Array.from({ length: shouldReduceMotion ? 2 : 3 }, () => {
     const colors = ['#4f46e5', '#6366f1']
     const shapeTypes: ('box' | 'tetrahedron' | 'octahedron')[] = [
       'box',

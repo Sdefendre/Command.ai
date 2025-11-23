@@ -6,8 +6,8 @@ import { NextRequest } from 'next/server'
  */
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json()
-    const { userId } = body
+    // const body = await request.json()
+    // const { userId } = body
 
     // Check if OpenAI API key is configured
     const apiKey = process.env.OPENAI_API_KEY

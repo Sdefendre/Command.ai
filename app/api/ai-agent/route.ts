@@ -1,5 +1,5 @@
 import { NextRequest } from 'next/server'
-import { streamText, convertToCoreMessages } from 'ai'
+import { streamText } from 'ai'
 import { openai } from '@ai-sdk/openai'
 import { createXai } from '@ai-sdk/xai'
 import { buildPrompt, SYSTEM_PROMPT, type ConversationMessage } from '@/lib/ai-agent'
@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     // useChat with DefaultChatTransport sends: { messages, data, ...body }
     // The body object from transport config (userId, model) is merged into the request body
-    const { messages: chatMessages, data, userId, model = 'gpt-4o-mini', conversationId } = body
+    const { messages: chatMessages, userId, model = 'gpt-4o-mini', conversationId } = body
 
     // Use provided conversation ID or generate a new one (for tracking conversations)
     const currentConversationId =

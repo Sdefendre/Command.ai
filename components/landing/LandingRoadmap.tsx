@@ -3,9 +3,10 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { ROADMAP_ITEMS, RoadmapItem } from '@/constants/roadmap'
+import { LANDING_ROADMAP } from '@/constants/landing'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { CheckCircle2, Circle, Clock, ArrowRight } from 'lucide-react'
+import { CheckCircle2, Circle, Clock } from 'lucide-react'
 
 export function LandingRoadmap() {
   // Group items by phase
@@ -50,10 +51,9 @@ export function LandingRoadmap() {
 
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Product Roadmap</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">{LANDING_ROADMAP.title}</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Our vision for the future of Life Command OS. We're building a comprehensive system to
-            help you master your finances and life.
+            {LANDING_ROADMAP.description}
           </p>
         </div>
 
@@ -103,6 +103,7 @@ export function LandingRoadmap() {
                       </div>
                       <div className="flex gap-2 pt-2">
                         <Badge
+                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
                           variant={getPriorityColor(item.priority) as any}
                           className="text-[10px] px-1.5 py-0 h-5"
                         >

@@ -9,6 +9,8 @@ Welcome to the Life Command OS documentation! This index helps you navigate thro
 - **[README.md](../README.md)** - Main project overview, installation, and usage
 - **[CHANGELOG.md](../CHANGELOG.md)** - Version history and release notes
 - **Features Page** (`/features`) - Public features page with roadmap and changelog display
+- **Work Page** (`/work`) - Portfolio showcase with search functionality
+- **Command Interface** (`/command`) - Advanced AI chat interface for VA benefits assistance
 
 ### Operations Documentation
 
@@ -17,6 +19,7 @@ Welcome to the Life Command OS documentation! This index helps you navigate thro
 - **[buy-me-coffee.md](./buy-me-coffee.md)** - Buy Me a Coffee integration details
 - **[AI_AGENT_SETUP.md](./AI_AGENT_SETUP.md)** - AI Agent setup and configuration
 - **[AI_AGENT_TEST_RESULTS.md](./AI_AGENT_TEST_RESULTS.md)** - AI Agent testing results
+- **Command Interface Documentation** - Advanced AI chat interface setup and features
 
 ### Setup & Configuration
 

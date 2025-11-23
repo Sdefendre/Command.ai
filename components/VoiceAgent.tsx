@@ -18,6 +18,7 @@ export function VoiceAgent({ userId }: VoiceAgentProps) {
   const [isMuted, setIsMuted] = useState(false)
   const [isListening, setIsListening] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const sessionRef = useRef<any>(null)
 
   const disconnect = async () => {

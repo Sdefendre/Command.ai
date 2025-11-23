@@ -27,7 +27,7 @@ export function AIAgentChat({ userId }: AIAgentChatProps) {
   const [selectedModel, setSelectedModel] = useState<ModelOption>('gpt-4o-mini')
   const [input, setInput] = useState('')
   // Generate conversation ID on mount and persist it
-  const [conversationId, setConversationId] = useState<string>(() => {
+  const [conversationId] = useState<string>(() => {
     if (typeof window !== 'undefined') {
       const stored = sessionStorage.getItem('ai-conversation-id')
       if (stored) return stored
@@ -97,7 +97,8 @@ export function AIAgentChat({ userId }: AIAgentChatProps) {
           const data = await response.json()
           if (data.conversations && data.conversations.length > 0) {
             // Convert database format to chat format
-            const historyMessages = data.conversations.map((conv: any, idx: number) => ({
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            const historyMessages = data.conversations.map((conv: any, _idx: number) => ({
               id: `history-${conv.id}`,
               role: conv.role,
               parts: [{ type: 'text', text: conv.message }],
@@ -307,6 +308,7 @@ export function AIAgentChat({ userId }: AIAgentChatProps) {
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault()
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 onSubmit(e as any)
               }
             }}

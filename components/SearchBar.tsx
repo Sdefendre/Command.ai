@@ -14,7 +14,7 @@ interface SearchBarProps<T> {
   containerClassName?: string
 }
 
-export function SearchBar<T extends Record<string, any>>({
+export function SearchBar<T extends Record<string, unknown>>({
   items,
   searchKeys,
   renderItem,

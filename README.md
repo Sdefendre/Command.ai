@@ -253,6 +253,28 @@ The `/features` page provides a comprehensive overview of all Life Command OS fe
 
 Access the features page at `/features` from the main navigation.
 
+## 💼 Work Portfolio
+
+The `/work` page showcases a curated collection of projects and technical experiments:
+
+- **Project Showcase**: Featured projects with descriptions, metrics, and live demos
+- **Search Functionality**: Filter projects by title, description, or technology
+- **Responsive Design**: Optimized for all device sizes
+- **Interactive Cards**: Hover effects and smooth animations with Framer Motion
+
+## 🤖 Command Interface
+
+The `/command` page provides an advanced AI-powered chat interface for VA benefits assistance:
+
+- **Multiple AI Models**: Support for GPT-4o, GPT-4o Mini, Grok models, and more
+- **Voice Integration**: Voice-to-text input with microphone support
+- **Conversation History**: Persistent chat sessions stored in Supabase
+- **Rate Limiting**: Daily query limits with real-time tracking
+- **Knowledge Base**: Integrated search for VA benefits information
+- **Responsive Sidebar**: Collapsible interface with model selection
+
+Access the Command interface via the floating chat button or directly at `/command`.
+
 ## 🔧 Performance Optimizations
 
 ### Client-Only Components

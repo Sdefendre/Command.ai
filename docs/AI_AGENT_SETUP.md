@@ -1,6 +1,6 @@
-# AI Agent Setup Guide
+# AI Agent & Command Interface Setup Guide
 
-This guide will help you set up the AI Agent chat feature for Life Command OS with full functionality.
+This guide will help you set up the AI Agent chat features for Life Command OS with full functionality, including the legacy AI Agent page and the new Command Interface.
 
 ## Prerequisites
 
@@ -204,6 +204,12 @@ $$ LANGUAGE plpgsql;
    - Verify user-friendly error message appears
    - Restore API key and test again
 
+7. **Test Command Interface (`/command`):**
+   - Navigate to `/command` or click the floating chat button
+   - Test sidebar toggle and model selection
+   - Try voice input (if microphone is available)
+   - Verify conversation persistence across sessions
+
 ## Features
 
 ### ✅ Implemented
@@ -216,6 +222,8 @@ $$ LANGUAGE plpgsql;
 - **Reddit Dataset Integration**: Include relevant Q&A from r/veteransbenefits
 - **Error Handling**: Graceful error messages and fallbacks
 - **Model Selection**: UI to switch between different AI models
+- **Command Interface**: Advanced chat UI with sidebar, voice input, and enhanced UX
+- **Voice Integration**: Microphone support for voice-to-text input
 
 ### 🔄 Optional Enhancements
 

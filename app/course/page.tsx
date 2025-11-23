@@ -71,7 +71,7 @@ export default function CoursePage() {
           </h1>
           <p className="text-lg sm:text-xl text-muted-foreground mb-6">
             The complete blueprint to maximize your service-connected benefits and unlock financial
-            freedom. Built by veterans who've successfully navigated the system.
+            freedom. Built by veterans who&apos;ve successfully navigated the system.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
@@ -92,7 +92,7 @@ export default function CoursePage() {
         {/* What You'll Learn */}
         <Card className="glass mb-12">
           <CardHeader>
-            <CardTitle className="text-2xl">What You'll Learn</CardTitle>
+            <CardTitle className="text-2xl">What You&apos;ll Learn</CardTitle>
             <CardDescription>
               This course reveals the complete strategy that has helped thousands of veterans
               maximize their service-connected disability rating.
@@ -141,7 +141,7 @@ export default function CoursePage() {
             <Medal className="h-12 w-12 text-primary mx-auto mb-4" />
             <CardTitle className="text-3xl">Ready to Maximize Your Benefits?</CardTitle>
             <CardDescription className="text-lg">
-              Join thousands of veterans who've successfully navigated from 0% to 100% rating
+              Join thousands of veterans who&apos;ve successfully navigated from 0% to 100% rating
             </CardDescription>
           </CardHeader>
           <CardContent className="text-center">
@@ -170,9 +170,9 @@ export default function CoursePage() {
               <Target className="h-8 w-8 text-primary shrink-0" />
               <div>
                 <p className="text-muted-foreground italic mb-2">
-                  "I was stuck at 30% for years. This course gave me the exact strategy I needed. I
-                  followed the steps, prepared properly for my C&P exam, and got my 100% rating. The
-                  financial freedom this has given me is life-changing."
+                  &quot;I was stuck at 30% for years. This course gave me the exact strategy I
+                  needed. I followed the steps, prepared properly for my C&P exam, and got my 100%
+                  rating. The financial freedom this has given me is life-changing.&quot;
                 </p>
                 <p className="text-sm font-semibold">— Marine Veteran, 100% Rating</p>
               </div>

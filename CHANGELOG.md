@@ -9,6 +9,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Command Interface** (`/command`): Advanced AI chat interface replacing the previous AI agent
+  - Enhanced chat UI with collapsible sidebar and model selection
+  - Voice integration with microphone support for voice-to-text input
+  - Persistent conversation history with Supabase storage
+  - Multiple AI model support (GPT-4o, GPT-4o Mini, Grok models)
+  - Real-time rate limiting with visual indicators
+  - Improved error handling and user feedback
+- **Work Portfolio Page** (`/work`): Enhanced project showcase replacing success stories
+  - Search functionality to filter projects by title, description, or technology
+  - Responsive design with improved mobile layout
+  - Interactive project cards with hover animations
+  - Better metrics display and project information
+- **Enhanced Floating Chat Button**: Updated to route to new Command interface
+  - Improved animations and accessibility
+  - Better positioning and responsive behavior
+- **YouTube Section Improvements**: Enhanced visual design and interaction
+  - Improved video preview with animated play button
+  - Better responsive layout and hover effects
+  - Enhanced channel branding and call-to-action
+- **Landing Page Enhancements**: Multiple UI/UX improvements
+  - Better statistics display with glass effect cards
+  - Improved hero section animations and responsiveness
+  - Enhanced call-to-action buttons with gradient effects
+- **Transaction Import Enhancements**: Better CSV processing and error handling
+  - Improved date parsing and transaction categorization
+  - Enhanced user feedback during import process
+
 - **AI Benefits Navigator**: AI-powered chat assistant for VA benefits and disability claims
   - Chat interface (`/ai-agent`) powered by AI SDK with knowledge base integration
   - Real-time conversation with context-aware responses

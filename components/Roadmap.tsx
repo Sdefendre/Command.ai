@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import { ROADMAP_ITEMS, RoadmapItem } from '@/constants/roadmap'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { CheckCircle2, Circle, Clock, ArrowRight } from 'lucide-react'
+import { CheckCircle2, Circle, Clock } from 'lucide-react'
 
 export function Roadmap() {
   // Group items by phase
@@ -89,6 +89,7 @@ export function Roadmap() {
                   </div>
                   <CardDescription className="text-xs flex gap-2 pt-1">
                     <Badge
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
                       variant={getPriorityColor(item.priority) as any}
                       className="text-[10px] px-1.5 py-0 h-5"
                     >

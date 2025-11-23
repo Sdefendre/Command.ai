@@ -107,7 +107,7 @@ export const courseModules: CourseModule[] = [
           <li>Be honest and thorough about your symptoms</li>
           <li>Describe your worst days, not your best days</li>
           <li>Explain how your condition affects work, family, and daily activities</li>
-          <li>Don't minimize your symptoms</li>
+          <li>Don&apos;t minimize your symptoms</li>
         </ul>
         <h4>After the Exam</h4>
         <p>
@@ -155,14 +155,14 @@ export const courseModules: CourseModule[] = [
       <div>
         <h3>Maximizing Your Rating Percentage</h3>
         <p>
-          The VA uses a combined rating table to calculate your total disability percentage. Here's
-          how to maximize it:
+          The VA uses a combined rating table to calculate your total disability percentage.
+          Here&apos;s how to maximize it:
         </p>
         <h4>Understanding Combined Ratings</h4>
         <p>
-          Ratings don't simply add up. The VA uses a specific formula that accounts for the "whole
-          person" concept. Multiple conditions combine in a way that prevents the total from
-          exceeding 100%.
+          Ratings don&apos;t simply add up. The VA uses a specific formula that accounts for the
+          &quot;whole person&quot; concept. Multiple conditions combine in a way that prevents the
+          total from exceeding 100%.
         </p>
         <h4>Strategic Filing</h4>
         <ul>
@@ -188,7 +188,9 @@ export const courseModules: CourseModule[] = [
     content: (
       <div>
         <h3>If Your Claim is Denied or Underrated</h3>
-        <p>Don't give up. Many successful claims require appeals. Here's your strategy:</p>
+        <p>
+          Don&apos;t give up. Many successful claims require appeals. Here&apos;s your strategy:
+        </p>
         <h4>Understanding the Decision</h4>
         <p>
           Review the decision letter carefully. Understand why your claim was denied or why you
@@ -198,7 +200,7 @@ export const courseModules: CourseModule[] = [
         <ul>
           <li>Supplemental Claim: Submit new evidence</li>
           <li>Higher-Level Review: Request a senior reviewer</li>
-          <li>Board Appeal: Formal appeal to the Board of Veterans' Appeals</li>
+          <li>Board Appeal: Formal appeal to the Board of Veterans&apos; Appeals</li>
         </ul>
         <h4>Gathering Additional Evidence</h4>
         <p>

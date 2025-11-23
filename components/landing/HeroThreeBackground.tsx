@@ -170,7 +170,7 @@ function HeroScene() {
   const shouldReduceMotion = useReducedMotion()
 
   // Reduced particles for better performance
-  const particles = Array.from({ length: shouldReduceMotion ? 20 : 60 }, (_, i) => {
+  const particles = Array.from({ length: shouldReduceMotion ? 20 : 60 }, () => {
     const colors = ['#4f46e5', '#7c3aed', '#6366f1', '#3b82f6', '#8b5cf6']
     return {
       position: [
@@ -183,7 +183,7 @@ function HeroScene() {
   })
 
   // Reduced shapes for better performance
-  const shapes = Array.from({ length: shouldReduceMotion ? 3 : 6 }, (_, i) => {
+  const shapes = Array.from({ length: shouldReduceMotion ? 3 : 6 }, () => {
     const colors = ['#4f46e5', '#7c3aed', '#6366f1', '#8b5cf6']
     const shapeTypes: ('box' | 'tetrahedron' | 'octahedron')[] = [
       'box',

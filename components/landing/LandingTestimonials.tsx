@@ -3,33 +3,7 @@
 import { motion } from 'framer-motion'
 import { Card, CardContent } from '@/components/ui/card'
 import { Star, Quote } from 'lucide-react'
-
-const testimonials = [
-  {
-    name: 'Mike Thompson',
-    role: 'Army Veteran, 82nd Airborne',
-    content:
-      'After EAS, I was broke and confused about my benefits. Command helped me understand my DD-214 and file my first claim. Went from 0% to 70% rating in 6 months. This platform changed my life.',
-    rating: 5,
-    avatar: 'MT',
-  },
-  {
-    name: 'Jennifer Martinez',
-    role: 'Navy Veteran, Corpsman',
-    content:
-      'I was overwhelmed by the VA system and C&P exams. The course gave me the exact strategy I needed. Finally got my 100% rating after years of fighting. Worth every penny.',
-    rating: 5,
-    avatar: 'JM',
-  },
-  {
-    name: 'David Chen',
-    role: 'Marine Veteran, Infantry',
-    content:
-      "The transition roadmap saved me. I went from survival mode to actually building wealth. The community support and AI agent answered questions I didn't even know to ask. Built by vets who get it.",
-    rating: 5,
-    avatar: 'DC',
-  },
-]
+import { LANDING_TESTIMONIALS } from '@/constants/landing'
 
 export function LandingTestimonials() {
   return (
@@ -46,15 +20,15 @@ export function LandingTestimonials() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-            Trusted by Veterans Nationwide
+            {LANDING_TESTIMONIALS.title}
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Join thousands of veterans who've escaped survival mode and unlocked financial freedom
+            {LANDING_TESTIMONIALS.description}
           </p>
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
+          {LANDING_TESTIMONIALS.items.map((testimonial, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
@@ -72,7 +46,7 @@ export function LandingTestimonials() {
                   </div>
                   <Quote className="h-8 w-8 text-primary/30 mb-4" />
                   <p className="text-muted-foreground mb-6 leading-relaxed">
-                    "{testimonial.content}"
+                    &quot;{testimonial.content}&quot;
                   </p>
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center text-white font-semibold text-sm">

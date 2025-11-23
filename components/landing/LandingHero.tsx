@@ -7,11 +7,12 @@ import { ArrowRight, Medal, Users, GraduationCap } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { useReducedMotion } from 'framer-motion'
+import { LANDING_HERO } from '@/constants/landing'
 
 const stats = [
-  { label: 'Veterans Served', value: '2.5K+', icon: Users },
-  { label: 'Success Rate', value: '94%', icon: Medal },
-  { label: 'AI-Powered', value: '24/7', icon: GraduationCap },
+  { label: LANDING_HERO.stats[0].label, value: LANDING_HERO.stats[0].value, icon: Users },
+  { label: LANDING_HERO.stats[1].label, value: LANDING_HERO.stats[1].value, icon: Medal },
+  { label: LANDING_HERO.stats[2].label, value: LANDING_HERO.stats[2].value, icon: GraduationCap },
 ]
 
 export function LandingHero() {
@@ -55,7 +56,7 @@ export function LandingHero() {
                     ? undefined
                     : {
                         scale: 1.05,
-                        transition: { duration: 0.15 },
+                        transition: { type: 'spring', stiffness: 400, damping: 25 },
                       }
                 }
               >
@@ -63,7 +64,7 @@ export function LandingHero() {
                   variant="outline"
                   className="mb-6 px-5 py-2 text-sm font-mono font-medium rounded-full border-primary/50 text-primary bg-primary/10 dark:bg-primary/20 uppercase tracking-wider hover:border-primary/70 hover:bg-primary/20 dark:hover:bg-primary/30 transition-all duration-200 cursor-default"
                 >
-                  Built by Veterans, For Veterans
+                  {LANDING_HERO.badge}
                 </Badge>
               </motion.div>
             </motion.div>
@@ -85,12 +86,12 @@ export function LandingHero() {
                     ? undefined
                     : {
                         scale: 1.02,
-                        transition: { duration: 0.15 },
+                        transition: { type: 'spring', stiffness: 400, damping: 25 },
                       }
                 }
                 className="inline-block cursor-default"
               >
-                Stop Surviving.
+                {LANDING_HERO.title1}
               </motion.span>
               <br />
               <motion.span
@@ -99,12 +100,12 @@ export function LandingHero() {
                     ? undefined
                     : {
                         scale: 1.02,
-                        transition: { duration: 0.15 },
+                        transition: { type: 'spring', stiffness: 400, damping: 25 },
                       }
                 }
                 className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/90 to-primary/80 animate-gradient-x inline-block cursor-default hover:from-primary hover:via-primary hover:to-primary transition-all duration-200"
               >
-                Start Commanding Your Benefits.
+                {LANDING_HERO.title2}
               </motion.span>
             </motion.h1>
 
@@ -122,13 +123,12 @@ export function LandingHero() {
                   ? undefined
                   : {
                       scale: 1.01,
-                      transition: { duration: 0.15 },
+                      transition: { type: 'spring', stiffness: 400, damping: 25 },
                     }
               }
               className="text-lg sm:text-xl md:text-2xl text-muted-foreground mb-4 max-w-2xl mx-auto leading-relaxed font-sans cursor-default hover:text-foreground/90 transition-colors duration-200"
             >
-              AI-powered education for veterans ready to escape survival mode and unlock financial
-              freedom.
+              {LANDING_HERO.description}
             </motion.p>
             <motion.p
               variants={
@@ -148,13 +148,12 @@ export function LandingHero() {
                   ? undefined
                   : {
                       scale: 1.01,
-                      transition: { duration: 0.15 },
+                      transition: { type: 'spring', stiffness: 400, damping: 25 },
                     }
               }
               className="text-base sm:text-lg text-muted-foreground/80 mb-10 max-w-2xl mx-auto leading-relaxed font-sans cursor-default hover:text-muted-foreground transition-colors duration-200"
             >
-              Confused about your DD-214? Overwhelmed by C&P exams? Broke after EAS? We&apos;ve been
-              there. Let&apos;s navigate your service-connected benefits together.
+              {LANDING_HERO.subDescription}
             </motion.p>
 
             <motion.div
@@ -181,7 +180,7 @@ export function LandingHero() {
                     className="relative z-10 flex items-center font-semibold text-white"
                     style={{ WebkitTextFillColor: 'initial' }}
                   >
-                    Start Learning Free
+                    {LANDING_HERO.primaryCta}
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform text-white" />
                   </span>
                   <span className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-200" />
@@ -197,7 +196,7 @@ export function LandingHero() {
                     className="text-primary dark:text-white font-semibold"
                     style={{ WebkitTextFillColor: 'initial' }}
                   >
-                    See How It Works
+                    {LANDING_HERO.secondaryCta}
                   </span>
                 </Button>
               </Link>
@@ -217,12 +216,12 @@ export function LandingHero() {
             >
               <div className="flex items-center gap-2">
                 <div className="h-2 w-2 rounded-full bg-green-500 animate-pulse" />
-                <span>Free Command</span>
+                <span>{LANDING_HERO.trust.badge}</span>
               </div>
               <span className="hidden sm:inline">•</span>
-              <span>No credit card required</span>
+              <span>{LANDING_HERO.trust.items[0]}</span>
               <span className="hidden sm:inline">•</span>
-              <span>Veteran-owned & operated</span>
+              <span>{LANDING_HERO.trust.items[1]}</span>
             </motion.div>
 
             {/* Stats Section */}
