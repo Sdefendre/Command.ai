@@ -10,12 +10,13 @@ import {
   PiggyBank,
   Wallet,
   Home,
+  Settings,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const sidebarItems = [
   {
-    title: 'Dashboard',
+    title: 'Overview',
     href: '/dashboard',
     icon: LayoutDashboard,
   },
@@ -50,38 +51,65 @@ export function DashboardSidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className="hidden border-r bg-card lg:flex lg:flex-col h-full">
-      <div className="flex h-14 items-center border-b px-4 lg:h-[60px]">
-        <Link className="flex items-center gap-2 font-semibold" href="/dashboard">
-          <span className="h-6 w-6 rounded-full bg-primary" />
-          <span className="">WealthWise</span>
+    <aside className="hidden border-r bg-card/50 backdrop-blur-xl lg:flex lg:flex-col h-full">
+      <div className="flex h-14 items-center border-b px-6 lg:h-[60px]">
+        <Link
+          className="flex items-center gap-2 font-bold text-lg tracking-tight"
+          href="/dashboard"
+        >
+          <div className="h-6 w-6 rounded-lg bg-primary flex items-center justify-center text-primary-foreground">
+            <LayoutDashboard className="h-4 w-4" />
+          </div>
+          <span>
+            SteveOS<span className="font-normal text-muted-foreground">Finance</span>
+          </span>
         </Link>
       </div>
-      <div className="flex-1 overflow-auto py-2">
-        <nav className="grid items-start px-2 text-sm font-medium lg:px-4">
+      <div className="flex-1 overflow-auto py-4">
+        <nav className="grid items-start px-4 text-sm font-medium gap-1">
+          <div className="px-2 mb-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+            Platform
+          </div>
           <Link
             href="/"
             className={cn(
-              'flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary mb-2',
+              'flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:bg-accent hover:text-accent-foreground mb-4',
               'text-muted-foreground'
             )}
           >
             <Home className="h-4 w-4" />
-            Back to SteveOS
+            Back to OS
           </Link>
+
+          <div className="px-2 mb-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+            Finance
+          </div>
           {sidebarItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                'flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:text-primary',
-                pathname === item.href ? 'bg-muted text-primary' : 'text-muted-foreground'
+                'flex items-center gap-3 rounded-lg px-3 py-2 transition-all hover:bg-accent hover:text-accent-foreground',
+                pathname === item.href
+                  ? 'bg-accent text-accent-foreground font-semibold shadow-sm'
+                  : 'text-muted-foreground'
               )}
             >
               <item.icon className="h-4 w-4" />
               {item.title}
             </Link>
           ))}
+        </nav>
+      </div>
+      <div className="mt-auto p-4 border-t">
+        <nav className="grid gap-1">
+          <Link
+            href="/dashboard/settings"
+            className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-all hover:bg-accent hover:text-accent-foreground"
+          >
+            <Settings className="h-4 w-4" />
+            Settings
+          </Link>
         </nav>
       </div>
     </aside>

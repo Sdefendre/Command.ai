@@ -3,6 +3,9 @@ import { ThemeProvider } from '@/components/theme-provider'
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { ScrollToTop } from '@/components/ScrollToTop'
+import { SkipLink } from '@/components/SkipLink'
+import { ErrorBoundary } from '@/components/ErrorBoundary'
 import './globals.css'
 
 const inter = Inter({
@@ -94,15 +97,38 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body
         className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-background text-foreground`}
       >
+        <SkipLink />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          {children}
-          <Analytics />
+          <ErrorBoundary>
+            {children}
+            <ScrollToTop />
+            <Analytics />
+          </ErrorBoundary>
         </ThemeProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Person',
+              name: 'Steve Defendre',
+              jobTitle: 'Full-Stack Engineer',
+              url: 'https://steve-os.vercel.app',
+              sameAs: [
+                'https://www.linkedin.com/in/joseph-m-defendre-a11a47225/',
+                'https://github.com/Sdefendre',
+                'https://www.youtube.com/@Stevedefendre',
+              ],
+              description:
+                'Full-Stack Engineer and Veteran specializing in building high-performance web applications and resilient software systems.',
+            }),
+          }}
+        />
       </body>
     </html>
   )

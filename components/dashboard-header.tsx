@@ -13,6 +13,7 @@ import {
   Bell,
   Search,
   Home,
+  Settings,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -31,7 +32,7 @@ import {
 
 const sidebarItems = [
   {
-    title: 'Dashboard',
+    title: 'Overview',
     href: '/dashboard',
     icon: LayoutDashboard,
   },
@@ -66,86 +67,115 @@ export function DashboardHeader() {
   const pathname = usePathname()
 
   return (
-    <header className="flex h-14 items-center gap-2 sm:gap-4 border-b bg-background px-2 sm:px-4 lg:h-[60px] lg:px-6 sticky top-0 z-50">
+    <header className="flex h-14 items-center gap-4 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 px-6 lg:h-[60px] sticky top-0 z-50">
       <Sheet>
         <SheetTrigger asChild>
-          <Button variant="outline" size="icon" className="shrink-0 lg:hidden h-9 w-9">
-            <Menu className="h-4 w-4 sm:h-5 sm:w-5" />
+          <Button variant="ghost" size="icon" className="shrink-0 lg:hidden -ml-2">
+            <Menu className="h-5 w-5" />
             <span className="sr-only">Toggle navigation menu</span>
           </Button>
         </SheetTrigger>
-        <SheetContent side="left" className="flex flex-col w-[280px] sm:w-[300px]">
-          <nav className="grid gap-2 text-lg font-medium">
-            <Link href="/dashboard" className="flex items-center gap-2 text-lg font-semibold mb-4">
-              <span className="h-6 w-6 rounded-full bg-primary" />
-              <span className="">WealthWise</span>
+        <SheetContent side="left" className="flex flex-col w-[300px] sm:w-[300px] p-0">
+          <div className="flex h-14 items-center border-b px-6">
+            <Link className="flex items-center gap-2 font-bold text-lg" href="/dashboard">
+              <div className="h-6 w-6 rounded-lg bg-primary flex items-center justify-center text-primary-foreground">
+                <LayoutDashboard className="h-4 w-4" />
+              </div>
+              <span>
+                SteveOS<span className="font-normal text-muted-foreground">Finance</span>
+              </span>
             </Link>
-            <Link
-              href="/"
-              className={cn(
-                'mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground mb-2',
-                'text-muted-foreground'
-              )}
-            >
-              <Home className="h-5 w-5" />
-              Back to SteveOS
-            </Link>
-            {sidebarItems.map((item) => (
+          </div>
+          <div className="flex-1 overflow-auto py-4 px-4">
+            <nav className="grid gap-1 text-sm font-medium">
+              <div className="px-2 mb-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                Platform
+              </div>
               <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  'mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 hover:text-foreground',
-                  pathname === item.href ? 'bg-muted text-foreground' : 'text-muted-foreground'
-                )}
+                href="/"
+                className="flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors mb-4"
               >
-                <item.icon className="h-5 w-5" />
-                {item.title}
+                <Home className="h-4 w-4" />
+                Back to OS
               </Link>
-            ))}
-          </nav>
+
+              <div className="px-2 mb-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                Finance
+              </div>
+              {sidebarItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={cn(
+                    'flex items-center gap-3 rounded-lg px-3 py-2 hover:text-foreground hover:bg-muted transition-colors',
+                    pathname === item.href
+                      ? 'bg-muted text-foreground font-semibold'
+                      : 'text-muted-foreground'
+                  )}
+                >
+                  <item.icon className="h-4 w-4" />
+                  {item.title}
+                </Link>
+              ))}
+            </nav>
+          </div>
+          <div className="p-4 border-t">
+            <Link
+              href="/dashboard/settings"
+              className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+            >
+              <Settings className="h-4 w-4" />
+              Settings
+            </Link>
+          </div>
         </SheetContent>
       </Sheet>
-      <div className="w-full flex-1 min-w-0">
+      <div className="w-full flex-1">
         <form>
-          <div className="relative">
-            <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
+          <div className="relative w-full max-w-[400px]">
+            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
-              placeholder="Search..."
-              className="w-full appearance-none bg-background pl-7 pr-2 shadow-none text-sm sm:text-base sm:pl-8 md:w-2/3 lg:w-1/3"
+              placeholder="Search transactions..."
+              className="w-full bg-background pl-9 md:w-[300px] lg:w-[400px] h-9 focus-visible:ring-1"
             />
           </div>
         </form>
       </div>
-      <div className="flex items-center gap-1 sm:gap-2 shrink-0">
+      <div className="flex items-center gap-2">
         <ThemeToggle />
-        <Button variant="ghost" size="icon" className="relative h-9 w-9 sm:h-10 sm:w-10">
-          <Bell className="h-4 w-4 sm:h-5 sm:w-5" />
-          <span className="absolute top-1 right-1 h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-red-500" />
+        <Button variant="ghost" size="icon" className="h-9 w-9 relative">
+          <Bell className="h-4 w-4" />
+          <span className="absolute top-2 right-2 h-1.5 w-1.5 rounded-full bg-red-500 ring-2 ring-background" />
           <span className="sr-only">Notifications</span>
         </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button
-              variant="secondary"
+              variant="ghost"
               size="icon"
-              className="rounded-full h-9 w-9 sm:h-10 sm:w-10"
+              className="rounded-full h-8 w-8 ml-2 ring-2 ring-transparent hover:ring-primary/20 transition-all"
             >
-              <Avatar className="h-8 w-8 sm:h-9 sm:w-9">
-                <AvatarImage src="/placeholder-user.jpg" alt="User" />
-                <AvatarFallback className="text-xs sm:text-sm">SD</AvatarFallback>
+              <Avatar className="h-8 w-8">
+                <AvatarImage src="/headshot.png" alt="Steve" />
+                <AvatarFallback>SD</AvatarFallback>
               </Avatar>
               <span className="sr-only">Toggle user menu</span>
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuLabel>
+              <div className="flex flex-col space-y-1">
+                <p className="text-sm font-medium leading-none">Steve Defendre</p>
+                <p className="text-xs leading-none text-muted-foreground">steve@example.com</p>
+              </div>
+            </DropdownMenuLabel>
             <DropdownMenuSeparator />
+            <DropdownMenuItem>Profile</DropdownMenuItem>
+            <DropdownMenuItem>Billing</DropdownMenuItem>
             <DropdownMenuItem>Settings</DropdownMenuItem>
-            <DropdownMenuItem>Support</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>Logout</DropdownMenuItem>
+            <DropdownMenuItem className="text-red-500 focus:text-red-500">Log out</DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>

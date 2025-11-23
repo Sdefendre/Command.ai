@@ -6,6 +6,7 @@ import { ExternalLink, Github, ArrowRight } from 'lucide-react'
 import { SiteHeader } from '@/components/SiteHeader'
 import { PROJECTS } from '@/constants/projects'
 import { createFadeInUp, viewportOnce } from '@/lib/motion'
+import { SearchBar } from '@/components/SearchBar'
 
 export default function WorkPage() {
   return (
@@ -20,8 +21,13 @@ export default function WorkPage() {
           </p>
         </div>
 
-        <div className="grid gap-6 sm:gap-8">
-          {PROJECTS.map((project, index) => {
+        <SearchBar
+          items={PROJECTS}
+          searchKeys={['title', 'desc', 'tag']}
+          placeholder="Search projects..."
+          emptyMessage="No projects found matching your search."
+          containerClassName="grid gap-6 sm:gap-8"
+          renderItem={(project, index) => {
             // Determine if the link is internal (starts with /) or external
             const isInternalLink = project.links?.live?.startsWith('/')
             const href = project.links?.live || '#'
@@ -85,8 +91,8 @@ export default function WorkPage() {
                 {cardContent}
               </a>
             )
-          })}
-        </div>
+          }}
+        />
 
         <div className="mt-12 sm:mt-16 md:mt-20 pt-6 sm:pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4">
           <p className="text-sm sm:text-base text-muted-foreground">

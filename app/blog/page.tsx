@@ -7,6 +7,7 @@ import { SiteHeader } from '@/components/SiteHeader'
 import { BLOG_POSTS } from '@/constants/blog'
 import { createFadeInUp, viewportOnce } from '@/lib/motion'
 import { NewsletterSubscription } from '@/components/NewsletterSubscription'
+import { SearchBar } from '@/components/SearchBar'
 
 export default function BlogPage() {
   const sortedPosts = [...BLOG_POSTS].sort(
@@ -27,8 +28,12 @@ export default function BlogPage() {
           </p>
         </div>
 
-        <div className="space-y-8 sm:space-y-10 md:space-y-12">
-          {sortedPosts.map((post, index) => (
+        <SearchBar
+          items={sortedPosts}
+          searchKeys={['title', 'excerpt', 'tags']}
+          placeholder="Search blog posts..."
+          emptyMessage="No blog posts found matching your search."
+          renderItem={(post, index) => (
             <motion.article
               key={post.id}
               variants={createFadeInUp(false)}
@@ -69,8 +74,8 @@ export default function BlogPage() {
                 </div>
               </Link>
             </motion.article>
-          ))}
-        </div>
+          )}
+        />
 
         <div className="mt-16 sm:mt-20 md:mt-24 pt-8 sm:pt-10 md:pt-12 border-t border-border">
           <div className="bg-accent/30 rounded-xl p-6 sm:p-8">

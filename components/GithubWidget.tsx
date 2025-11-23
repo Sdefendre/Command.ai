@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { ExternalLink, Users, FileCode, Star, GitFork } from 'lucide-react'
@@ -16,13 +17,22 @@ interface GithubWidgetProps {
 }
 
 export function GithubWidget({ repos }: GithubWidgetProps) {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   if (!repos || repos.length === 0) return null
 
   // Calculate a pseudo-progress based on recency to match the visual style
+  // Round to 2 decimal places to avoid hydration mismatches
   const getProgress = (dateString: string) => {
+    if (!mounted) return 50 // Default value during SSR
     const daysSince = (new Date().getTime() - new Date(dateString).getTime()) / (1000 * 3600 * 24)
     // Newer = higher progress. 0 days = 95%, 30 days = 20%
-    return Math.min(95, Math.max(15, 100 - daysSince * 2.5))
+    const progress = Math.min(95, Math.max(15, 100 - daysSince * 2.5))
+    return Math.round(progress * 100) / 100 // Round to 2 decimal places
   }
 
   // Format date like "Due June 15, 2025" -> "Updated Nov 18, 2025"

@@ -4,6 +4,8 @@ import { ArrowLeft, Calendar, Clock, User, Tag } from 'lucide-react'
 import { BLOG_POSTS } from '@/constants/blog'
 import { CodeBlockEnhancer } from '@/components/CodeBlockEnhancer'
 import { YouTubeEmbed } from '@/components/YouTubeEmbed'
+import { ShareButtons } from '@/components/ShareButtons'
+import { ReadingProgress } from '@/components/ReadingProgress'
 
 type Params = Promise<{ id: string }>
 
@@ -49,6 +51,7 @@ export default async function BlogPostPage({ params }: { params: Params }) {
 
   return (
     <div className="min-h-screen bg-background text-foreground relative">
+      <ReadingProgress />
       <div className="relative z-10">
         <header className="fixed top-0 left-0 right-0 backdrop-blur-md bg-background/80 border-b border-border z-40">
           <nav className="mx-auto max-w-4xl px-6 py-4 flex items-center justify-between">
@@ -100,10 +103,10 @@ export default async function BlogPostPage({ params }: { params: Params }) {
             {/* YouTube Embed */}
             {/* @ts-ignore - YouTubeId is optional */}
             {post.youtubeId && (
-              <YouTubeEmbed 
+              <YouTubeEmbed
                 // @ts-ignore
-                videoId={post.youtubeId} 
-                title={post.title} 
+                videoId={post.youtubeId}
+                title={post.title}
               />
             )}
 
@@ -113,6 +116,11 @@ export default async function BlogPostPage({ params }: { params: Params }) {
             />
             {/* Enhance code blocks after hydration */}
             <CodeBlockEnhancer />
+            <ShareButtons
+              title={post.title}
+              url={`https://steve-os.vercel.app/blog/${post.id}`}
+              description={post.excerpt}
+            />
           </article>
         </main>
       </div>
