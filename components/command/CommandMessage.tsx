@@ -10,7 +10,7 @@ interface CommandMessageProps {
   isLast?: boolean
 }
 
-export function CommandMessage({ message, isLast }: CommandMessageProps) {
+export function CommandMessage({ message }: CommandMessageProps) {
   const isUser = message.role === 'user'
 
   // Extract text content from message parts or content

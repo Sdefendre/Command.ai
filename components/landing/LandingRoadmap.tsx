@@ -4,7 +4,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { ROADMAP_ITEMS, RoadmapItem } from '@/constants/roadmap'
 import { LANDING_ROADMAP } from '@/constants/landing'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { CheckCircle2, Circle, Clock } from 'lucide-react'
 

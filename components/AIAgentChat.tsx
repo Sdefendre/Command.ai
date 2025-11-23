@@ -98,7 +98,7 @@ export function AIAgentChat({ userId }: AIAgentChatProps) {
           if (data.conversations && data.conversations.length > 0) {
             // Convert database format to chat format
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            const historyMessages = data.conversations.map((conv: any, _idx: number) => ({
+            const historyMessages = data.conversations.map((conv: any) => ({
               id: `history-${conv.id}`,
               role: conv.role,
               parts: [{ type: 'text', text: conv.message }],

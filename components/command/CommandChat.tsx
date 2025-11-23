@@ -128,6 +128,7 @@ export function CommandChat({ userId }: CommandChatProps) {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       handleSubmit(e as any)
     }
   }
@@ -339,7 +340,9 @@ export function CommandChat({ userId }: CommandChatProps) {
                           variant="outline"
                           className="w-full h-auto py-4 px-5 justify-start text-left whitespace-normal bg-background/40 hover:bg-primary/20 border-primary/10 hover:border-primary/40 backdrop-blur-sm transition-all duration-300 group"
                           onClick={() => {
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
                             const event = { preventDefault: () => {} } as any
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
                             handleInputChange({ target: { value: prompt } } as any)
                             setTimeout(() => handleSubmit(event), 100)
                           }}
