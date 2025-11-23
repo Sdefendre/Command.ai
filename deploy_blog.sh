@@ -2,12 +2,12 @@
 
 # Deploy script for updating blog posts
 
-echo "🚀 SteveOS Blog Update Script"
+echo "🚀 Life Command OS Blog Update Script"
 echo "========================================="
 
 # Navigate to project directory
 # Using current directory relative path or assuming we are in the root
-# cd "/Users/stevesmacmini/Desktop/Code/Active Projects/code/SteveOS"
+# cd "/Users/stevesmacmini/Desktop/Code/Active Projects/code/LifeCommandOS"
 
 # Check if there are changes
 echo "🔍 Checking for changes..."

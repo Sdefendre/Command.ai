@@ -42,5 +42,5 @@ NEXT_PUBLIC_SITE_URL=https://steve-os.vercel.app
 
 ---
 
-**SteveOS Newsletter System**  
+**Life Command OS Newsletter System**  
 Built with Next.js, Nodemailer, and TypeScript

@@ -1,6 +1,6 @@
-# SteveOS
+# Life Command OS
 
-SteveOS is a personal operating system and portfolio website - a multi-page Next.js 15 application with glassmorphism design showcasing projects, blog content, and services.
+Life Command OS is a personal operating system and portfolio website - a multi-page Next.js 15 application with glassmorphism design showcasing projects, blog content, and services.
 
 ## Commands
 

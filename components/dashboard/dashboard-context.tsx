@@ -55,22 +55,22 @@ export function DashboardProvider({ children }: { children: ReactNode }) {
       return saved ? JSON.parse(saved) : initial
     }
 
-    setTransactions(loadData('steveos_transactions', INITIAL_TRANSACTIONS))
-    setBudgets(loadData('steveos_budgets', INITIAL_BUDGETS))
-    setSavingsGoals(loadData('steveos_savings', INITIAL_SAVINGS_GOALS))
-    setAccounts(loadData('steveos_accounts', INITIAL_ACCOUNTS))
-    setBills(loadData('steveos_bills', INITIAL_BILLS))
+    setTransactions(loadData('lifecmd_transactions', INITIAL_TRANSACTIONS))
+    setBudgets(loadData('lifecmd_budgets', INITIAL_BUDGETS))
+    setSavingsGoals(loadData('lifecmd_savings', INITIAL_SAVINGS_GOALS))
+    setAccounts(loadData('lifecmd_accounts', INITIAL_ACCOUNTS))
+    setBills(loadData('lifecmd_bills', INITIAL_BILLS))
     setIsLoading(false)
   }, [])
 
   // Persist changes
   useEffect(() => {
     if (!isLoading) {
-      localStorage.setItem('steveos_transactions', JSON.stringify(transactions))
-      localStorage.setItem('steveos_budgets', JSON.stringify(budgets))
-      localStorage.setItem('steveos_savings', JSON.stringify(savingsGoals))
-      localStorage.setItem('steveos_accounts', JSON.stringify(accounts))
-      localStorage.setItem('steveos_bills', JSON.stringify(bills))
+      localStorage.setItem('lifecmd_transactions', JSON.stringify(transactions))
+      localStorage.setItem('lifecmd_budgets', JSON.stringify(budgets))
+      localStorage.setItem('lifecmd_savings', JSON.stringify(savingsGoals))
+      localStorage.setItem('lifecmd_accounts', JSON.stringify(accounts))
+      localStorage.setItem('lifecmd_bills', JSON.stringify(bills))
     }
   }, [transactions, budgets, savingsGoals, accounts, bills, isLoading])
 

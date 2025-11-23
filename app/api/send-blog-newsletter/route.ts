@@ -88,7 +88,7 @@ export async function POST(request: NextRequest) {
     // Send emails to all subscribers
     const emailPromises = subscribers.map((subscriber) =>
       transporter.sendMail({
-        from: `"SteveOS" <${process.env.GMAIL_USER || 'steve.defendre12@gmail.com'}>`,
+        from: `"Life Command OS" <${process.env.GMAIL_USER || 'steve.defendre12@gmail.com'}>`,
         to: subscriber.email,
         subject: `📚 New Blog Post: ${blogPost.title}`,
         text: newsletterText,
@@ -162,7 +162,7 @@ function createBlogNewsletterHtml(blogPost: BlogPost) {
           <h1 style="background: linear-gradient(135deg, #ffffff 0%, #3b82f6 50%, #ffffff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0; font-size: 28px; font-weight: 700; line-height: 1.2;">
             New Blog Post Published!
           </h1>
-          <p style="color: #9ca3af; margin: 15px 0 0 0; font-size: 16px;">Fresh insights from SteveOS</p>
+          <p style="color: #9ca3af; margin: 15px 0 0 0; font-size: 16px;">Fresh insights from Life Command OS</p>
         </div>
         
         <!-- Main content -->
@@ -229,7 +229,7 @@ function createBlogNewsletterHtml(blogPost: BlogPost) {
             </a>
           </div>
           <p style="color: #6b7280; font-size: 14px; margin: 0; font-weight: 500;">
-            SteveOS • Personal Operating System
+            Life Command OS • Personal Operating System
           </p>
         </div>
       </div>
@@ -259,7 +259,7 @@ Read the full article: ${postUrl}
 Browse all posts: ${siteUrl}/blog
 
 ---
-SteveOS • Personal Operating System
+Life Command OS • Personal Operating System
 Unsubscribe by replying to this email
   `
 }

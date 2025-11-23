@@ -4,10 +4,12 @@ import { motion } from 'framer-motion'
 import { Mail, Linkedin, Github } from 'lucide-react'
 import { SiteHeader } from '@/components/SiteHeader'
 import { SITE } from '@/constants/site'
+import { SubtleThreeBackground } from '@/components/SubtleThreeBackground'
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20">
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20 relative">
+      <SubtleThreeBackground />
       <SiteHeader />
 
       <main className="container mx-auto px-3 sm:px-4 max-w-3xl py-12 sm:py-16 md:py-20">
@@ -20,7 +22,7 @@ export default function AboutPage() {
 
           <div className="prose prose-neutral max-w-none">
             <p className="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-6 sm:mb-8">
-              I'm Steve Defendre, a Full-Stack Engineer and Veteran. I build high-performance
+              I&apos;m Steve Defendre, a Full-Stack Engineer and Veteran. I build high-performance
               systems and intelligent tools that help people take command of their lives and
               operations.
             </p>
@@ -30,7 +32,7 @@ export default function AboutPage() {
                 <h3 className="font-semibold text-base sm:text-lg">Background</h3>
                 <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                   Military service instilled discipline, precision, and operational resilience.
-                  These principles drive my engineering approach: build systems that don't just
+                  These principles drive my engineering approach: build systems that don&apos;t just
                   function—they execute with reliability and endurance.
                 </p>
               </div>
@@ -53,7 +55,7 @@ export default function AboutPage() {
                   <h3 className="font-semibold text-sm sm:text-base">Founder & Lead Engineer</h3>
                   <span className="text-xs sm:text-sm text-muted-foreground">2023 — Present</span>
                 </div>
-                <div className="text-primary mb-2 text-sm sm:text-base">SteveOS</div>
+                <div className="text-primary mb-2 text-sm sm:text-base">Life Command OS</div>
                 <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
                   Architecting custom software solutions with emphasis on scalability, performance,
                   and operational excellence. Building systems that command results.

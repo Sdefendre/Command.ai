@@ -3,14 +3,14 @@ export const rebrandingPost = {
   id: 'rebranding-life-command-os',
   title: 'Rebranding to Life Command OS: Why We Changed Everything',
   excerpt:
-    "After months of reflection and growth, we're rebranding from SteveOS to Life Command OS. Here's why this change matters and what it means for the future.",
+    "After months of reflection and growth, we're rebranding to Life Command OS. Here's why this change matters and what it means for the future.",
   content: `
     <p>Change is never easy. Especially when it means letting go of something you've built from the ground up. But sometimes, the mission evolves. Sometimes, you realize that what started as a personal project has become something bigger – something that deserves a name that reflects its true purpose.</p>
 
-    <p>Today, I'm announcing the rebranding of SteveOS to <strong>Life Command OS</strong>. This isn't just a name change. It's a declaration of intent. A commitment to helping people break out of survival mode and take command of their future.</p>
+    <p>Today, I'm announcing the rebranding to <strong>Life Command OS</strong>. This isn't just a name change. It's a declaration of intent. A commitment to helping people break out of survival mode and take command of their future.</p>
 
     <h3>Why the Change?</h3>
-    <p>When I first built SteveOS, it was exactly what it sounded like – my personal operating system. A place to showcase my work, share my thoughts, and build my digital identity. But as the platform grew, I realized something important: the tools and systems I was building weren't just for me anymore.</p>
+    <p>When I first built this platform, it was exactly what it sounded like – my personal operating system. A place to showcase my work, share my thoughts, and build my digital identity. But as the platform grew, I realized something important: the tools and systems I was building weren't just for me anymore.</p>
 
     <p>I started hearing from people who were using the concepts, applying the frameworks, and finding value in the approach. They weren't just interested in "Steve's OS" – they were interested in taking command of their own lives.</p>
 
@@ -88,7 +88,7 @@ export const rebrandingPost = {
     <p>Life Command OS is built for people who are ready to make the shift. Ready to build systems. Ready to take control. Ready to command their future instead of just hoping it works out.</p>
 
     <h3>What This Means for You</h3>
-    <p>If you've been following along with SteveOS, here's what you need to know:</p>
+    <p>If you've been following along, here's what you need to know:</p>
 
     <h4>For Existing Users</h4>
     <ul>
@@ -121,7 +121,7 @@ export const rebrandingPost = {
     <p>As someone who's navigated the transition from military service to entrepreneurship, I know what it takes to move from survival mode to command mode. It's not easy. But it's possible. And it starts with the right systems, the right mindset, and the right tools.</p>
 
     <h3>The Bottom Line</h3>
-    <p>SteveOS was a good name. It was honest, personal, and authentic. But Life Command OS is a better name. It's clearer about what we're building. It's more inclusive of who we're building it for. And it better reflects the mission: helping people stop surviving and start commanding.</p>
+    <p>The previous name was honest, personal, and authentic. But Life Command OS is a better name. It's clearer about what we're building. It's more inclusive of who we're building it for. And it better reflects the mission: helping people stop surviving and start commanding.</p>
 
     <p>The name changed. The mission got clearer. The commitment got stronger.</p>
 

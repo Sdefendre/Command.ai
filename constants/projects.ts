@@ -31,7 +31,7 @@ export const PROJECTS: Project[] = [
     },
   },
   {
-    title: 'SteveOS',
+    title: 'Life Command OS',
     tag: 'Personal Portfolio',
     desc: 'My personal digital headquarters. A comprehensive portfolio and blog built with Next.js 15, Tailwind CSS, and Framer Motion.',
     metrics: 'Open Source • Next.js 15 • Personal Identity',

@@ -1,14 +1,14 @@
-# AI Agent Handbook - SteveOS
+# AI Agent Handbook - Life Command OS
 
-This document provides context and guidelines for AI agents working on the SteveOS codebase.
+This document provides context and guidelines for AI agents working on the Life Command OS codebase.
 
 ## 1. Project Overview
 
-**SteveOS** is the personal operating system and portfolio for Steve Defendre. It acts as a central hub for his projects, writings, and digital identity.
+**Life Command OS** is the personal operating system and portfolio for Steve Defendre. It acts as a central hub for his projects, writings, and digital identity.
 
 ### Key Entities
 
-- **Project**: SteveOS
+- **Project**: Life Command OS
 - **Owner**: Steve Defendre
 - **Core Philosophy**: Discipline, Precision, Resilience.
 
