@@ -1,25 +1,20 @@
 'use client'
 
 import { forwardRef } from 'react'
-import { useRouter, usePathname } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 import { MessageCircle } from 'lucide-react'
 import { motion, type HTMLMotionProps } from 'framer-motion'
+import { ChatDialog } from '@/components/ChatDialog'
 
-// Simple navigation button component
+// Simple navigation button component - updated for HMR fix
 const ChatButton = forwardRef<HTMLButtonElement, HTMLMotionProps<'button'>>(
-  ({ className, ...props }, ref) => {
-    const router = useRouter()
-
-    const handleClick = () => {
-      router.push('/command')
-    }
-
+  ({ className, onClick, ...props }, ref) => {
     return (
       <motion.button
         ref={ref}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        onClick={handleClick}
+        onClick={onClick}
         className={`group flex size-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 ${
           className || ''
         }`}
@@ -52,7 +47,7 @@ export function ChatFloatingButton() {
         right: 'max(1rem, calc(env(safe-area-inset-right) + 1rem))',
       }}
     >
-      <ChatButton />
+      <ChatDialog trigger={<ChatButton />} />
     </motion.div>
   )
 }

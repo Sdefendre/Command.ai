@@ -171,7 +171,7 @@ export function LandingHero() {
               }
               className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-12 sm:mb-16"
             >
-              <Link href="/ai-agent" className="w-full sm:w-auto">
+              <Link href="/command" className="w-full sm:w-auto">
                 <Button
                   size="lg"
                   className="w-full sm:w-auto text-lg px-10 py-7 rounded-full shadow-xl shadow-primary/30 hover:shadow-primary/50 hover:scale-105 active:scale-95 transition-all duration-200 bg-primary border-0 group font-semibold relative overflow-hidden text-white"

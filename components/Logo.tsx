@@ -1,5 +1,6 @@
 import React from 'react'
 import { cn } from '@/lib/utils'
+import { SITE } from '@/constants/site'
 
 interface LogoProps {
   className?: string
@@ -58,7 +59,7 @@ export function Logo({ className, showText = true, size = 'md', icon, textSuffix
           className={cn('font-bold tracking-tight leading-none flex flex-col', textClasses[size])}
         >
           <div className="flex items-center gap-1.5">
-            <span className="text-foreground">LifeCommandOS</span>
+            <span className="text-foreground">{SITE.name}</span>
             {textSuffix}
           </div>
         </div>
