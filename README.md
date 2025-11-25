@@ -1,12 +1,12 @@
-# Life Command OS
+# Command
 
 **Personal Operating System & Portfolio**
 
-Life Command OS is the digital home of Steve Defendre, showcasing projects, thoughts, and services. Built with Next.js 15, Tailwind CSS, and Framer Motion.
+Command is the digital home of Steve Defendre, showcasing projects, thoughts, and services. Built with Next.js 15, Tailwind CSS, and Framer Motion.
 
 ## 🚀 Live Demo
 
-Visit: [Life Command OS](https://steve-os.vercel.app)
+Visit: [Command](https://steve-os.vercel.app)
 
 ## 🛠 Tech Stack
 

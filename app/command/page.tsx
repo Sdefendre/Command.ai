@@ -3,8 +3,8 @@ import { CommandThreeBackground } from '@/components/CommandThreeBackground'
 import type { Viewport } from 'next'
 
 export const metadata = {
-  title: 'Command Interface - Life Command OS',
-  description: 'Direct interface for Command AI. Ask about VA benefits, claims, and transition.',
+  title: 'CommandAI - Life Command OS',
+  description: 'Direct interface for CommandAI. Ask about VA benefits, claims, and transition.',
 }
 
 export const viewport: Viewport = {

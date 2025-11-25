@@ -4,7 +4,7 @@ import { forwardRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { MessageCircle } from 'lucide-react'
 import { motion, type HTMLMotionProps } from 'framer-motion'
-import { ChatDialog } from '@/components/ChatDialog'
+import ChatDialog from '@/components/ChatDialog'
 
 // Simple navigation button component - updated for HMR fix
 const ChatButton = forwardRef<HTMLButtonElement, HTMLMotionProps<'button'>>(

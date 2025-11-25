@@ -115,7 +115,7 @@ export const LANDING_TESTIMONIALS = {
 export const LANDING_ROADMAP = {
   title: 'Product Roadmap',
   description:
-    "Our vision for the future of Life Command OS. We're building a comprehensive system to help you master your finances and life.",
+    "Our vision for the future of Command. We're building a comprehensive system to help you master your finances and life.",
 }
 
 export const LANDING_PRICING = {

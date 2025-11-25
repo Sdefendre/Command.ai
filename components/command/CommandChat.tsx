@@ -222,16 +222,16 @@ export function CommandChat({ userId }: CommandChatProps) {
         setInput(title)
         // Optional: auto-submit or let user edit
       }}
-      className="flex flex-col items-start p-3 md:p-4 rounded-xl bg-background/40 hover:bg-background/60 border border-white/5 hover:border-primary/20 transition-all text-left group w-full h-full backdrop-blur-sm min-h-[100px] md:min-h-[120px]"
+      className="flex flex-col items-start p-4 rounded-xl bg-card/20 hover:bg-card/40 border border-white/5 hover:border-primary/50 transition-all text-left group w-full h-full backdrop-blur-md shadow-lg hover:shadow-primary/10 min-h-[110px]"
     >
       <div className="flex items-center gap-2 mb-2 text-muted-foreground group-hover:text-primary transition-colors">
         <Icon className="h-4 w-4" />
-        <span className="text-xs font-medium uppercase tracking-wider">Topic</span>
+        <span className="text-[10px] md:text-xs font-medium uppercase tracking-wider">Topic</span>
       </div>
       <h3 className="text-sm md:text-base font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
         {title}
       </h3>
-      <p className="text-xs md:text-sm text-muted-foreground line-clamp-2 leading-relaxed">
+      <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">
         {description}
       </p>
     </motion.button>
@@ -247,30 +247,32 @@ export function CommandChat({ userId }: CommandChatProps) {
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0 relative h-full">
         {/* Mobile Header */}
-        <header className="md:hidden flex items-center justify-between p-4 border-b border-white/5 bg-background/50 backdrop-blur-md z-20 absolute top-0 left-0 right-0">
+        <header className="md:hidden flex items-center justify-between p-4 border-b border-white/5 bg-background/80 backdrop-blur-xl z-50 fixed top-0 left-0 right-0 h-16">
           <div className="flex items-center gap-3">
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-muted-foreground">
+                <Button variant="ghost" size="icon" className="text-muted-foreground hover:bg-white/5">
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
               <SheetContent
                 side="left"
-                className="p-0 w-[80px] bg-black border-r border-white/10 pt-safe"
+                className="p-0 w-[280px] bg-black border-r border-white/10 pt-safe"
               >
                 <Sidebar />
               </SheetContent>
             </Sheet>
-            <span className="font-bold text-lg tracking-tight">Command</span>
+            <span className="font-bold text-lg tracking-tight text-foreground">
+              Command<span className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">AI</span>
+            </span>
           </div>
-          <Button variant="ghost" size="icon" onClick={() => setMessages([])}>
+          <Button variant="ghost" size="icon" onClick={() => setMessages([])} className="text-muted-foreground hover:bg-white/5">
             <Plus className="h-5 w-5" />
           </Button>
         </header>
 
         {/* Content Area */}
-        <div className="flex-1 overflow-y-auto relative scroll-smooth custom-scrollbar flex flex-col">
+        <div className="flex-1 overflow-y-auto relative scroll-smooth custom-scrollbar flex flex-col pt-16 md:pt-0">
           {isVoiceMode ? (
             <div className="h-full flex flex-col items-center justify-center p-6">
               <VoiceAgent userId={userId} />
@@ -283,71 +285,71 @@ export function CommandChat({ userId }: CommandChatProps) {
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.5 }}
-                    className="flex flex-col items-center text-center mb-12 w-full"
+                    className="flex flex-col items-center text-center mb-8 md:mb-12 w-full mt-4 md:mt-0"
                   >
-                    <div className="mb-8 relative">
+                    <div className="mb-6 md:mb-8 relative">
                       <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full" />
-                      <Sparkles className="h-20 w-20 text-white relative z-10 fill-white/10" />
+                      <Sparkles className="h-16 w-16 md:h-20 md:w-20 text-primary relative z-10 fill-primary/10" />
                     </div>
-                    <h1 className="text-3xl md:text-5xl font-bold mb-8 tracking-tight text-white">
+                    <h1 className="text-2xl md:text-5xl font-bold mb-8 tracking-tight text-foreground px-4">
                       Ready to tackle some veteran questions?
                     </h1>
 
                     {/* Search Input Centered */}
-                    <div className="w-full max-w-2xl relative group mb-12">
-                      <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-purple-500/20 to-primary/20 rounded-full blur opacity-50 group-hover:opacity-100 transition duration-500" />
-                      <div className="relative flex items-center bg-[#1a1a1a] rounded-full border border-white/10 focus-within:border-primary/50 transition-all shadow-2xl">
-                        <Search className="h-5 w-5 text-muted-foreground ml-5 shrink-0" />
+                    <div className="w-full max-w-2xl relative group mb-8 md:mb-12 px-2">
+                      <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 rounded-full blur opacity-50 group-hover:opacity-100 transition duration-500" />
+                      <div className="relative flex items-center bg-black/60 backdrop-blur-xl rounded-full border border-white/10 focus-within:border-primary/50 transition-all shadow-2xl">
+                        <Search className="h-5 w-5 text-muted-foreground ml-4 md:ml-5 shrink-0" />
                         <form onSubmit={handleSubmit} className="flex-1 flex items-center">
                           <input
                             value={input}
                             onChange={handleInputChange}
                             placeholder="Ask anything..."
-                            className="w-full bg-transparent border-none focus:ring-0 py-4 px-4 text-lg text-white placeholder:text-muted-foreground/50 outline-none"
+                            className="w-full bg-transparent border-none focus:ring-0 py-3 md:py-4 px-3 md:px-4 text-base md:text-lg text-foreground placeholder:text-muted-foreground/50 outline-none"
                           />
                           <div className="pr-2 flex items-center gap-1">
                             <Button
                               type="button"
                               variant="ghost"
                               size="icon"
-                              className="text-muted-foreground hover:text-white rounded-full"
+                              className="text-muted-foreground hover:text-foreground rounded-full h-8 w-8 md:h-10 md:w-10"
                               onClick={toggleVoiceMode}
                             >
-                              <Mic className="h-5 w-5" />
+                              <Mic className="h-4 w-4 md:h-5 md:w-5" />
                             </Button>
                             <Button
                               type="submit"
                               size="icon"
                               disabled={!input.trim() || isLoading}
                               className={cn(
-                                'h-10 w-10 rounded-full transition-all duration-300',
+                                'h-8 w-8 md:h-10 md:w-10 rounded-full transition-all duration-300',
                                 input.trim()
-                                  ? 'bg-white text-black hover:bg-gray-200'
+                                  ? 'bg-primary text-primary-foreground hover:bg-primary/90'
                                   : 'bg-white/5 text-muted-foreground hover:bg-white/10'
                               )}
                             >
-                              <ArrowUp className="h-5 w-5" />
+                              <ArrowUp className="h-4 w-4 md:h-5 md:w-5" />
                             </Button>
                           </div>
                         </form>
                       </div>
 
-                      <div className="absolute top-full left-0 right-0 mt-6 flex flex-wrap items-center justify-center gap-6 text-xs text-muted-foreground/60 font-medium">
-                        <button className="flex items-center gap-2 hover:text-primary transition-colors">
-                          <Globe className="h-3 w-3" /> Search Web
+                      <div className="absolute top-full left-0 right-0 mt-4 md:mt-6 flex flex-wrap items-center justify-center gap-3 md:gap-6 text-xs text-muted-foreground/60 font-medium px-2">
+                        <button className="flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-white/5 hover:text-primary transition-colors border border-transparent hover:border-white/5">
+                          <Globe className="h-3 w-3" /> <span className="hidden xs:inline">Search Web</span><span className="xs:hidden">Web</span>
                         </button>
-                        <button className="flex items-center gap-2 hover:text-primary transition-colors">
-                          <ImageIcon className="h-3 w-3" /> Generate Images
+                        <button className="flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-white/5 hover:text-primary transition-colors border border-transparent hover:border-white/5">
+                          <ImageIcon className="h-3 w-3" /> <span className="hidden xs:inline">Generate Images</span><span className="xs:hidden">Images</span>
                         </button>
-                        <button className="flex items-center gap-2 hover:text-primary transition-colors">
-                          <Zap className="h-3 w-3" /> Deep Research
+                        <button className="flex items-center gap-2 px-3 py-1.5 rounded-full hover:bg-white/5 hover:text-primary transition-colors border border-transparent hover:border-white/5">
+                          <Zap className="h-3 w-3" /> <span className="hidden xs:inline">Deep Research</span><span className="xs:hidden">Research</span>
                         </button>
                       </div>
                     </div>
                   </motion.div>
 
                   {/* Suggestion Cards */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full max-w-5xl px-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 w-full max-w-5xl px-2 md:px-4 pb-20 md:pb-0">
                     <SuggestedCard
                       icon={MessageSquare}
                       title="VA Benefits"
@@ -400,9 +402,9 @@ export function CommandChat({ userId }: CommandChatProps) {
 
         {/* Floating Input Area (Only visible when there are messages) */}
         {!isVoiceMode && messages.length > 0 && (
-          <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-gradient-to-t from-black via-black/95 to-transparent pt-6 md:pt-10 z-20 supports-[padding-bottom:env(safe-area-inset-bottom)]:pb-[max(12px,env(safe-area-inset-bottom))]">
+          <div className="absolute bottom-0 left-0 right-0 p-3 md:p-4 bg-gradient-to-t from-background via-background/95 to-transparent pt-6 md:pt-10 z-20 supports-[padding-bottom:env(safe-area-inset-bottom)]:pb-[max(12px,env(safe-area-inset-bottom))]">
             <div className="max-w-3xl mx-auto">
-              <div className="relative bg-[#1a1a1a] rounded-2xl md:rounded-3xl border border-white/10 focus-within:border-primary/50 transition-all shadow-2xl overflow-hidden">
+              <div className="relative bg-black/60 backdrop-blur-xl rounded-2xl md:rounded-3xl border border-white/10 focus-within:border-primary/50 transition-all shadow-2xl overflow-hidden">
                 <form onSubmit={handleSubmit} className="flex flex-col">
                   <Textarea
                     ref={textareaRef}
@@ -410,7 +412,7 @@ export function CommandChat({ userId }: CommandChatProps) {
                     onChange={handleInputChange}
                     onKeyDown={handleKeyDown}
                     placeholder="Ask anything..."
-                    className="min-h-[48px] max-h-[200px] w-full resize-none border-0 shadow-none focus-visible:ring-0 bg-transparent py-3 md:py-4 px-3 md:px-4 text-base text-white placeholder:text-muted-foreground/50 outline-none"
+                    className="min-h-[48px] max-h-[200px] w-full resize-none border-0 shadow-none focus-visible:ring-0 bg-transparent py-3 md:py-4 px-3 md:px-4 text-base text-foreground placeholder:text-muted-foreground/50 outline-none"
                     rows={1}
                   />
                   <div className="flex items-center justify-between px-2 pb-2">
@@ -418,14 +420,14 @@ export function CommandChat({ userId }: CommandChatProps) {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-8 w-8 text-muted-foreground hover:text-white rounded-full min-h-[40px] min-w-[40px]"
+                        className="h-8 w-8 text-muted-foreground hover:text-foreground hover:bg-white/5 rounded-full min-h-[40px] min-w-[40px]"
                       >
                         <ImageIcon className="h-4 w-4" />
                       </Button>
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-8 w-8 text-muted-foreground hover:text-white rounded-full min-h-[40px] min-w-[40px]"
+                        className="h-8 w-8 text-muted-foreground hover:text-foreground hover:bg-white/5 rounded-full min-h-[40px] min-w-[40px]"
                       >
                         <Globe className="h-4 w-4" />
                       </Button>
@@ -438,7 +440,7 @@ export function CommandChat({ userId }: CommandChatProps) {
                             {selectedModel}
                           </span>
                         </SelectTrigger>
-                        <SelectContent className="bg-[#1a1a1a] border-white/10 text-white">
+                        <SelectContent className="bg-black/90 border-white/10 text-foreground backdrop-blur-xl">
                           {MODEL_OPTIONS.map((option) => (
                             <SelectItem key={option.value} value={option.value}>
                               {option.label}
@@ -453,7 +455,7 @@ export function CommandChat({ userId }: CommandChatProps) {
                         variant="ghost"
                         size="icon"
                         onClick={toggleVoiceMode}
-                        className="h-8 w-8 text-muted-foreground hover:text-white rounded-full min-h-[40px] min-w-[40px]"
+                        className="h-8 w-8 text-muted-foreground hover:text-foreground hover:bg-white/5 rounded-full min-h-[40px] min-w-[40px]"
                       >
                         <Mic className="h-4 w-4" />
                       </Button>
@@ -464,7 +466,7 @@ export function CommandChat({ userId }: CommandChatProps) {
                         className={cn(
                           'h-8 w-8 rounded-full transition-all min-h-[40px] min-w-[40px]',
                           input?.trim()
-                            ? 'bg-white text-black hover:bg-gray-200'
+                            ? 'bg-primary text-primary-foreground hover:bg-primary/90'
                             : 'bg-white/10 text-muted-foreground hover:bg-white/20'
                         )}
                       >

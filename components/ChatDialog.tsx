@@ -32,7 +32,7 @@ function ChatLoadingSkeleton() {
   )
 }
 
-export function ChatDialog({ trigger }: ChatDialogProps) {
+export default function ChatDialog({ trigger }: ChatDialogProps) {
   const [open, setOpen] = useState(false)
 
   return (

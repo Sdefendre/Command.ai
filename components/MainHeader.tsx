@@ -25,7 +25,7 @@ function DesktopNav() {
         className="hover:text-primary transition-colors no-underline font-medium"
         suppressHydrationWarning
       >
-        Command
+        Command<span className="font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">AI</span>
       </Link>
       <Link
         href="/dashboard"
@@ -65,7 +65,7 @@ function MobileMenu({ open, setOpen }: { open: boolean; setOpen: (open: boolean)
           onClick={() => setOpen(false)}
           suppressHydrationWarning
         >
-          Command
+          Command<span className="font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">AI</span>
         </Link>
         <Link
           href="/dashboard"

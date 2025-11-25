@@ -34,8 +34,8 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Life Command OS - Stop Surviving. Start Commanding Your Benefits.',
-    template: '%s | Life Command OS',
+    default: 'Command - Stop Surviving. Start Commanding Your Benefits.',
+    template: '%s | Command',
   },
   description:
     'AI-powered education for veterans ready to escape survival mode and unlock financial freedom. Navigate your DD-214, understand C&P exams, and master your service-connected benefits. Built by veterans, for veterans.',
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     { name: 'Steve Defendre', url: 'https://www.linkedin.com/in/joseph-m-defendre-a11a47225/' },
   ],
   creator: 'Steve Defendre',
-  publisher: 'Life Command OS',
+  publisher: 'Command',
   formatDetection: {
     email: false,
     address: false,
@@ -55,21 +55,21 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
     types: {
-      'application/rss+xml': [{ url: '/api/rss', title: 'Life Command OS Blog RSS Feed' }],
+      'application/rss+xml': [{ url: '/api/rss', title: 'Command Blog RSS Feed' }],
     },
   },
   openGraph: {
-    title: 'Life Command OS - Stop Surviving. Start Commanding Your Benefits.',
+    title: 'Command - Stop Surviving. Start Commanding Your Benefits.',
     description:
       'AI-powered education for veterans ready to escape survival mode and unlock financial freedom. Built by veterans, for veterans.',
     url: 'https://steve-os.vercel.app',
-    siteName: 'Life Command OS',
+    siteName: 'Command',
     images: [
       {
         url: '/logo.png',
         width: 1200,
         height: 630,
-        alt: 'Life Command OS - Stop Surviving. Start Commanding.',
+        alt: 'Command - Stop Surviving. Start Commanding.',
       },
     ],
     locale: 'en_US',
@@ -77,7 +77,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Life Command OS - Stop Surviving. Start Commanding Your Benefits.',
+    title: 'Command - Stop Surviving. Start Commanding Your Benefits.',
     description:
       'AI-powered education for veterans ready to escape survival mode and unlock financial freedom. Built by veterans, for veterans.',
     images: ['/logo.png'],
