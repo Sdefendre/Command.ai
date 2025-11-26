@@ -1,6 +1,6 @@
 # Documentation Index
 
-Welcome to the Life Command OS documentation! This index helps you navigate through all available documentation.
+Welcome to the Command documentation! This index helps you navigate through all available documentation.
 
 ## 📚 Available Documentation
 
