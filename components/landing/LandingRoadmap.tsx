@@ -65,7 +65,7 @@ export function LandingRoadmap() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative pl-8 sm:pl-0"
+              className="relative pl-8 sm:pl-0 will-change-transform"
             >
               {/* Timeline connector for mobile/tablet */}
               <div className="absolute left-0 top-0 bottom-0 w-px bg-border sm:hidden" />

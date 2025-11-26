@@ -27,7 +27,7 @@ export function LandingFeatures() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-16 will-change-transform"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 not-italic font-sans">
             {LANDING_FEATURES.title}

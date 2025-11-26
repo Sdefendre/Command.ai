@@ -260,7 +260,7 @@
   }
   html {
     /* Remove global smooth scroll to fix "slow" feeling and interference with native scroll */
-    /* scroll-behavior: smooth; */
+    scroll-behavior: smooth;
     /* Improve base font size for better legibility */
     font-size: 17px;
     /* Ensure html has proper background */

@@ -25,6 +25,7 @@ export function LandingHero() {
           <motion.div
             initial={shouldReduceMotion ? false : 'hidden'}
             animate={shouldReduceMotion ? false : 'visible'}
+            className="will-change-transform"
             variants={
               shouldReduceMotion
                 ? undefined

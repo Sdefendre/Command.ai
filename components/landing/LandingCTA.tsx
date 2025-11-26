@@ -19,6 +19,7 @@ export function LandingCTA() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
+          className="will-change-transform"
         >
           {/* Badge */}
           <motion.div

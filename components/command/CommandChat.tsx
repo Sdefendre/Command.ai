@@ -150,23 +150,21 @@ export function CommandChat({ userId }: CommandChatProps) {
 
   // Generate conversation ID
 
-  const [conversationId] = useState<string>(() => {
+  const [conversationId, setConversationId] = useState<string>('')
+
+  // Initialize conversation ID on client side only to match hydration
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       const stored = sessionStorage.getItem('ai-conversation-id')
-      if (stored) return stored
-      const newId = `conv-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
-      sessionStorage.setItem('ai-conversation-id', newId)
-      return newId
+      if (stored) {
+        setConversationId(stored)
+      } else {
+        const newId = `conv-${Date.now()}-${Math.random().toString(36).slice(2, 11)}`
+        sessionStorage.setItem('ai-conversation-id', newId)
+        setConversationId(newId)
+      }
     }
-    return `conv-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
-  })
-
-  // Update sessionStorage
-  useEffect(() => {
-    if (typeof window !== 'undefined' && conversationId) {
-      sessionStorage.setItem('ai-conversation-id', conversationId)
-    }
-  }, [conversationId])
+  }, [])
 
   // Type definitions may be incomplete, but these options work at runtime
   const chatResult = useChat({
@@ -225,7 +223,7 @@ export function CommandChat({ userId }: CommandChatProps) {
   }
 
   const submitMessage = async () => {
-    const trimmedInput = inputValue?.trim() || ''
+    const trimmedInput = (inputValue || '').trim() || ''
     if (!trimmedInput || status === 'submitted' || status === 'streaming') {
       return
     }
@@ -260,7 +258,7 @@ export function CommandChat({ userId }: CommandChatProps) {
   const toggleVoiceMode = () => setIsVoiceMode(!isVoiceMode)
 
   return (
-    <div className="flex h-[100vh] overflow-hidden bg-transparent text-foreground font-sans">
+    <div className="flex h-full w-full overflow-hidden bg-transparent text-foreground font-sans">
       {/* Sidebar - Hidden on mobile */}
       <div className="hidden md:flex">
         <SidebarContent />
@@ -346,7 +344,7 @@ export function CommandChat({ userId }: CommandChatProps) {
                     transition={{ duration: 0.5 }}
                     className="flex flex-col items-center text-center w-full mt-auto md:my-auto mb-2 md:mb-12"
                   >
-                    {!inputValue?.trim() && (
+                    {!(inputValue || '').trim() && (
                       <>
                         <div className="mb-6 md:mb-8 relative">
                           <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full" />
@@ -410,10 +408,10 @@ export function CommandChat({ userId }: CommandChatProps) {
                             <Button
                               type="submit"
                               size="icon"
-                              disabled={!inputValue?.trim() || isLoading}
+                              disabled={!(inputValue || '').trim() || isLoading}
                               className={cn(
                                 'h-8 w-8 md:h-10 md:w-10 rounded-full transition-all duration-300',
-                                inputValue?.trim()
+                                (inputValue || '').trim()
                                   ? 'bg-primary text-primary-foreground hover:bg-primary/90'
                                   : 'bg-white/5 text-muted-foreground hover:bg-white/10'
                               )}
@@ -507,10 +505,10 @@ export function CommandChat({ userId }: CommandChatProps) {
                       <Button
                         type="submit"
                         size="icon"
-                        disabled={!inputValue?.trim() || isLoading}
+                        disabled={!(inputValue || '').trim() || isLoading}
                         className={cn(
                           'h-8 w-8 rounded-full transition-all min-h-[40px] min-w-[40px]',
-                          inputValue?.trim()
+                          (inputValue || '').trim()
                             ? 'bg-primary text-primary-foreground hover:bg-primary/90'
                             : 'bg-white/10 text-muted-foreground hover:bg-white/20'
                         )}
