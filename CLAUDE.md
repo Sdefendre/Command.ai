@@ -1,14 +1,14 @@
-# Life Command OS
+# Command
 
-Life Command OS is a personal operating system and portfolio website - a multi-page Next.js 15 application with glassmorphism design showcasing projects, blog content, and services.
+Command is an AI-powered education platform for veterans - a multi-page Next.js 15 application helping veterans navigate VA benefits, disability claims, and financial literacy.
 
 ## Commands
 
-- `npm run dev` - Start dev server (localhost:3000)
-- `npm run build` - Production build
-- `npm start` - Start production server
-- `npm run lint` - Run ESLint
-- `npm run format` - Format code with Prettier
+- `pnpm dev` - Start dev server (localhost:3000)
+- `pnpm build` - Production build
+- `pnpm start` - Start production server
+- `pnpm lint` - Run ESLint
+- `pnpm format` - Format code with Prettier
 
 ## Code Style
 
