@@ -40,10 +40,9 @@ Visit: [Command](https://steve-os.vercel.app)
 
    ```env
    # AI Agent - Required for AI chat functionality
-   OPENAI_API_KEY=your_openai_api_key_here
-   XAI_API_KEY=your_xai_api_key_here  # Optional, for Grok models
+   XAI_API_KEY=your_xai_api_key_here  # Required for Grok 4.1 Fast
 
-   # Supabase - Required for rate limiting, knowledge base, and Reddit dataset
+   # Supabase - Optional for rate limiting, knowledge base, and Reddit dataset
    NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
    NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
    SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key  # For server-side operations
@@ -60,18 +59,13 @@ Visit: [Command](https://steve-os.vercel.app)
    ```
 
    **Getting API Keys:**
-   - **OpenAI API Key** (Required):
-     - Visit [OpenAI Platform](https://platform.openai.com/api-keys)
-     - Sign in or create an account
-     - Create a new API key
-     - Copy the key and add it to your `.env.local` file
-   - **XAI API Key** (Optional, for Grok models):
+   - **XAI API Key** (Required):
      - Visit [X.AI Console](https://console.x.ai/)
      - Sign in or create an account
      - Navigate to API Keys section
      - Create a new API key
      - Copy the key and add it to your `.env.local` file
-   - **Supabase Setup** (Required for full functionality):
+   - **Supabase Setup** (Optional, but recommended):
      - Visit [Supabase](https://supabase.com/)
      - Create a new project or use an existing one
      - Go to Project Settings → API
@@ -98,10 +92,19 @@ Visit: [Command](https://steve-os.vercel.app)
    gh auth login
    ```
 
-5. **Start development server**
+5. **Verify environment setup (optional)**
+
+   ```bash
+   npm run check-ai-env
+   ```
+
+6. **Start development server**
+
    ```bash
    pnpm dev
    ```
+
+   Note: Dev server runs with Turbopack disabled for dependency compatibility.
 
 ## 🤖 MCP (Model Context Protocol) Setup
 
@@ -289,15 +292,16 @@ Located in `components/landing/`:
 
 The `/command` page provides an advanced AI-powered chat interface for VA benefits assistance:
 
-- **Multiple AI Models**: Support for GPT-4o, GPT-4o Mini, Grok models, and more
+- **Grok 4.1 Fast**: Powered by xAI's fast reasoning model for intelligent responses
 - **Voice Integration**: Voice-to-text input with microphone support via `VoiceAgent` component
 - **Conversation History**: Persistent chat sessions stored in Supabase with conversation IDs
-- **Rate Limiting**: Daily query limits with real-time tracking
+- **Rate Limiting**: Daily query limits with real-time tracking (20 free, 1000 premium)
 - **Knowledge Base**: Integrated search for VA benefits information
+- **Reddit Context**: Real-world veteran experiences from Reddit Q&A
 - **Responsive Design**: Mobile-friendly with collapsible sidebar and sheet menu
-- **Model Selection**: Dropdown selector for switching between AI models
 - **Three.js Background**: Immersive `CommandThreeBackground` component
 - **Session Management**: Conversation IDs stored in sessionStorage for persistence
+- **Graceful Degradation**: Works without Supabase (unlimited rate limits for local dev)
 
 ### Command Interface Components
 
