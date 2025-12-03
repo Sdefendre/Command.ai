@@ -64,7 +64,7 @@ async function fallbackSearch(query: string, limit: number): Promise<CommunityQA
     const searchPattern = `%${query}%`
 
     const { data, error } = await supabase
-      .from('reddit_qa_dataset')
+      .from('community_qa_dataset')
       .select('id, title, question, answer, upvotes, url')
       .or(
         `title.ilike.${searchPattern},question.ilike.${searchPattern},answer.ilike.${searchPattern}`
@@ -96,7 +96,7 @@ export async function getQAByTags(tags: string[], limit: number = 5): Promise<Co
 
   try {
     const { data, error } = await supabase
-      .from('reddit_qa_dataset')
+      .from('community_qa_dataset')
       .select('id, title, question, answer, upvotes, url')
       .contains('tags', tags)
       .order('upvotes', { ascending: false })
