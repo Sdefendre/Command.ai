@@ -19,8 +19,6 @@ Command is an AI-powered education platform for veterans - a multi-page Next.js 
 ### Utility Scripts
 
 - `npm run check-ai-env` - Verify AI environment variables are configured
-- `npm run scrape-reddit` - Scrape Reddit dataset for VA benefits Q&A
-- `npm run verify-reddit-dataset` - Verify integrity of Reddit dataset
 - `npm run scrape-valor-features` - Scrape Valor features documentation
 - `npm run send-newsletter` - Send newsletter to subscribers
 
@@ -50,14 +48,13 @@ Command is an AI-powered education platform for veterans - a multi-page Next.js 
 
 The core AI functionality is built around Grok models via xAI with comprehensive context augmentation:
 
-**Flow**: User input → API route → Prompt building (with KB/Reddit context) → Grok streaming → Response
+**Flow**: User input → API route → Prompt building (with KB context) → Grok streaming → Response
 
 **Key Files**:
 
 - `app/api/ai-agent/route.ts` - Main API endpoint handling streaming chat with rate limiting
 - `lib/ai-agent.ts` - System prompts and prompt building logic with conversation history
 - `lib/knowledge-base.ts` - VA benefits knowledge base search and formatting
-- `lib/reddit-dataset.ts` - Reddit Q&A dataset search for real-world veteran experiences
 - `lib/supabase.ts` - Database operations for rate limiting, conversations, subscriptions, course access
 - `constants/ai.ts` - AI model configuration (currently only Grok 4.1 Fast)
 
@@ -68,7 +65,7 @@ The core AI functionality is built around Grok models via xAI with comprehensive
 - Conversation IDs stored in sessionStorage for persistence
 - Messages saved to Supabase after streaming completes
 - Supports anonymous users with reduced rate limits (5 queries)
-- Knowledge base and Reddit context automatically injected into prompts
+- Knowledge base context automatically injected into prompts
 - Last 10 conversation messages included for context
 
 ### Client Components Architecture
@@ -227,12 +224,6 @@ Project linked to Linear workspace: https://linear.app/ceceriforma/project/life-
 1. Add content to Supabase `knowledge_base` table
 2. Content automatically searchable via `lib/knowledge-base.ts`
 3. Relevant articles injected into AI prompts automatically
-
-### Adding Reddit Q&A Data
-
-1. Run `npm run scrape-reddit` to fetch new Q&A
-2. Verify with `npm run verify-reddit-dataset`
-3. Context automatically injected via `lib/reddit-dataset.ts`
 
 ### Creating New Landing Sections
 

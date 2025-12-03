@@ -297,7 +297,6 @@ The `/command` page provides an advanced AI-powered chat interface for VA benefi
 - **Conversation History**: Persistent chat sessions stored in Supabase with conversation IDs
 - **Rate Limiting**: Daily query limits with real-time tracking (20 free, 1000 premium)
 - **Knowledge Base**: Integrated search for VA benefits information
-- **Reddit Context**: Real-world veteran experiences from Reddit Q&A
 - **Responsive Design**: Mobile-friendly with collapsible sidebar and sheet menu
 - **Three.js Background**: Immersive `CommandThreeBackground` component
 - **Session Management**: Conversation IDs stored in sessionStorage for persistence

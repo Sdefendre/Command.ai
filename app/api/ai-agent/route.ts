@@ -13,9 +13,11 @@ export async function POST(request: NextRequest) {
     const { messages: chatMessages, userId, conversationId } = body
     const resolvedModel = DEFAULT_MODEL
 
-    // Warn (but allow) if Supabase isn’t configured; KB/Reddit will be skipped gracefully
+    // Warn (but allow) if Supabase isn't configured; KB/Community Q&A will be skipped gracefully
     if (!isSupabaseConfigured) {
-      console.warn('Supabase not configured; knowledge base and Reddit context will be skipped.')
+      console.warn(
+        'Supabase not configured; knowledge base and community Q&A context will be skipped.'
+      )
     }
 
     // Use provided conversation ID or generate a new one (for tracking conversations)

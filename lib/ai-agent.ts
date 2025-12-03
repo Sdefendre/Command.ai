@@ -3,7 +3,7 @@
  */
 
 import { searchKnowledgeBase, formatKnowledgeBaseForPrompt } from './knowledge-base'
-import { searchRedditDataset, formatRedditContext } from './reddit-dataset'
+import { searchCommunityQA, formatCommunityContext } from './community-qa'
 
 export interface ConversationMessage {
   role: 'user' | 'assistant'
@@ -28,10 +28,10 @@ Key Guidelines:
 - Keep responses concise but thorough
 - Use a supportive, encouraging tone
 - When knowledge base articles are provided, use them as your primary source of information
-- When Reddit Q&A examples are provided, use them to understand common questions and real-world experiences
+- When community Q&A examples are provided, use them to understand common questions and real-world experiences
 - Cite information from knowledge base articles when relevant
-- Reference Reddit examples to show that others have similar questions/experiences
-- If knowledge base articles don't fully answer the question, provide additional helpful context based on your training and the Reddit examples
+- Reference community examples to show that others have similar questions/experiences
+- If knowledge base articles don't fully answer the question, provide additional helpful context based on your training and the community examples
 
 Remember: You're built by veterans, for veterans. Speak their language and understand their struggles.`
 
@@ -39,7 +39,7 @@ export async function buildPrompt(
   userMessage: string,
   conversationHistory: ConversationMessage[],
   includeKnowledgeBase: boolean = true,
-  includeRedditDataset: boolean = true
+  includeCommunityQA: boolean = true
 ): Promise<string> {
   const historyContext = conversationHistory
     .slice(-10) // Last 10 messages for context
@@ -60,17 +60,17 @@ export async function buildPrompt(
     }
   }
 
-  // Search Reddit dataset for relevant Q&A
-  let redditContext = ''
-  if (includeRedditDataset) {
+  // Search community Q&A for relevant examples
+  let communityContext = ''
+  if (includeCommunityQA) {
     try {
-      const redditResults = await searchRedditDataset(userMessage, 3) // Get top 3 relevant results
-      if (redditResults.length > 0) {
-        redditContext = formatRedditContext(redditResults)
+      const communityResults = await searchCommunityQA(userMessage, 3) // Get top 3 relevant results
+      if (communityResults.length > 0) {
+        communityContext = formatCommunityContext(communityResults)
       }
     } catch (error) {
-      console.error('Error searching Reddit dataset:', error)
-      // Continue without Reddit context if search fails
+      console.error('Error searching community Q&A:', error)
+      // Continue without community context if search fails
     }
   }
 
@@ -81,9 +81,9 @@ ${historyContext || 'This is the start of the conversation.'}
 
 Current User Question: ${userMessage}
 ${knowledgeBaseContext}
-${redditContext}
+${communityContext}
 
-Please provide a helpful, accurate response that addresses the user's question while maintaining the supportive, veteran-focused tone. Use the knowledge base articles provided above as your primary source of information when available. Use the Reddit Q&A examples to understand common questions and provide context that shows real-world experiences from the veteran community.`
+Please provide a helpful, accurate response that addresses the user's question while maintaining the supportive, veteran-focused tone. Use the knowledge base articles provided above as your primary source of information when available. Use the community Q&A examples to understand common questions and provide context that shows real-world experiences from the veteran community.`
 }
 
 export function shouldRateLimit(_userId?: string): boolean {

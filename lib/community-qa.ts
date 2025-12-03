@@ -1,13 +1,13 @@
 /**
- * Reddit Dataset Utilities
+ * Community Q&A Dataset Utilities
  *
- * Functions to search and retrieve relevant Q&A from the Reddit dataset
+ * Functions to search and retrieve relevant veteran community Q&A
  * for use in AI agent responses.
  */
 
 import { getSupabaseClient } from './supabase'
 
-export interface RedditQAResult {
+export interface CommunityQAResult {
   id: string
   title: string
   question: string
@@ -18,16 +18,16 @@ export interface RedditQAResult {
 }
 
 /**
- * Search the Reddit Q&A dataset for relevant questions and answers
+ * Search the community Q&A dataset for relevant questions and answers
  *
  * @param query - The search query (user's question)
  * @param limit - Maximum number of results to return (default: 5)
  * @returns Array of relevant Q&A results
  */
-export async function searchRedditDataset(
+export async function searchCommunityQA(
   query: string,
   limit: number = 5
-): Promise<RedditQAResult[]> {
+): Promise<CommunityQAResult[]> {
   const supabase = getSupabaseClient()
   if (!supabase) return []
 
@@ -39,14 +39,14 @@ export async function searchRedditDataset(
     })
 
     if (error) {
-      console.error('Error searching Reddit dataset:', error)
+      console.error('Error searching community Q&A dataset:', error)
       // Fallback to simple text search if function doesn't exist yet
       return await fallbackSearch(query, limit)
     }
 
-    return (data || []) as RedditQAResult[]
+    return (data || []) as CommunityQAResult[]
   } catch (error) {
-    console.error('Error in searchRedditDataset:', error)
+    console.error('Error in searchCommunityQA:', error)
     return []
   }
 }
@@ -55,7 +55,7 @@ export async function searchRedditDataset(
  * Fallback search using simple text matching
  * Used if the full-text search function isn't available
  */
-async function fallbackSearch(query: string, limit: number): Promise<RedditQAResult[]> {
+async function fallbackSearch(query: string, limit: number): Promise<CommunityQAResult[]> {
   const supabase = getSupabaseClient()
   if (!supabase) return []
 
@@ -77,7 +77,7 @@ async function fallbackSearch(query: string, limit: number): Promise<RedditQARes
       return []
     }
 
-    return (data || []) as RedditQAResult[]
+    return (data || []) as CommunityQAResult[]
   } catch (error) {
     console.error('Error in fallbackSearch:', error)
     return []
@@ -90,7 +90,7 @@ async function fallbackSearch(query: string, limit: number): Promise<RedditQARes
  * @param tags - Array of tags to search for
  * @param limit - Maximum number of results
  */
-export async function getQAByTags(tags: string[], limit: number = 5): Promise<RedditQAResult[]> {
+export async function getQAByTags(tags: string[], limit: number = 5): Promise<CommunityQAResult[]> {
   const supabase = getSupabaseClient()
   if (!supabase) return []
 
@@ -107,7 +107,7 @@ export async function getQAByTags(tags: string[], limit: number = 5): Promise<Re
       return []
     }
 
-    return (data || []) as RedditQAResult[]
+    return (data || []) as CommunityQAResult[]
   } catch (error) {
     console.error('Error in getQAByTags:', error)
     return []
@@ -115,12 +115,12 @@ export async function getQAByTags(tags: string[], limit: number = 5): Promise<Re
 }
 
 /**
- * Format Reddit Q&A results for use in AI prompt context
+ * Format community Q&A results for use in AI prompt context
  *
- * @param results - Array of Reddit Q&A results
+ * @param results - Array of community Q&A results
  * @returns Formatted string for AI context
  */
-export function formatRedditContext(results: RedditQAResult[]): string {
+export function formatCommunityContext(results: CommunityQAResult[]): string {
   if (results.length === 0) {
     return ''
   }
@@ -137,7 +137,7 @@ Source: ${result.url}
     })
     .join('\n\n')
 
-  return `\n\nRelevant Q&A from r/veteransbenefits community:\n${formatted}\n\nUse these real-world examples to inform your response, but always provide your own comprehensive answer.`
+  return `\n\nRelevant Q&A from veteran community:\n${formatted}\n\nUse these real-world examples to inform your response, but always provide your own comprehensive answer.`
 }
 
 /**
