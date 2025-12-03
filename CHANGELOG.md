@@ -9,19 +9,66 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Comprehensive Architecture Documentation**: Enhanced `CLAUDE.md` with complete system architecture
+  - Detailed AI chat system architecture with API routes, models, and data flow
+  - Client components documentation including Three.js backgrounds
+  - Data management patterns with Supabase integration
+  - Key routes and their purposes
+  - Code style guidelines and environment variable requirements
+  - Linear project integration reference
+
+- **Community Q&A Dataset**: Renamed and rebranded Reddit dataset for legal compliance
+  - New file: `lib/community-qa-dataset.ts` (replaces `reddit-dataset.ts`)
+  - Updated all function names: `getRelevantCommunityQA`, `searchCommunityQA`, `formatCommunityContext`
+  - Changed documentation: `COMMUNITY_QA_DATASET_SETUP.md` (replaces `REDDIT_DATASET_SETUP.md`)
+  - Supabase table renamed to `community_qa` for consistency
+  - All references updated across codebase (AI agent, README, etc.)
+
 ### Changed
+
+- **AI Model Architecture**: Standardized on Grok 4.1 Fast as the sole AI model
+  - Removed OpenAI models (GPT-4o, GPT-4o-mini) from `constants/ai.ts`
+  - Single model configuration: `grok-4.1-fast` via xAI
+  - Simplified model selection UI - removed model picker from chat interface
+  - Updated `app/api/ai-agent/route.ts` to use only Grok model
+  - Removed OpenAI API dependencies and environment variable checks
+  - Updated README to reflect Grok-only architecture
+
+- **Supabase Integration**: Made Supabase services optional with graceful degradation
+  - Added `isSupabaseConfigured()` utility function in `lib/supabase.ts`
+  - Wrapped all Supabase calls with configuration checks
+  - Functions return `null` or empty arrays when Supabase is unavailable
+  - Rate limiting gracefully disabled without Supabase
+  - Conversation history gracefully disabled without Supabase
+  - Course access checks gracefully disabled without Supabase
+  - AI chat continues to work without database persistence
+  - Knowledge base and community Q&A gracefully disabled when unavailable
+
+- **Chat Interface Improvements**: Enhanced user experience and error handling
+  - Fixed model display to show "Grok 4.1 Fast" instead of raw model ID
+  - Improved error messages with clearer user guidance
+  - Better loading states during message streaming
+  - Enhanced visual feedback for system states
+  - Updated `components/AIAgentChat.tsx` and `components/command/Chat.tsx`
+
+- **Development Tooling**: Updated dev environment configuration
+  - Disabled Turbopack in `next.config.ts` (commented out `turbo: {}`)
+  - Reason: Turbopack compatibility issues with Three.js and other dependencies
+  - Updated `scripts/check-ai-env.ts` to only check for `XAI_API_KEY`
+  - Removed OpenAI environment variable checks
+  - Simplified environment variable validation
+
+- **Documentation Updates**: Project documentation reflects current architecture
+  - Updated `README.md` to show Grok-only AI architecture
+  - Removed OpenAI references from setup instructions
+  - Updated environment variable documentation (only XAI_API_KEY required)
+  - Community Q&A dataset terminology throughout docs
 
 - **Pricing Plans**: Updated "Choose Your Path" billing section with 3 tiers
   - Free ($0): CommandAI with 10 queries/day, basic content, community read-only access
   - Pro ($20/mo): Unlimited CommandAI, full library, community access, priority support
   - Lifetime ($50 one-time): Everything in Pro forever, plus course access and 1-on-1 onboarding
   - Updated LandingPricing component for 3-column responsive layout
-
-- **AI Model Configuration**: Updated model picker to use verified, working models
-  - Removed `gpt-5.1` (requires special access/registration)
-  - Removed `grok-4.1-fast` (invalid model name)
-  - Updated to valid xAI models: `grok-4-fast`, `grok-4-fast-reasoning`, `grok-4-fast-non-reasoning`
-  - Simplified API route model handling
 
 ### Fixed
 
