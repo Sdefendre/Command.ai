@@ -1,6 +1,6 @@
 # Buy Me a Coffee Integration
 
-This document explains the "Buy Me a Coffee" integration added to Life Command OS.
+This document explains the "Buy Me a Coffee" integration added to Command.
 
 ## Overview
 

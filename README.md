@@ -175,7 +175,7 @@ The Linear MCP server allows AI assistants to interact with Linear issues, creat
 
 **Project Connection:**
 
-This repository is connected to the **Life Command OS** project in Linear:
+This repository is connected to the **Command** project in Linear:
 
 - **Linear Project URL**: [https://linear.app/ceceriforma/project/life-command-os-113a92ca8686](https://linear.app/ceceriforma/project/life-command-os-113a92ca8686)
 - **Team**: Ceceriforma
@@ -186,16 +186,16 @@ This repository is connected to the **Life Command OS** project in Linear:
 Once configured, you can use the Linear MCP server to:
 
 - List Linear issues related to this project
-- Create new Linear issues linked to the Life Command OS project
+- Create new Linear issues linked to the Command project
 - Update existing issues
 - Search for issues by various criteria
 
 Example prompts:
 
-- "List all issues in the Life Command OS project"
-- "Create a new Linear issue for this bug in the Life Command OS project"
-- "Show me all open issues in the Life Command OS project"
-- "Create an issue for [feature description] and add it to the Life Command OS project"
+- "List all issues in the Command project"
+- "Create a new Linear issue for this bug in the Command project"
+- "Show me all open issues in the Command project"
+- "Create an issue for [feature description] and add it to the Command project"
 
 ## 🔧 GitHub CLI Usage
 
@@ -219,7 +219,7 @@ This project uses GitHub CLI for various operations. You can use GitHub CLI comm
 
 ## 📊 BattleStation Features
 
-Life Command OS includes a comprehensive financial BattleStation (`/battlestation`) with:
+Command includes a comprehensive financial BattleStation (`/battlestation`) with:
 
 - **Financial Overview**: Track balance, spending, budget, and savings goals
 - **Transaction Management**: View and manage recent transactions
@@ -244,7 +244,7 @@ The BattleStation includes Google Calendar integration for viewing upcoming even
 
 ## 🎯 Features Page
 
-The `/features` page provides a comprehensive overview of all Life Command OS features, including:
+The `/features` page provides a comprehensive overview of all Command features, including:
 
 - **Current Features**: Overview of all available features (Command AI chat, Educational Pathways, Claim Strategy Builder, Transition Roadmap, Community Access, Secure & Private)
 - **Product Roadmap**: Interactive roadmap showing planned features and improvements

@@ -7,7 +7,7 @@ import { Check, Medal, Target, BookOpen, Clock, Users } from 'lucide-react'
 import { CheckoutButton } from '@/components/CheckoutButton'
 
 export const metadata = {
-  title: '0-100% Service-Connected Disability Rating Course - Life Command OS',
+  title: '0-100% Service-Connected Disability Rating Course - Command',
   description:
     'The complete blueprint to maximize your service-connected disability rating. Step-by-step strategy from 0% to 100%.',
 }

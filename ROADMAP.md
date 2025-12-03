@@ -1,4 +1,4 @@
-# Life Command OS - Development Roadmap
+# Command - Development Roadmap
 
 ## ✅ Completed Features
 

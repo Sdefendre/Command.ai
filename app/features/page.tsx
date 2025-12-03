@@ -9,8 +9,8 @@ import { ChangelogEntry } from '@/components/Changelog'
 import { MessageSquare, GraduationCap, Target, Map, Users, Lock } from 'lucide-react'
 
 export const metadata = {
-  title: 'Features - Life Command OS',
-  description: 'Explore features, roadmap, and changelog for Life Command OS.',
+  title: 'Features - Command',
+  description: 'Explore features, roadmap, and changelog for Command.',
 }
 
 const features = [
@@ -71,7 +71,7 @@ export default function FeaturesPage() {
         <div className="mb-12 text-center">
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4">Features</h1>
           <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
-            Explore all features, future plans, and recent updates for Life Command OS.
+            Explore all features, future plans, and recent updates for Command.
           </p>
         </div>
 
@@ -141,7 +141,7 @@ export default function FeaturesPage() {
           <div className="mb-8">
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight mb-4">Changelog</h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              All notable changes to Life Command OS are documented here.
+              All notable changes to Command are documented here.
             </p>
             <p className="text-sm text-muted-foreground mt-2">
               The format is based on{' '}

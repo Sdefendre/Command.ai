@@ -2,7 +2,7 @@ import { CommandPageClient } from '@/components/command/CommandPageClient'
 import type { Viewport } from 'next'
 
 export const metadata = {
-  title: 'CommandAI - Life Command OS',
+  title: 'CommandAI - Command',
   description: 'Direct interface for CommandAI. Ask about VA benefits, claims, and transition.',
 }
 

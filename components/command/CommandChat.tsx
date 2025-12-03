@@ -19,9 +19,8 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
-import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select'
 import { CommandMessage, CommandMessageLoading } from './CommandMessage'
-import { MODEL_OPTIONS, type ModelOption } from '@/constants/ai'
+import { DEFAULT_MODEL, MODEL_OPTIONS, type ModelOption } from '@/constants/ai'
 import { cn } from '@/lib/utils'
 
 // Lazy load VoiceAgent since it's not needed on initial render
@@ -111,7 +110,7 @@ const SidebarContent = ({ showLabels = false }: { showLabels?: boolean }) => (
           <Sparkles className="h-6 w-6 text-primary-foreground fill-current" />
         </div>
       </Link>
-      {showLabels && <span className="font-bold text-lg tracking-tight">Life Command OS</span>}
+      {showLabels && <span className="font-bold text-lg tracking-tight">Command</span>}
     </div>
 
     <div className="flex-1 w-full space-y-2">
@@ -146,7 +145,7 @@ const SidebarContent = ({ showLabels = false }: { showLabels?: boolean }) => (
 )
 
 export function CommandChat({ userId }: CommandChatProps) {
-  const [selectedModel, setSelectedModel] = useState<ModelOption>('gpt-4o-mini')
+  const selectedModel: ModelOption = DEFAULT_MODEL
   const [isVoiceMode, setIsVoiceMode] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [inputValue, setInputValue] = useState('')
@@ -183,6 +182,8 @@ export function CommandChat({ userId }: CommandChatProps) {
   const { messages, status, error, append } = chatResult
   // Alias append to sendMessage for compatibility with existing code structure
   const sendMessage = append
+  const selectedModelLabel =
+    MODEL_OPTIONS.find((m) => m.value === selectedModel)?.label || 'Grok 4.1 Fast'
 
   // Load rate limit
   useEffect(() => {
@@ -383,32 +384,9 @@ export function CommandChat({ userId }: CommandChatProps) {
                             className="w-full bg-transparent border-none focus:ring-0 py-3 md:py-4 px-3 md:px-4 text-base md:text-lg text-foreground placeholder:text-muted-foreground/70 outline-none"
                           />
                           <div className="pr-2 flex items-center gap-1">
-                            <Select
-                              value={selectedModel}
-                              onValueChange={(value) => setSelectedModel(value as ModelOption)}
-                            >
-                              <SelectTrigger className="h-8 border-none bg-transparent hover:bg-white/5 focus:ring-0 gap-2 text-zinc-100 text-xs w-auto px-2 min-h-[32px]">
-                                <span className="truncate max-w-[120px] font-medium">
-                                  {MODEL_OPTIONS.find((m) => m.value === selectedModel)?.label}
-                                </span>
-                              </SelectTrigger>
-                              <SelectContent className="bg-zinc-950 border-white/10 text-zinc-100 backdrop-blur-xl">
-                                {MODEL_OPTIONS.map((option) => (
-                                  <SelectItem
-                                    key={option.value}
-                                    value={option.value}
-                                    className="focus:bg-white/10 focus:text-white py-2"
-                                  >
-                                    <div className="flex flex-col gap-0.5 text-left">
-                                      <span className="font-medium">{option.label}</span>
-                                      <span className="text-[10px] text-zinc-400">
-                                        {option.description}
-                                      </span>
-                                    </div>
-                                  </SelectItem>
-                                ))}
-                              </SelectContent>
-                            </Select>
+                            <span className="inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-foreground">
+                              {selectedModelLabel}
+                            </span>
                             <Button
                               type="button"
                               variant="ghost"
@@ -478,32 +456,9 @@ export function CommandChat({ userId }: CommandChatProps) {
                   />
                   <div className="flex items-center justify-between px-2 pb-2">
                     <div className="flex items-center gap-1">
-                      <Select
-                        value={selectedModel}
-                        onValueChange={(value) => setSelectedModel(value as ModelOption)}
-                      >
-                        <SelectTrigger className="h-8 border-none bg-transparent hover:bg-white/5 focus:ring-0 gap-2 text-zinc-100 text-xs w-auto px-2 min-h-[32px]">
-                          <span className="truncate max-w-[120px] font-medium">
-                            {MODEL_OPTIONS.find((m) => m.value === selectedModel)?.label}
-                          </span>
-                        </SelectTrigger>
-                        <SelectContent className="bg-zinc-950 border-white/10 text-zinc-100 backdrop-blur-xl">
-                          {MODEL_OPTIONS.map((option) => (
-                            <SelectItem
-                              key={option.value}
-                              value={option.value}
-                              className="focus:bg-white/10 focus:text-white py-2"
-                            >
-                              <div className="flex flex-col gap-0.5 text-left">
-                                <span className="font-medium">{option.label}</span>
-                                <span className="text-[10px] text-zinc-400">
-                                  {option.description}
-                                </span>
-                              </div>
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <span className="inline-flex items-center rounded-full bg-white/5 px-3 py-1 text-xs font-medium text-foreground">
+                        {selectedModelLabel}
+                      </span>
                     </div>
                     <div className="flex items-center gap-2">
                       <Button

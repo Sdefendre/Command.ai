@@ -11,7 +11,7 @@ export default function TermsOfService() {
           <p>Last updated: {new Date().toLocaleDateString()}</p>
           <p>
             Please read these Terms of Service (&ldquo;Terms&rdquo;, &ldquo;Terms of Service&rdquo;)
-            carefully before using the Life Command OS website operated by us.
+            carefully before using the Command website operated by us.
           </p>
 
           <h2 className="text-xl font-semibold mt-8 mb-4">1. Conditions of Use</h2>
@@ -24,9 +24,9 @@ export default function TermsOfService() {
           <h2 className="text-xl font-semibold mt-8 mb-4">2. Intellectual Property</h2>
           <p>
             You agree that all materials, products, and services provided on this website are the
-            property of Life Command OS, its affiliates, directors, officers, employees, agents,
-            suppliers, or licensors including all copyrights, trade secrets, trademarks, patents,
-            and other intellectual property.
+            property of Command, its affiliates, directors, officers, employees, agents, suppliers,
+            or licensors including all copyrights, trade secrets, trademarks, patents, and other
+            intellectual property.
           </p>
 
           <h2 className="text-xl font-semibold mt-8 mb-4">3. User Accounts</h2>
@@ -38,9 +38,8 @@ export default function TermsOfService() {
 
           <h2 className="text-xl font-semibold mt-8 mb-4">4. Indemnification</h2>
           <p>
-            You agree to indemnify Life Command OS and its affiliates and hold Life Command OS
-            harmless against legal claims and demands that may arise from your use or misuse of our
-            services.
+            You agree to indemnify Command and its affiliates and hold Command harmless against
+            legal claims and demands that may arise from your use or misuse of our services.
           </p>
         </div>
       </main>

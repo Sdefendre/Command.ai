@@ -150,8 +150,8 @@ export function FeedbackDialog({ path, trigger }: FeedbackDialogProps) {
             <DialogHeader>
               <DialogTitle>Share Your Feedback</DialogTitle>
               <DialogDescription>
-                Help us improve Life Command OS by sharing your thoughts, reporting issues, or
-                suggesting features.
+                Help us improve Command by sharing your thoughts, reporting issues, or suggesting
+                features.
               </DialogDescription>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">

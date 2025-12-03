@@ -64,7 +64,7 @@ export default function AboutPage() {
                   <h3 className="font-semibold text-sm sm:text-base">Founder & Lead Engineer</h3>
                   <span className="text-xs sm:text-sm text-muted-foreground">2023 — Present</span>
                 </div>
-                <div className="text-primary mb-2 text-sm sm:text-base">Life Command OS</div>
+                <div className="text-primary mb-2 text-sm sm:text-base">Command</div>
                 <p className="text-muted-foreground text-xs sm:text-sm leading-relaxed">
                   Architecting custom software solutions with emphasis on scalability, performance,
                   and operational excellence. Building systems that command results.

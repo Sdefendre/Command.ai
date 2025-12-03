@@ -52,7 +52,7 @@ export async function POST(request: NextRequest) {
       <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Welcome to Life Command OS</title>
+        <title>Welcome to Command</title>
       </head>
       <body style="margin: 0; padding: 0; background: linear-gradient(135deg, #000000 0%, #1a0505 50%, #000000 100%); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
         <div style="max-width: 600px; margin: 0 auto; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(220, 38, 38, 0.2); border-radius: 24px; overflow: hidden;">
@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
             </div>
             
             <h1 style="background: linear-gradient(135deg, #ffffff 0%, #dc2626 50%, #ffffff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin: 0; font-size: 36px; font-weight: 700; line-height: 1.2;">
-              Welcome to Life Command OS
+              Welcome to Command
             </h1>
             <p style="color: #9ca3af; margin: 15px 0 0 0; font-size: 18px; font-weight: 500;">Stop Surviving. Start Commanding.</p>
           </div>
@@ -79,7 +79,7 @@ export async function POST(request: NextRequest) {
             <div style="background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 30px; margin-bottom: 30px;">
               <h2 style="color: #ffffff; margin: 0 0 20px 0; font-size: 24px; font-weight: 600;">Mission Accepted, ${email.split('@')[0]}.</h2>
               <p style="color: #d1d5db; line-height: 1.7; margin: 0 0 20px 0; font-size: 16px;">
-                You've taken the first step out of survival mode. Life Command OS is here to help you stabilize your finances, eliminate chaos, and build your future.
+                You've taken the first step out of survival mode. Command is here to help you stabilize your finances, eliminate chaos, and build your future.
               </p>
               <ul style="color: #d1d5db; line-height: 1.8; margin: 0; padding-left: 0; list-style: none;">
                 <li style="padding: 8px 0; position: relative; padding-left: 25px;">
@@ -101,7 +101,7 @@ export async function POST(request: NextRequest) {
             <div style="background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(234, 88, 12, 0.1) 100%); backdrop-filter: blur(10px); border: 1px solid rgba(220, 38, 38, 0.2); border-radius: 16px; padding: 30px; margin-bottom: 30px;">
               <h3 style="color: #dc2626; margin: 0 0 15px 0; font-size: 20px; font-weight: 600;">About Steve Defendre</h3>
               <p style="color: #d1d5db; line-height: 1.7; margin: 0; font-size: 16px;">
-                Veteran, full-stack engineer, and creator of Life Command OS. I built this system to help you escape chaos and take command of your life.
+                Veteran, full-stack engineer, and creator of Command. I built this system to help you escape chaos and take command of your life.
               </p>
             </div>
             
@@ -126,7 +126,7 @@ export async function POST(request: NextRequest) {
               <span style="color: #6b7280; font-size: 12px;">Unsubscribe anytime</span>
             </div>
             <p style="color: #6b7280; font-size: 14px; margin: 0; font-weight: 500;">
-              Life Command OS • Stop Surviving. Start Commanding.
+              Command • Stop Surviving. Start Commanding.
             </p>
           </div>
         </div>
@@ -135,11 +135,11 @@ export async function POST(request: NextRequest) {
     `
 
     const welcomeEmailText = `
-Welcome to Life Command OS!
+Welcome to Command!
 
 Mission Accepted, ${email.split('@')[0]}.
 
-You've taken the first step out of survival mode. Life Command OS is here to help you stabilize your finances, eliminate chaos, and build your future.
+You've taken the first step out of survival mode. Command is here to help you stabilize your finances, eliminate chaos, and build your future.
 
 What to expect:
 • Weekly financial missions
@@ -147,13 +147,13 @@ What to expect:
 • Tactical advice for growth
 
 About Steve Defendre:
-Veteran, full-stack engineer, and creator of Life Command OS. I built this system to help you escape chaos and take command of your life.
+Veteran, full-stack engineer, and creator of Command. I built this system to help you escape chaos and take command of your life.
 
 Access Mission Briefings: ${siteUrl}/blog
 
 You can unsubscribe at any time by replying to any email.
 
-Life Command OS • Stop Surviving. Start Commanding.
+Command • Stop Surviving. Start Commanding.
     `
 
     // Send welcome email

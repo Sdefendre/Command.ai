@@ -1,13 +1,13 @@
 // Blog Post: Mission Statement
 export const missionStatementPost = {
   id: 'the-mission-statement-behind-life-command-os',
-  title: 'The Mission Statement Behind Life Command OS: Breaking Out of Survival Mode',
+  title: 'The Mission Statement Behind Command: Breaking Out of Survival Mode',
   excerpt:
     "Our mission is simple but profound: to help people break out of survival mode and take command of their future. Here's what that means, why it matters, and how we're building toward it.",
   content: `
     <p>Every organization needs a mission statement. But not every mission statement matters. Most are corporate fluff – carefully crafted words that sound impressive but don't actually guide anything.</p>
 
-    <p>At Life Command OS, we have a different approach. Our mission statement isn't marketing copy. It's not aspirational fluff. It's a declaration of the problem we're solving and the future we're building toward.</p>
+    <p>At Command, we have a different approach. Our mission statement isn't marketing copy. It's not aspirational fluff. It's a declaration of the problem we're solving and the future we're building toward.</p>
 
     <blockquote class="border-l-4 border-blue-400 pl-4 italic text-gray-300 my-6">
       <strong>Our Mission:</strong> To help people break out of survival mode and take command of their future through intelligent systems and disciplined execution.
@@ -47,7 +47,7 @@ export const missionStatementPost = {
     <p>Let's examine each part of our mission statement and what it means in practice:</p>
 
     <h4>"To Help People"</h4>
-    <p>This isn't about us. It's about you. Life Command OS exists to serve people who are ready to make the shift. We're not building a product for ourselves – we're building tools for anyone who's tired of just surviving.</p>
+    <p>This isn't about us. It's about you. Command exists to serve people who are ready to make the shift. We're not building a product for ourselves – we're building tools for anyone who's tired of just surviving.</p>
 
     <p>This means:</p>
     <ul>
@@ -92,7 +92,7 @@ export const missionStatementPost = {
       <li><strong>Reliable:</strong> They work consistently, not just when you remember to use them</li>
     </ul>
 
-    <p>Life Command OS is built on intelligent systems. The BattleStation tracks your finances automatically. The budgeting tools help you plan proactively. The reporting gives you clarity on what's actually happening. It's all connected, all working together to give you command of your financial life.</p>
+    <p>Command is built on intelligent systems. The BattleStation tracks your finances automatically. The budgeting tools help you plan proactively. The reporting gives you clarity on what's actually happening. It's all connected, all working together to give you command of your financial life.</p>
 
     <h4>"And Disciplined Execution"</h4>
     <p>The best systems in the world don't matter if you don't use them. Disciplined execution is what turns plans into reality.</p>
@@ -106,7 +106,7 @@ export const missionStatementPost = {
       <li><strong>Focus:</strong> Prioritizing what matters and saying no to what doesn't</li>
     </ul>
 
-    <p>As someone who's navigated the transition from military service to entrepreneurship, I know that discipline isn't about perfection – it's about showing up consistently, even when it's hard. Life Command OS is designed to support disciplined execution, not replace it.</p>
+    <p>As someone who's navigated the transition from military service to entrepreneurship, I know that discipline isn't about perfection – it's about showing up consistently, even when it's hard. Command is designed to support disciplined execution, not replace it.</p>
 
     <h3>Why This Mission Matters</h3>
     <p>In a world full of productivity apps, financial tools, and life coaches, why does this mission statement matter?</p>
@@ -141,7 +141,7 @@ export const missionStatementPost = {
     </ul>
 
     <h3>How the Mission Guides What We Build</h3>
-    <p>Every feature, every tool, every piece of content at Life Command OS is evaluated against the mission statement. If it doesn't help people break out of survival mode and take command of their future, we don't build it.</p>
+    <p>Every feature, every tool, every piece of content at Command is evaluated against the mission statement. If it doesn't help people break out of survival mode and take command of their future, we don't build it.</p>
 
     <h4>Features That Serve the Mission</h4>
     <ul>
@@ -165,13 +165,13 @@ export const missionStatementPost = {
     <p>Our mission statement is supported by three core values:</p>
 
     <h4>Discipline</h4>
-    <p>Discipline isn't about being perfect. It's about showing up consistently, even when it's hard. It's about following through on what you decide, even when you don't feel like it. Life Command OS is built to support discipline, not replace it.</p>
+    <p>Discipline isn't about being perfect. It's about showing up consistently, even when it's hard. It's about following through on what you decide, even when you don't feel like it. Command is built to support discipline, not replace it.</p>
 
     <h4>Precision</h4>
-    <p>Precision means getting the details right. It means building systems that work reliably, not just sometimes. It means clarity over complexity, accuracy over approximation. Every feature at Life Command OS is designed with precision in mind.</p>
+    <p>Precision means getting the details right. It means building systems that work reliably, not just sometimes. It means clarity over complexity, accuracy over approximation. Every feature at Command is designed with precision in mind.</p>
 
     <h4>Resilience</h4>
-    <p>Resilience is about getting back up when you fall down. It's about adapting when circumstances change. It's about building systems that work even when you're not at your best. Life Command OS is designed to be resilient – for you and for itself.</p>
+    <p>Resilience is about getting back up when you fall down. It's about adapting when circumstances change. It's about building systems that work even when you're not at your best. Command is designed to be resilient – for you and for itself.</p>
 
     <h3>What This Means for You</h3>
     <p>If you're reading this, you're probably in survival mode. Or you've been there. Or you know someone who is.</p>
@@ -179,15 +179,15 @@ export const missionStatementPost = {
     <p>Here's what our mission statement means for you:</p>
 
     <h4>If You're in Survival Mode</h4>
-    <p>You're not alone. And you're not stuck. Breaking out of survival mode is possible, and it starts with the right systems. Life Command OS is built specifically for people who are ready to make that shift.</p>
+    <p>You're not alone. And you're not stuck. Breaking out of survival mode is possible, and it starts with the right systems. Command is built specifically for people who are ready to make that shift.</p>
 
     <p>Start with the BattleStation. Get clarity on where you are. Then use the budgeting tools to plan where you want to go. Build systems. Execute with discipline. Take command.</p>
 
     <h4>If You're Already in Command Mode</h4>
-    <p>You know what works. You've built systems. You execute with discipline. Life Command OS can help you optimize what you're already doing, automate what you're tracking manually, and give you even more clarity on your progress.</p>
+    <p>You know what works. You've built systems. You execute with discipline. Command can help you optimize what you're already doing, automate what you're tracking manually, and give you even more clarity on your progress.</p>
 
     <h4>If You're Helping Others</h4>
-    <p>Maybe you're a coach, a mentor, or someone who helps others break out of survival mode. Life Command OS can be a tool in your toolkit – a way to give people the systems they need to take command of their future.</p>
+    <p>Maybe you're a coach, a mentor, or someone who helps others break out of survival mode. Command can be a tool in your toolkit – a way to give people the systems they need to take command of their future.</p>
 
     <h3>The Long-Term Vision</h3>
     <p>Our mission statement isn't just about what we're building today. It's about the future we're working toward:</p>
@@ -203,18 +203,12 @@ export const missionStatementPost = {
 
     <p>Every feature we build, every tool we create, every piece of content we write – it all serves this mission. Because we believe that survival mode isn't sustainable. And we believe that command mode is possible.</p>
 
-    <p>If you're ready to break out of survival mode and take command of your future, <a href="/battlestation" class="text-blue-400 hover:text-blue-300">start with the BattleStation</a>. If you want to understand more about the principles behind Life Command OS, <a href="/blog" class="text-blue-400 hover:text-blue-300">explore the blog</a>.</p>
+    <p>If you're ready to break out of survival mode and take command of your future, <a href="/battlestation" class="text-blue-400 hover:text-blue-300">start with the BattleStation</a>. If you want to understand more about the principles behind Command, <a href="/blog" class="text-blue-400 hover:text-blue-300">explore the blog</a>.</p>
 
     <p>The mission is clear. The tools are ready. The question is: are you ready to take command?</p>
   `,
   author: 'Steve Defendre',
   date: '2025-12-02',
   readTime: '10 min read',
-  tags: [
-    'Mission Statement',
-    'Life Command OS',
-    'Survival Mode',
-    'Personal Development',
-    'Philosophy',
-  ],
+  tags: ['Mission Statement', 'Command', 'Survival Mode', 'Personal Development', 'Philosophy'],
 }

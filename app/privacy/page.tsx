@@ -10,8 +10,8 @@ export default function PrivacyPolicy() {
         <div className="prose dark:prose-invert max-w-none space-y-4">
           <p>Last updated: {new Date().toLocaleDateString()}</p>
           <p>
-            Welcome to Life Command OS. This Privacy Policy explains how we collect, use, disclose,
-            and safeguard your information when you visit our website.
+            Welcome to Command. This Privacy Policy explains how we collect, use, disclose, and
+            safeguard your information when you visit our website.
           </p>
 
           <h2 className="text-xl font-semibold mt-8 mb-4">1. Information We Collect</h2>
