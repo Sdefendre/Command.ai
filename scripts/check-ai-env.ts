@@ -11,10 +11,10 @@ if (fs.existsSync(envPath)) {
   console.log('No .env.local file found. Checking process environment...')
 }
 
-const requiredVars = ['OPENAI_API_KEY', 'NEXT_PUBLIC_SUPABASE_URL', 'NEXT_PUBLIC_SUPABASE_ANON_KEY']
+const requiredVars = ['XAI_API_KEY', 'NEXT_PUBLIC_SUPABASE_URL', 'NEXT_PUBLIC_SUPABASE_ANON_KEY']
 
 const optionalVars = [
-  'XAI_API_KEY', // For Grok models
+  'OPENAI_API_KEY', // For voice agent or other OpenAI features
   'SUPABASE_SERVICE_ROLE_KEY', // For server-side rate limiting/admin
 ]
 
@@ -25,11 +25,6 @@ let missingRequired = false
 requiredVars.forEach((varName) => {
   if (process.env[varName]) {
     console.log(`✅ ${varName} is set`)
-    if (varName === 'OPENAI_API_KEY' && !process.env[varName]?.startsWith('sk-')) {
-      console.warn(
-        `   ⚠️  ${varName} does not look like a standard OpenAI key (should start with sk-)`
-      )
-    }
   } else {
     console.error(`❌ ${varName} is MISSING`)
     missingRequired = true
@@ -49,8 +44,8 @@ optionalVars.forEach((varName) => {
 console.log('\n----------------------------------------------')
 
 if (missingRequired) {
-  console.error('\n❌ Configuration incomplete. The AI Command Chat will NOT work.')
-  console.log('Please add the missing variables to your .env.local file.')
+  console.error('\n❌ Configuration incomplete. The Command chat will NOT work.')
+  console.log('Please add the missing variables (Grok key) to your .env.local file.')
   process.exit(1)
 } else {
   console.log('\n✅ Configuration looks good! The AI Command Chat should work.')
