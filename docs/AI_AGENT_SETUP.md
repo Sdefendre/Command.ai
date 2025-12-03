@@ -1,6 +1,6 @@
 # AI Agent & Command Interface Setup Guide
 
-This guide will help you set up the AI Agent chat features for Life Command OS with full functionality, including the legacy AI Agent page and the new Command Interface.
+This guide will help you set up the AI Agent chat features for Command with full functionality, including the legacy AI Agent page and the new Command Interface.
 
 ## Prerequisites
 

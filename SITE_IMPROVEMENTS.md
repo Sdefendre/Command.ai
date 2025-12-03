@@ -1,6 +1,6 @@
 # Site Improvements Summary
 
-This document outlines all the improvements made to enhance the Life Command OS website.
+This document outlines all the improvements made to enhance the Command website.
 
 ## ✅ Completed Improvements
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-The feedback system allows users to submit feedback, bug reports, feature requests, and content feedback from anywhere on the Life Command OS website.
+The feedback system allows users to submit feedback, bug reports, feature requests, and content feedback from anywhere on the Command website.
 
 ## Features
 
@@ -97,7 +97,6 @@ Main feedback dialog component.
 
 ```tsx
 import { FeedbackDialog } from '@/components/FeedbackDialog'
-
 ;<FeedbackDialog path="/optional/path" trigger={<CustomButton />} />
 ```
 
@@ -107,7 +106,6 @@ Floating feedback button (already included in root layout).
 
 ```tsx
 import { FeedbackFloatingButton } from '@/components/FeedbackFloatingButton'
-
 ;<FeedbackFloatingButton path="/current/page" />
 ```
 

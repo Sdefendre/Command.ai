@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document summarizes the complete database setup for Life Command OS, including the feedback system, AI agent infrastructure, and course management.
+This document summarizes the complete database setup for Command, including the feedback system, AI agent infrastructure, and course management.
 
 ## Supabase Project
 

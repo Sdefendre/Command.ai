@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation'
 
 export const metadata = {
-  title: 'Product Roadmap - Life Command OS',
-  description: 'Future plans and feature roadmap for Life Command OS.',
+  title: 'Product Roadmap - Command',
+  description: 'Future plans and feature roadmap for Command.',
 }
 
 export default function RoadmapPage() {

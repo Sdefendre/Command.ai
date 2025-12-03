@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation'
 
 export const metadata = {
-  title: 'Changelog - Life Command OS',
-  description: 'All notable changes and updates to Life Command OS.',
+  title: 'Changelog - Command',
+  description: 'All notable changes and updates to Command.',
 }
 
 export default function ChangelogPage() {

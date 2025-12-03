@@ -2,7 +2,7 @@
 
 # Deploy script for updating blog posts
 
-echo "🚀 Life Command OS Blog Update Script"
+echo "🚀 Command Blog Update Script"
 echo "========================================="
 
 # Navigate to project directory

@@ -274,7 +274,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Mobile menu styling enhanced with glassmorphism consistency
 - Newsletter subscription: improved accessibility (aria-live/roles) and reduced-motion friendly entrance animation
 - Floating background: respect prefers-reduced-motion and reduce element count on small screens
-- Site transformed from consultancy to veteran-focused benefits platform (Life Command OS)
+- Site transformed from consultancy to veteran-focused benefits platform (Command)
 - Homepage rebranded to focus on veteran benefits navigation and education
 - Navigation updated to include AI Agent and Course pages
 - Site theme and branding updated to reflect veteran-focused mission

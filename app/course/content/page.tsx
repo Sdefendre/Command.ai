@@ -11,7 +11,7 @@ import { Lock } from 'lucide-react'
 import Link from 'next/link'
 
 export const metadata = {
-  title: 'Course Content - Life Command OS',
+  title: 'Course Content - Command',
   description: 'Access your premium course content',
 }
 

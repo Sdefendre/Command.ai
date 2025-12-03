@@ -2,7 +2,7 @@
  * Valor AI Features Scraper
  *
  * This script scrapes features from tryvalor.ai and converts them
- * into roadmap items for Life Command OS.
+ * into roadmap items for Command.
  *
  * Usage: npm run scrape-valor-features
  */

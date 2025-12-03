@@ -9,7 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { Medal, MessageSquare, Shield } from 'lucide-react'
 
 export const metadata = {
-  title: 'Command - Life Command OS',
+  title: 'Command - Command',
   description: 'Chat with Command about VA benefits, disability claims, and transition resources.',
 }
 
