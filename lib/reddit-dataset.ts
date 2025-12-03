@@ -29,6 +29,7 @@ export async function searchRedditDataset(
   limit: number = 5
 ): Promise<RedditQAResult[]> {
   const supabase = getSupabaseClient()
+  if (!supabase) return []
 
   try {
     // Use the full-text search function we created in the migration
@@ -56,6 +57,7 @@ export async function searchRedditDataset(
  */
 async function fallbackSearch(query: string, limit: number): Promise<RedditQAResult[]> {
   const supabase = getSupabaseClient()
+  if (!supabase) return []
 
   try {
     // Simple search using ILIKE (case-insensitive pattern matching)
@@ -90,6 +92,7 @@ async function fallbackSearch(query: string, limit: number): Promise<RedditQARes
  */
 export async function getQAByTags(tags: string[], limit: number = 5): Promise<RedditQAResult[]> {
   const supabase = getSupabaseClient()
+  if (!supabase) return []
 
   try {
     const { data, error } = await supabase
@@ -147,6 +150,14 @@ export async function getDatasetStats(): Promise<{
   topTags: Array<{ tag: string; count: number }>
 }> {
   const supabase = getSupabaseClient()
+  if (!supabase) {
+    return {
+      totalPosts: 0,
+      totalAnswers: 0,
+      averageUpvotes: 0,
+      topTags: [],
+    }
+  }
 
   try {
     // Get total count

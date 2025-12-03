@@ -7,7 +7,14 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 // Server-side client (uses service role key if available)
 const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
 
+const hasSupabaseConfig = !!supabaseUrl && !!(supabaseAnonKey || supabaseServiceKey)
+export const isSupabaseConfigured = hasSupabaseConfig
+
 export function getSupabaseClient() {
+  if (!hasSupabaseConfig) {
+    console.warn('Supabase environment variables are not set. Falling back to no-op client.')
+    return null
+  }
   // If we have a service role key (server-side), use it for admin operations
   if (supabaseServiceKey && typeof window === 'undefined') {
     return createClient(supabaseUrl, supabaseServiceKey, {
@@ -25,6 +32,7 @@ export function getSupabaseClient() {
 // Helper functions for course access
 export async function checkCourseAccess(userId: string, courseId: string = '0-100-rating-course') {
   const supabase = getSupabaseClient()
+  if (!supabase) return false
   const { data, error } = await supabase
     .from('course_access')
     .select('*')
@@ -55,6 +63,7 @@ export async function saveConversation(
   if (!userId) return
 
   const supabase = getSupabaseClient()
+  if (!supabase) return
   const { error } = await supabase.from('ai_agent_conversations').insert({
     user_id: userId,
     conversation_id: conversationId,
@@ -74,12 +83,20 @@ export async function checkRateLimit(userId: string | undefined): Promise<{
   remaining: number
   limit: number
 }> {
+  if (!hasSupabaseConfig) {
+    // If Supabase isn't configured, allow chats without rate limiting
+    return { allowed: true, remaining: Infinity, limit: Infinity }
+  }
+
   if (!userId) {
     // For anonymous users, apply stricter limits
     return { allowed: true, remaining: 5, limit: 5 }
   }
 
   const supabase = getSupabaseClient()
+  if (!supabase) {
+    return { allowed: true, remaining: Infinity, limit: Infinity }
+  }
   const today = new Date().toISOString().split('T')[0]
 
   // Get or create rate limit record

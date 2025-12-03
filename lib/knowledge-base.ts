@@ -33,6 +33,7 @@ export async function searchKnowledgeBase(
   limit: number = 5
 ): Promise<SearchResult[]> {
   const supabase = getSupabaseClient()
+  if (!supabase) return []
   const lowerQuery = query.toLowerCase()
 
   // Split query into individual words for keyword matching
@@ -166,6 +167,7 @@ export async function getKnowledgeBaseByCategory(
   limit: number = 10
 ): Promise<KnowledgeBaseArticle[]> {
   const supabase = getSupabaseClient()
+  if (!supabase) return []
 
   const { data, error } = await supabase
     .from('knowledge_base')
@@ -188,6 +190,7 @@ export async function getKnowledgeBaseByCategory(
  */
 export async function getKnowledgeBaseArticle(id: string): Promise<KnowledgeBaseArticle | null> {
   const supabase = getSupabaseClient()
+  if (!supabase) return null
 
   const { data, error } = await supabase
     .from('knowledge_base')
