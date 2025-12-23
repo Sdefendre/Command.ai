@@ -2,66 +2,74 @@
 
 This document lists all unfinished features found in the Command codebase, organized by priority and status.
 
-## ✅ Completed - User Authentication System
+---
 
-### 1. User Authentication System
+## ✅ Recently Completed (December 2024)
 
-**Status:** ✅ Fully implemented  
+### Voice Agent Rate Limiting
+
+**Status:** ✅ Fully implemented
 **Completed:** December 2024
 
 **What was implemented:**
 
-- [x] Supabase Auth integration (`lib/auth/context.tsx`)
-- [x] Login page (`app/login/page.tsx`)
-- [x] Signup page (`app/signup/page.tsx`)
-- [x] Auth callback route (`app/auth/callback/route.ts`)
-- [x] AuthProvider wrapping entire app (`app/layout.tsx`)
-- [x] Protected routes middleware (`middleware.ts`)
-- [x] UserMenu component with sign out (`components/auth/UserMenu.tsx`)
-- [x] Forgot password flow (`app/forgot-password/page.tsx`)
-- [x] Reset password flow (`app/reset-password/page.tsx`)
-- [x] Session management and refresh
+- [x] Rate limiting check in voice agent session endpoint
+- [x] Uses same `checkRateLimit()` function as AI agent
+- [x] Returns 429 with proper error message when limit exceeded
+- [x] Rate limit headers in response (X-Rate-Limit-Remaining, X-Rate-Limit-Limit)
 
 ---
 
-## ✅ Completed - Chat History UI
+### Admin Dashboard
 
-### 2. Chat History UI
-
-**Status:** ✅ Fully implemented  
+**Status:** ✅ Fully implemented
 **Completed:** December 2024
 
 **What was implemented:**
 
-- [x] Backend API for saving/loading conversations (`app/api/ai-agent/conversations`)
-- [x] Frontend `useChatHistory` hook
-- [x] Sidebar UI with conversation list (`ChatSidebar.tsx`)
-- [x] Conversation switching logic
-- [x] Deletion of conversations
-- [x] Cleaned up duplicate/legacy code (`CommandChat.tsx` removed)
+- [x] Admin layout with sidebar navigation (`app/admin/layout.tsx`)
+- [x] Dashboard overview with stats cards (`app/admin/page.tsx`)
+- [x] Feedback management page (`app/admin/feedback/page.tsx`)
+- [x] User management page (`app/admin/users/page.tsx`)
+- [x] Subscription management page (`app/admin/subscriptions/page.tsx`)
+- [x] Admin authentication check (`lib/admin-auth.ts`)
+- [x] Reusable admin components (`components/admin/`)
 
 ---
 
-## ✅ Completed - Course Progress Loading
+### Course Content System
 
-### 3. Course Progress Loading
-
-**Status:** ✅ Fully implemented  
+**Status:** ✅ Fully implemented
 **Completed:** December 2024
 
 **What was implemented:**
 
-- [x] Added `isLoading` state to `CoursePlayer`
-- [x] Implemented `fetchProgress` effect on component mount
-- [x] Integrated with `GET /api/course/progress` endpoint
-- [x] Added loading spinner UI
-- [x] Verified progress persistence (saving and loading)
+- [x] Comprehensive course content in `constants/course.tsx`
+- [x] Course player with module/lesson navigation
+- [x] Course sidebar component (`components/course/CourseSidebar.tsx`)
+- [x] Lesson content renderer (`components/course/LessonContent.tsx`)
+- [x] Progress tracking integration
+- [x] 6 comprehensive modules with educational content
 
 ---
 
-## ✅ Completed - Course Content Page Authentication
+### Feedback System Enhancements
 
-### 4. Course Content Page Authentication
+**Status:** ✅ Fully implemented
+**Completed:** December 2024
+
+**What was implemented:**
+
+- [x] Email notifications for new feedback (`lib/feedback-email.ts`)
+- [x] Admin response endpoint (`app/api/feedback/respond/route.ts`)
+- [x] Feedback status tracking (new, in-progress, resolved)
+- [x] GET endpoint for retrieving feedback with filters
+- [x] PATCH endpoint for updating feedback status
+- [x] Database types for feedback table
+
+---
+
+### Course Content Page Authentication
 
 **Status:** ✅ Fully implemented
 **Completed:** December 2024
@@ -69,158 +77,318 @@ This document lists all unfinished features found in the Command codebase, organ
 **What was implemented:**
 
 - [x] Get userId from auth session using Supabase server client
-- [x] Remove placeholder redirect logic
 - [x] Implement proper auth check with redirect to login
 - [x] Course access verification using `checkCourseAccess()`
 - [x] Proper null handling for Supabase client
 
 ---
 
-## 🟠 Medium Priority - Stubs/Placeholders
+## ✅ Previously Completed
 
-### 5. Rate Limiting Logic Stub
+### User Authentication System
 
-**Status:** Stub function exists  
-**Priority:** Medium  
-**Impact:** Function exists but always returns false
+**Status:** ✅ Fully implemented
+**Completed:** December 2024
+
+**What was implemented:**
+
+- [x] Supabase Auth integration
+- [x] Login/Signup pages
+- [x] Auth callback route
+- [x] Protected routes middleware
+- [x] Forgot/Reset password flows
+- [x] Session management
+
+---
+
+### Chat History UI
+
+**Status:** ✅ Fully implemented
+**Completed:** December 2024
+
+**What was implemented:**
+
+- [x] Backend API for saving/loading conversations
+- [x] Sidebar UI with conversation list
+- [x] Conversation switching and deletion
+
+---
+
+### Course Progress Loading
+
+**Status:** ✅ Fully implemented
+**Completed:** December 2024
+
+**What was implemented:**
+
+- [x] Loading state in CoursePlayer
+- [x] Progress fetching on mount
+- [x] Progress persistence
+
+---
+
+## 🔴 High Priority - Needs Implementation
+
+### 1. Bank Account Integration (Plaid)
+
+**Status:** Not started
+**Priority:** High
+**Impact:** Users must manually import CSV files
+
+**What needs to be done:**
+
+- [ ] Plaid SDK integration for bank connections
+- [ ] Link bank account flow
+- [ ] Automatic transaction syncing
+- [ ] Secure credential storage
+- [ ] Multi-account support
+
+**Estimated Effort:** Large (8-12 hours)
+
+---
+
+### 2. Payment System Completion
+
+**Status:** Partial (Stripe integrated, needs testing)
+**Priority:** High
+**Impact:** Revenue generation
+
+**What needs to be done:**
+
+- [ ] Complete Stripe webhook handling for all events
+- [ ] Subscription management portal
+- [ ] Invoice generation
+- [ ] Payment history UI
+- [ ] Cancellation flow testing
+
+**Estimated Effort:** Medium (4-6 hours)
+
+---
+
+### 3. VA API Integration
+
+**Status:** Not started
+**Priority:** High (Phase 5 in roadmap)
+**Impact:** Core feature for veterans
+
+**What needs to be done:**
+
+- [ ] VA Claims API integration
+- [ ] Real-time claims status fetching
+- [ ] DD-214 data extraction
+- [ ] Award letters sync
+- [ ] OAuth flow with VA.gov
+
+**Estimated Effort:** Large (12-20 hours)
+
+---
+
+## 🟠 Medium Priority
+
+### 4. Goal Setting & Financial Planning Tools
+
+**Status:** Not started
+**Priority:** Medium (Phase 2 in roadmap)
+**Impact:** Core financial planning features
+
+**What needs to be done:**
+
+- [ ] Goal creation UI
+- [ ] Progress tracking visualization
+- [ ] Milestone notifications
+- [ ] Financial scenario modeling
+- [ ] Bill forecasting system
+
+**Estimated Effort:** Large (10-15 hours)
+
+---
+
+### 5. Mobile App Development
+
+**Status:** Not started
+**Priority:** Medium (Phase 3 in roadmap)
+**Impact:** Mobile user experience
+
+**What needs to be done:**
+
+- [ ] React Native or Expo setup
+- [ ] Core screens implementation
+- [ ] Push notifications
+- [ ] Offline support
+- [ ] App store submissions
+
+**Estimated Effort:** Very Large (40+ hours)
+
+---
+
+### 6. Advanced Notification System
+
+**Status:** Basic email implemented
+**Priority:** Medium (Phase 5 in roadmap)
+**Impact:** User engagement
+
+**What needs to be done:**
+
+- [ ] Push notification service
+- [ ] SMS integration (Twilio)
+- [ ] In-app notification center
+- [ ] Notification preferences UI
+- [ ] Smart scheduling/quiet hours
+
+**Estimated Effort:** Medium (6-8 hours)
+
+---
+
+## 🔵 Low Priority / Future
+
+### 7. Investment Portfolio Tracking
+
+**Status:** Not started
+**Priority:** Low (Phase 4 in roadmap)
+**Impact:** Advanced financial tracking
+
+**What needs to be done:**
+
+- [ ] Brokerage API integrations
+- [ ] Portfolio performance charts
+- [ ] Tax-loss harvesting suggestions
+- [ ] Retirement account tracking
+
+**Estimated Effort:** Large (15-20 hours)
+
+---
+
+### 8. Multi-Language Support
+
+**Status:** Not started
+**Priority:** Low (Phase 5 in roadmap)
+**Impact:** Accessibility for non-English veterans
+
+**What needs to be done:**
+
+- [ ] i18n framework setup
+- [ ] Spanish translations
+- [ ] Vietnamese translations
+- [ ] Korean translations
+- [ ] Language switcher UI
+
+**Estimated Effort:** Large (10-15 hours)
+
+---
+
+### 9. Certificate Generation for Courses
+
+**Status:** Not started
+**Priority:** Low
+**Impact:** Course completion recognition
+
+**What needs to be done:**
+
+- [ ] PDF certificate generation
+- [ ] Unique certificate IDs
+- [ ] Verification system
+- [ ] Share functionality
+
+**Estimated Effort:** Small (3-4 hours)
+
+---
+
+## 🧹 Technical Debt / Cleanup
+
+### 10. Rate Limiting Stub Removal
+
+**Status:** Stub exists in code
+**Priority:** Low
+**Impact:** Code cleanliness
 
 **Files:**
 
-- `lib/ai-agent.ts` (line 89-95): `shouldRateLimit()` function is a stub
-
-**Note:** Actual rate limiting IS implemented in `app/api/ai-agent/route.ts` using `checkRateLimit()` from `lib/supabase.ts`. This stub function appears unused.
+- `lib/ai-agent.ts` (line 89-95): Unused `shouldRateLimit()` stub function
 
 **What needs to be done:**
 
-- [ ] Remove stub function if unused, OR
-- [ ] Implement proper logic if it's needed elsewhere
+- [ ] Remove unused stub function
+- [ ] Audit for other unused code
 
-**Estimated Time:** 30 minutes
+**Estimated Effort:** Minimal (15 minutes)
 
 ---
 
-### 6. Voice Agent Rate Limiting
+### 11. Documentation Updates
 
-**Status:** TODO comment  
-**Priority:** Medium  
-**Impact:** Voice agent has no rate limiting
-
-**Files:**
-
-- `app/api/voice-agent/session/route.ts` (line 23-33): TODO comment for rate limiting
+**Status:** Needs refresh
+**Priority:** Low
+**Impact:** Developer experience
 
 **What needs to be done:**
 
-- [ ] Add rate limiting check before creating session
-- [ ] Use same rate limiting logic as AI agent
-- [ ] Return 429 error if limit exceeded
+- [ ] Update API documentation
+- [ ] Add JSDoc comments to key functions
+- [ ] Create admin dashboard usage guide
+- [ ] Update deployment documentation
 
-**Estimated Time:** 1 hour
-
----
-
-## 🔵 Low Priority - Planned Features
-
-### 7. Admin Dashboard
-
-**Status:** Not started  
-**Priority:** Low (Priority 3 in ROADMAP.md)  
-**Impact:** No way to manage feedback, users, or view analytics
-
-**What needs to be done:**
-
-- [ ] Create admin dashboard layout (`app/admin/layout.tsx`)
-- [ ] Create dashboard overview (`app/admin/page.tsx`)
-- [ ] Feedback management page (`app/admin/feedback/page.tsx`)
-- [ ] User management page (`app/admin/users/page.tsx`)
-- [ ] Subscription management page (`app/admin/subscriptions/page.tsx`)
-- [ ] Create admin components (`components/admin/FeedbackTable.tsx`, etc.)
-- [ ] Admin authentication check
-
-**Estimated Time:** 6-8 hours
-
----
-
-### 8. Course Content System
-
-**Status:** Pages exist but need content  
-**Priority:** Low (Priority 4 in ROADMAP.md)  
-**Impact:** Users can purchase but no content to view
-
-**What needs to be done:**
-
-- [ ] Build course content viewer
-- [ ] Add progress tracking (partially done)
-- [ ] Create course curriculum structure
-- [ ] Add video/article content components
-- [ ] Implement completion tracking
-- [ ] Certificate generation (future)
-
-**Estimated Time:** 8-10 hours
-
----
-
-### 9. Feedback System Enhancements
-
-**Status:** Basic functionality complete  
-**Priority:** Low (Priority 5 in ROADMAP.md)  
-**Impact:** Missing advanced features
-
-**What needs to be done:**
-
-- [ ] Email notifications for new feedback
-- [ ] Feedback analytics dashboard
-- [ ] Auto-tagging based on content
-- [ ] Response functionality (reply to feedback)
-- [ ] Feedback status tracking (new, in-progress, resolved)
-
-**Estimated Time:** 3-4 hours
+**Estimated Effort:** Small (2-3 hours)
 
 ---
 
 ## 📋 Summary by Status
 
-### ✅ Completed
+### ✅ Completed (December 2024)
 
-1. User Authentication System (Dec 2024)
-2. Course Progress Loading (Dec 2024)
-3. Chat History UI (Dec 2024)
-4. Course Content Page Authentication (Dec 2024)
+1. User Authentication System
+2. Chat History UI
+3. Course Progress Loading
+4. Course Content Page Authentication
+5. **Voice Agent Rate Limiting** (NEW)
+6. **Admin Dashboard** (NEW)
+7. **Course Content System** (NEW)
+8. **Feedback System Enhancements** (NEW)
 
-### Not Started (0% complete)
+### 🔴 High Priority (Not Started)
 
-1. Admin Dashboard
-2. Course Content System (content creation)
-3. Feedback System Enhancements
+1. Bank Account Integration (Plaid)
+2. Payment System Completion
+3. VA API Integration
 
-### Stubs/Placeholders (needs implementation)
+### 🟠 Medium Priority
 
-1. Rate Limiting Logic Stub (`lib/ai-agent.ts`)
-2. Voice Agent Rate Limiting
+1. Goal Setting & Financial Planning Tools
+2. Mobile App Development
+3. Advanced Notification System
+
+### 🔵 Low Priority / Future
+
+1. Investment Portfolio Tracking
+2. Multi-Language Support
+3. Certificate Generation
+
+### 🧹 Technical Debt
+
+1. Rate Limiting Stub Removal
+2. Documentation Updates
 
 ---
 
 ## 🎯 Recommended Implementation Order
 
-1. ~~**User Authentication** (4-6 hours)~~ ✅ DONE
-2. ~~**Course Progress Loading** (1-2 hours)~~ ✅ DONE
-3. ~~**Chat History UI** (3-4 hours)~~ ✅ DONE
-4. ~~**Course Content Page Authentication** (1 hour)~~ ✅ DONE
-5. **Voice Agent Rate Limiting** (1 hour) - Security/abuse prevention
-6. **Admin Dashboard** (6-8 hours) - Management tools
-7. **Course Content System** (8-10 hours) - Content delivery
-8. **Feedback Enhancements** (3-4 hours) - Polish
+1. ~~User Authentication~~ ✅ DONE
+2. ~~Chat History UI~~ ✅ DONE
+3. ~~Course Progress Loading~~ ✅ DONE
+4. ~~Voice Agent Rate Limiting~~ ✅ DONE
+5. ~~Admin Dashboard~~ ✅ DONE
+6. ~~Course Content System~~ ✅ DONE
+7. ~~Feedback Enhancements~~ ✅ DONE
+8. **Payment System Completion** - Enable revenue
+9. **Bank Account Integration** - Core BattleStation feature
+10. **VA API Integration** - Core veteran feature
+11. **Goal Setting Tools** - Financial planning
+12. **Advanced Notifications** - User engagement
+13. **Mobile App** - Expand reach
+14. **Investment Tracking** - Advanced features
+15. **Multi-Language** - Accessibility
 
-**Total Estimated Time:** 16-25 hours (auth, progress, history, and course auth complete)
+**Total Remaining Effort:** ~100-150 hours
 
 ---
 
-## 🔍 How This Was Found
-
-This analysis was performed by:
-
-1. Searching for TODO/FIXME comments
-2. Searching for "placeholder", "coming soon", "not implemented"
-3. Reviewing ROADMAP.md and CHANGELOG.md
-4. Examining API routes and components for incomplete implementations
-5. Checking for stub functions and placeholder values
+_Last updated: December 2024_

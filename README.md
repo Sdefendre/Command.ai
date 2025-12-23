@@ -311,6 +311,39 @@ The `/command` page provides an advanced AI-powered chat interface for VA benefi
 
 Access the Command interface via the floating chat button or directly at `/command`.
 
+## 🎓 Course System
+
+The `/course` page provides comprehensive VA benefits education with progress tracking:
+
+- **6 Comprehensive Modules**: DD-214 Understanding, Service-Connected Conditions, C&P Exam Mastery, Claim Filing Strategy, Rating Maximization, and Appeals
+- **Progress Tracking**: Per-lesson completion tracking with visual progress indicators
+- **Course Sidebar**: Module and lesson navigation with completion status
+- **Authenticated Access**: Secure course access with Supabase authentication
+- **Stripe Integration**: Payment processing for course enrollment
+
+### Course Routes
+
+- `/course` - Course overview and enrollment page
+- `/course/content` - Full course viewer with lesson navigation
+
+## 🛠 Admin Dashboard
+
+The `/admin` section provides comprehensive platform management tools:
+
+- **Dashboard Overview**: Stats cards showing total users, feedback count, active subscriptions, and today's conversations
+- **Feedback Management**: Filter by status (new, in-progress, resolved), update status inline, respond to users with email notifications
+- **User Management**: Search users by ID, view subscription tier and status, track conversation counts and activity
+- **Subscription Management**: Filter by tier (free, premium, lifetime) and status, view Stripe integration data
+
+### Admin Routes
+
+- `/admin` - Dashboard overview with key metrics
+- `/admin/feedback` - Feedback management with filtering
+- `/admin/users` - User management with search
+- `/admin/subscriptions` - Subscription management
+
+**Note**: Admin access requires email whitelist configuration in `lib/admin-auth.ts`.
+
 ## 🔧 Performance Optimizations
 
 ### Client-Only Components

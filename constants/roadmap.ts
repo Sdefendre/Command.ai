@@ -13,6 +13,68 @@ export interface RoadmapItem {
 }
 
 export const ROADMAP_ITEMS: RoadmapItem[] = [
+  // Recently Completed (December 2024)
+  {
+    id: 'admin-dashboard',
+    title: 'Admin Dashboard',
+    description:
+      'Complete admin dashboard for managing users, subscriptions, and feedback with filtering, status tracking, and real-time stats.',
+    priority: 'high',
+    complexity: 'medium',
+    status: 'completed',
+    phase: 'Admin & Management',
+  },
+  {
+    id: 'course-content-system',
+    title: 'Course Content System',
+    description:
+      'Comprehensive course viewer with 6 modules covering VA benefits, modular curriculum structure, lesson navigation, and progress tracking.',
+    priority: 'high',
+    complexity: 'medium',
+    status: 'completed',
+    phase: 'Education Platform',
+  },
+  {
+    id: 'feedback-system-enhancements',
+    title: 'Feedback System Enhancements',
+    description:
+      'Enhanced feedback system with email notifications, status tracking (new/in-progress/resolved), admin response functionality, and user notifications.',
+    priority: 'high',
+    complexity: 'medium',
+    status: 'completed',
+    phase: 'Admin & Management',
+  },
+  {
+    id: 'voice-agent-rate-limiting',
+    title: 'Voice Agent Rate Limiting',
+    description:
+      'Rate limiting for voice agent sessions using the same checkRateLimit() function as AI agent, with proper 429 responses and rate limit headers.',
+    priority: 'high',
+    complexity: 'low',
+    status: 'completed',
+    phase: 'AI-Powered Features',
+  },
+  {
+    id: 'course-auth-system',
+    title: 'Course Authentication System',
+    description:
+      'Course access verification with Supabase auth, proper redirect to login for unauthenticated users, and course access checking.',
+    priority: 'high',
+    complexity: 'medium',
+    status: 'completed',
+    phase: 'Education Platform',
+  },
+  {
+    id: 'chat-history-ui',
+    title: 'Chat History UI',
+    description:
+      'Sidebar UI with conversation list, conversation switching and deletion, and backend API for saving/loading conversations.',
+    priority: 'high',
+    complexity: 'medium',
+    status: 'completed',
+    phase: 'AI-Powered Features',
+  },
+
   // Phase 1: Financial Clarity Foundation
   {
     id: 'financial-dashboard',
@@ -71,7 +133,7 @@ export const ROADMAP_ITEMS: RoadmapItem[] = [
       'Secure user accounts with encrypted financial data storage, ensuring your information stays private and protected.',
     priority: 'high',
     complexity: 'medium',
-    status: 'planned',
+    status: 'completed',
     phase: 'Phase 1: Financial Clarity Foundation',
   },
   {

@@ -5,6 +5,55 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2024-12-23
+
+### Added
+
+- **Admin Dashboard System**: Complete admin dashboard for managing the platform
+  - Admin layout with sidebar navigation (`app/admin/layout.tsx`)
+  - Dashboard overview with stats cards (total users, feedback, subscriptions)
+  - Feedback management page with status filters and inline updates
+  - User management page with search and activity tracking
+  - Subscription management page with tier/status filtering
+  - Admin authentication with email whitelist (`lib/admin-auth.ts`)
+  - Reusable admin components (`components/admin/`)
+
+- **Course Content System**: Comprehensive course viewer for VA benefits education
+  - 6 comprehensive modules covering DD-214, service-connected conditions, C&P exams, claims, rating maximization, and appeals
+  - Course curriculum structure in `constants/course.tsx`
+  - Course sidebar with module/lesson navigation (`components/course/CourseSidebar.tsx`)
+  - Lesson content renderer with markdown support (`components/course/LessonContent.tsx`)
+  - Progress bar component (`components/course/ProgressBar.tsx`)
+  - Module card component (`components/course/CourseModuleCard.tsx`)
+  - Integration with existing progress tracking API
+
+- **Feedback System Enhancements**: Enhanced feedback with notifications and responses
+  - Email notifications for new feedback submissions (`lib/feedback-email.ts`)
+  - Admin response endpoint (`app/api/feedback/respond/route.ts`)
+  - Status tracking (new, in-progress, resolved)
+  - Admin panel for feedback management (`components/feedback/FeedbackAdminPanel.tsx`)
+  - User notification emails when admin responds
+
+- **Voice Agent Rate Limiting**: Rate limiting for voice sessions
+  - Rate limiting check in voice agent session endpoint
+  - Uses same `checkRateLimit()` function as AI agent
+  - Returns 429 with proper error message when limit exceeded
+  - Rate limit headers in response (X-Rate-Limit-Remaining, X-Rate-Limit-Limit)
+
+- **Course Authentication**: Secure course access verification
+  - Get userId from auth session using Supabase server client
+  - Proper auth check with redirect to login
+  - Course access verification using `checkCourseAccess()`
+  - Proper null handling for Supabase client
+
+### Changed
+
+- **Database Types**: Added feedback table type to `lib/types/database.ts`
+- **Roadmap**: Added newly completed features to roadmap.ts
+- **Documentation**: Updated UNFINISHED_FEATURES.md with completed items
+
+---
+
 ## [Unreleased]
 
 ### Added
