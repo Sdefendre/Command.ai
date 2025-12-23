@@ -208,7 +208,7 @@ export const missionStatementPost = {
     <p>The mission is clear. The tools are ready. The question is: are you ready to take command?</p>
   `,
   author: 'Steve Defendre',
-  date: '2025-12-02',
+  date: '2025-01-01',
   readTime: '10 min read',
   tags: ['Mission Statement', 'Command', 'Survival Mode', 'Personal Development', 'Philosophy'],
 }
