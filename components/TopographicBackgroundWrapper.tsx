@@ -2,8 +2,6 @@
 
 import dynamic from 'next/dynamic'
 
-// Lazy load topographic background to improve initial render
-// Must be client-only as it uses browser APIs
 const TopographicBackground = dynamic(
   () =>
     import('@/components/landing/TopographicBackground').then((mod) => ({
@@ -12,6 +10,6 @@ const TopographicBackground = dynamic(
   { ssr: false }
 )
 
-export function DashboardThreeBackgroundWrapper() {
+export function TopographicBackgroundWrapper() {
   return <TopographicBackground />
 }

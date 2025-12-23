@@ -159,6 +159,18 @@
       transform: translate(-20%, -25%) scale(0.85);
     }
   }
+
+  @keyframes pulse-slow {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+
+  --animate-pulse-slow: pulse-slow 8s ease-in-out infinite;
 }
 
 :root {

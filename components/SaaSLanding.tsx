@@ -2,9 +2,10 @@ import { MainHeader } from '@/components/MainHeader'
 import { LandingHero } from '@/components/landing/LandingHero'
 import dynamic from 'next/dynamic'
 
-// Dynamically import the Three.js background for better performance
-const HeroThreeBackground = dynamic(
-  () => import('@/components/landing/HeroThreeBackground').then((mod) => mod.HeroThreeBackground),
+// Dynamically import the background for client-side only
+const TopographicBackground = dynamic(
+  () =>
+    import('@/components/landing/TopographicBackground').then((mod) => mod.TopographicBackground),
   { ssr: false }
 )
 
@@ -43,8 +44,8 @@ const LandingFooter = dynamic(() =>
 export default function SaaSLanding() {
   return (
     <div className="min-h-screen text-foreground font-sans selection:bg-primary/20 overflow-x-hidden relative w-full max-w-full">
-      {/* Three.js animated background - z-[1] renders above body bg */}
-      <HeroThreeBackground />
+      {/* Topographic contour line background - military-inspired */}
+      <TopographicBackground />
 
       {/* Content layer - z-[2] renders above Three.js */}
       <div className="relative z-[2] w-full max-w-full">

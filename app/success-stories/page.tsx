@@ -8,11 +8,11 @@ import { PROJECTS } from '@/constants/projects'
 import { createFadeInUp, viewportOnce } from '@/lib/motion'
 import dynamic from 'next/dynamic'
 
-// Lazy load Three.js background to improve initial render
-const SubtleThreeBackground = dynamic(
+// Lazy load topographic background to improve initial render
+const TopographicBackground = dynamic(
   () =>
-    import('@/components/SubtleThreeBackground').then((mod) => ({
-      default: mod.SubtleThreeBackground,
+    import('@/components/landing/TopographicBackground').then((mod) => ({
+      default: mod.TopographicBackground,
     })),
   { ssr: false }
 )
@@ -20,7 +20,7 @@ const SubtleThreeBackground = dynamic(
 export default function SuccessStoriesPage() {
   return (
     <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20 relative">
-      <SubtleThreeBackground />
+      <TopographicBackground />
       <MainHeader />
 
       <main className="container mx-auto px-4 max-w-5xl py-20">
